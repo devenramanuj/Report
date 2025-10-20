@@ -707,688 +707,27 @@
                         </div>
                         <div style="margin-top: 15px; text-align: center;">
                             <button class="btn" style="width: 100%;">અહીં ક્લિક કરો</button>
-                               color: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            text-align: center;
-            position: relative;
-        }
-
-        header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-        }
-
-        .credit-line {
-            position: absolute;
-            bottom: 10px;
-            right: 15px;
-            font-size: 0.8rem;
-            opacity: 0.8;
-        }
-
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            overflow-x: auto;
-            padding: 8px;
-        }
-
-        .nav-btn {
-            flex: 1;
-            min-width: 120px;
-            padding: 14px 12px;
-            border: none;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            white-space: nowrap;
-            border-radius: 8px;
-            margin: 0 4px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .nav-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-
-        .nav-btn.active {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .card {
-            background-color: white;
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            border-left: 5px solid #667eea;
-        }
-
-        .card h2 {
-            color: #5a67d8;
-            margin-bottom: 18px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #e9ecef;
-            font-size: 1.6rem;
-        }
-
-        .month-year-selector {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        select, input, textarea {
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            width: 100%;
-            transition: border 0.3s;
-        }
-
-        select:focus, input:focus, textarea:focus {
-            border-color: #667eea;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .calendar {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-
-        .calendar-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 12px;
-            text-align: center;
-            font-weight: bold;
-            border-radius: 8px;
-        }
-
-        .calendar-day {
-            background-color: white;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-height: 90px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .calendar-day:hover {
-            background-color: #f8f9fa;
-            border-color: #667eea;
-        }
-
-        .calendar-day.has-beneficiaries {
-            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
-            border-color: #5a67d8;
-            font-weight: bold;
-        }
-
-        .calendar-day.holiday {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-        }
-
-        .beneficiary-input {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .beneficiary-input input {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-        }
-
-        .stock-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .stock-item {
-            border: 2px solid #e9ecef;
-            border-radius: 12px;
-            padding: 20px;
-            background-color: #f8f9fa;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stock-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 100%;
-        }
-
-        .stock-item.wheat::before {
-            background: linear-gradient(to bottom, #f6d365, #fda085);
-        }
-
-        .stock-item.rice::before {
-            background: linear-gradient(to bottom, #84fab0, #8fd3f4);
-        }
-
-        .stock-item.oil::before {
-            background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
-        }
-
-        .stock-item.chana::before {
-            background: linear-gradient(to bottom, #ffecd2, #fcb69f);
-        }
-
-        .stock-item.dal::before {
-            background: linear-gradient(to bottom, #d4fc79, #96e6a1);
-        }
-
-        .stock-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .stock-item h3 {
-            margin-bottom: 15px;
-            color: #5a67d8;
-            font-size: 1.3rem;
-        }
-
-        .stock-input {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .stock-input label {
-            font-weight: bold;
-            color: #495057;
-        }
-
-        .stock-total-box {
-            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .stock-total-box h3 {
-            color: #2d3748;
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-        }
-
-        .report-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .table-container {
-            overflow-x: auto;
-            margin-top: 20px;
-            max-height: 600px;
-            position: relative;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-
-        .wide-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-        }
-
-        .wide-table th, .wide-table td {
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #dee2e6;
-        }
-
-        .wide-table th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            font-weight: bold;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .sub-header {
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-            position: sticky;
-            top: 40px;
-            z-index: 10;
-        }
-
-        .date-column {
-            position: sticky;
-            left: 0;
-            background-color: #e9ecef;
-            z-index: 5;
-            font-weight: bold;
-        }
-
-        .total-row {
-            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
-            font-weight: bold;
-        }
-
-        .holiday-row {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-        }
-
-        /* Calculator Styles */
-        .calculator {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            max-width: 320px;
-            margin: 0 auto;
-        }
-
-        .calculator-display {
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: right;
-            font-size: 2rem;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            overflow: hidden;
-        }
-
-        .calculator-buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-
-        .calc-btn {
-            background-color: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 10px;
-            color: white;
-            font-size: 1.2rem;
-            padding: 15px 0;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .calc-btn:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .calc-btn.operator {
-            background-color: rgba(255, 152, 0, 0.8);
-        }
-
-        .calc-btn.operator:hover {
-            background-color: rgba(255, 152, 0, 1);
-        }
-
-        .calc-btn.equals {
-            background-color: rgba(76, 175, 80, 0.8);
-            grid-column: span 2;
-        }
-
-        .calc-btn.equals:hover {
-            background-color: rgba(76, 175, 80, 1);
-        }
-
-        /* Tools Grid */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .tool-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
-            border-left: 5px solid #667eea;
-        }
-
-        .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        }
-
-        .tool-card h3 {
-            color: #5a67d8;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.3rem;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #495057;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 12px;
-        }
-
-        .form-row .form-group {
-            flex: 1;
-        }
-
-        .result {
-            margin-top: 15px;
-            padding: 15px;
-            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
-            border-radius: 8px;
-            text-align: center;
-            font-weight: bold;
-            color: #2d3748;
-        }
-
-        .gender-selector {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .gender-btn {
-            flex: 1;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            background-color: white;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.3s;
-            font-weight: bold;
-        }
-
-        .gender-btn.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-color: #667eea;
-        }
-
-        footer {
-            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 30px;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-content p {
-            margin-bottom: 8px;
-            font-size: 1rem;
-        }
-
-        .footer-content a {
-            color: #90cdf4;
-            text-decoration: none;
-        }
-
-        .footer-content a:hover {
-            text-decoration: underline;
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            background-color: #323232;
-            color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .toast.show {
-            opacity: 1;
-        }
-
-        .toast.success {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        }
-
-        .toast.error {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-
-        .rules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .rule-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            border-left: 5px solid #667eea;
-        }
-
-        .rule-card h3 {
-            color: #5a67d8;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.3rem;
-        }
-
-        .rule-card ul {
-            padding-left: 20px;
-        }
-
-        .rule-card li {
-            margin-bottom: 8px;
-            line-height: 1.5;
-        }
-
-        @media (max-width: 768px) {
-            .month-year-selector {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .report-actions {
-                flex-direction: column;
-            }
-            
-            .nav-btn {
-                padding: 12px 8px;
-                font-size: 0.8rem;
-                min-width: 90px;
-            }
-            
-            .stock-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .tools-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .calendar {
-                grid-template-columns: repeat(7, 1fr);
-                gap: 4px;
-            }
-            
-            .calendar-day {
-                min-height: 70px;
-                padding: 8px;
-                font-size: 0.8rem;
-            }
-            
-            .rules-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>આંગણવાડી Patrak-4</h1>
-            <p style="font-size: 1.2rem;">બાળકોના પોષણ અને સંભાળ માટેની એપ્લિકેશન</p>
-            <div class="credit-line">Developed by Devendra Ramanuj</div>
-        </header>
-
-        <nav>
-            <button class="nav-btn active" onclick="showPage('homePage')">
-                <span class="material-icons">home</span> હોમ
-            </button>
-            <button class="nav-btn" onclick="showPage('beneficiaryPage')">
-                <span class="material-icons">people</span> લાભાર્થી
-            </button>
-            <button class="nav-btn" onclick="showPage('stockPage')">
-                <span class="material-icons">inventory</span> સ્ટોક
-            </button>
-            <button class="nav-btn" onclick="showPage('reportPage')">
-                <span class="material-icons">assessment</span> રિપોર્ટ
-            </button>
-            <button class="nav-btn" onclick="showPage('billPage')">
-                <span class="material-icons">receipt</span> બિલ
-            </button>
-            <button class="nav-btn" onclick="showPage('toolsPage')">
-                <span class="material-icons">build</span> ટૂલ્સ
-            </button>
-        </nav>
-
-        <!-- Home Page -->
-        <div id="homePage" class="page active">
-            <div class="card">
-                <h2>સ્વાગત છે</h2>
-                <p>આંગણવાડી Patrak-4 એપ્લિકેશનમાં આપનું સ્વાગત છે. આ એપ્લિકેશન તમને નીચેની સુવિધાઓ પૂરી પાડે છે:</p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
-                    <div style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); padding: 20px; border-radius: 12px; color: #2d3748;">
-                        <h3 style="color: #2d3748; margin-bottom: 10px; font-size: 1.3rem;">લાભાર્થી નોંધણી</h3>
-                        <p>દરરોજના લાભાર્થીઓની સંખ્યા નોંધો અને કેલેન્ડર પર દર્શાવો.</p>
+                        </div>
                     </div>
                     
-                    <div style="background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%); padding: 20px; border-radius: 12px; color: #2d3748;">
-                        <h3 style="color: #2d3748; margin-bottom: 10px; font-size: 1.3rem;">સ્ટોક મેનેજમેન્ટ</h3>
-                        <p>ઘઉં, ચોખા, તેલ, ચણા અને દાળનો સ્ટોક મેનેજ કરો.</p>
+                    <div class="feature-card" onclick="showPage('reportPage')">
+                        <div>
+                            <h3><span class="material-icons">assessment</span> રિપોર્ટ જનરેશન</h3>
+                            <p>દૈનિક અને માસિક રિપોર્ટ્સ જનરેટ કરો અને ડાઉનલોડ કરો.</p>
+                        </div>
+                        <div style="margin-top: 15px; text-align: center;">
+                            <button class="btn" style="width: 100%;">અહીં ક્લિક કરો</button>
+                        </div>
                     </div>
                     
-                    <div style="background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); padding: 20px; border-radius: 12px; color: #2d3748;">
-                        <h3 style="color: #2d3748; margin-bottom: 10px; font-size: 1.3rem;">રિપોર્ટ જનરેશન</h3>
-                        <p>દૈનિક અને માસિક રિપોર્ટ્સ જનરેટ કરો અને ડાઉનલોડ કરો.</p>
-                    </div>
-                    
-                    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 20px; border-radius: 12px; color: white;">
-                        <h3 style="color: white; margin-bottom: 10px; font-size: 1.3rem;">ઉપયોગી ટૂલ્સ</h3>
-                        <p>કેલ્ક્યુલેટર, ઉંમર કેલ્ક્યુલેટર અને BMI કેલ્ક્યુલેટર.</p>
+                    <div class="feature-card" onclick="showPage('toolsPage')">
+                        <div>
+                            <h3><span class="material-icons">build</span> ઉપયોગી ટૂલ્સ</h3>
+                            <p>કેલ્ક્યુલેટર, ઉંમર કેલ્ક્યુલેટર અને BMI કેલ્ક્યુલેટર.</p>
+                        </div>
+                        <div style="margin-top: 15px; text-align: center;">
+                            <button class="btn" style="width: 100%;">અહીં ક્લિક કરો</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1399,7 +738,7 @@
             <div class="card">
                 <h2>લાભાર્થી એન્ટ્રી</h2>
                 <div class="month-year-selector">
-                    <select id="monthSelector">
+                    <select id="monthSelector" onchange="loadCalendar()">
                         <option value="0">જાન્યુઆરી</option>
                         <option value="1">ફેબ્રુઆરી</option>
                         <option value="2">માર્ચ</option>
@@ -1413,10 +752,7 @@
                         <option value="10">નવેમ્બર</option>
                         <option value="11">ડિસેમ્બર</option>
                     </select>
-                    <select id="yearSelector"></select>
-                    <button class="btn" onclick="loadCalendar()">
-                        <span class="material-icons">refresh</span> લોડ કરો
-                    </button>
+                    <select id="yearSelector" onchange="loadCalendar()"></select>
                 </div>
                 
                 <div id="calendarContainer"></div>
@@ -1432,11 +768,8 @@
             <div class="card">
                 <h2>સ્ટોક એન્ટ્રી</h2>
                 <div class="month-year-selector">
-                    <select id="stockMonthSelector"></select>
-                    <select id="stockYearSelector"></select>
-                    <button class="btn" onclick="loadStockData()">
-                        <span class="material-icons">refresh</span> લોડ કરો
-                    </button>
+                    <select id="stockMonthSelector" onchange="loadStockData()"></select>
+                    <select id="stockYearSelector" onchange="loadStockData()"></select>
                 </div>
                 
                 <div class="stock-grid">
@@ -1554,49 +887,12 @@
                 </div>
             </div>
 
-            <!-- Usage Rules Card -->
-            <div class="card">
-                <h2>વપરાશના નિયમો</h2>
-                <div class="rules-grid">
-                    <div class="rule-card">
-                        <h3><span class="material-icons">lunch_dining</span> ઘઉં</h3>
-                        <ul>
-                            <li>સવાર: સોમ, બુધ, ગુરુ, શુક્ર, શનિ - 30 ગ્રામ પ્રતિ લાભાર્થી</li>
-                            <li>બપોર: સોમ, મંગળ, શુક્ર - 50 ગ્રામ પ્રતિ લાભાર્થી</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="rule-card">
-                        <h3><span class="material-icons">rice_bowl</span> ચોખા</h3>
-                        <ul>
-                            <li>સવાર: મંગળ - 30 ગ્રામ પ્રતિ લાભાર્થી</li>
-                            <li>બપોર: બુધ, ગુરુ, શનિ - 50 ગ્રામ પ્રતિ લાભાર્થી</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="rule-card">
-                        <h3><span class="material-icons">local_drink</span> તેલ</h3>
-                        <ul>
-                            <li>સવાર: દરરોજ - 5 ગ્રામ પ્રતિ લાભાર્થી</li>
-                            <li>બપોર: દરરોજ - 8 ગ્રામ પ્રતિ લાભાર્થી</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="rule-card">
-                        <h3><span class="material-icons">nutrition</span> ચણા</h3>
-                        <ul>
-                            <li>સવાર: -</li>
-                            <li>બપોર: મંગળ, ગુરુ, શુક્ર - 20 ગ્રામ પ્રતિ લાભાર્થી</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="rule-card">
-                        <h3><span class="material-icons">set_meal</span> દાળ</h3>
-                        <ul>
-                            <li>સવાર: -</li>
-                            <li>બપોર: સોમ, બુધ - 20 ગ્રામ પ્રતિ લાભાર્થી</li>
-                        </ul>
-                    </div>
+            <div class="card" id="beneficiarySummaryContainer" style="display: none;">
+                <h2>માસિક લાભાર્થી સારાંશ</h2>
+                <div class="table-container">
+                    <table class="wide-table" id="beneficiarySummaryTable">
+                        <!-- Beneficiary summary will be displayed here -->
+                    </table>
                 </div>
             </div>
         </div>
@@ -1606,11 +902,8 @@
             <div class="card">
                 <h2>બિલ જનરેશન</h2>
                 <div class="month-year-selector">
-                    <select id="billMonthSelector"></select>
-                    <select id="billYearSelector"></select>
-                    <button class="btn" onclick="loadBills()">
-                        <span class="material-icons">refresh</span> લોડ કરો
-                    </button>
+                    <select id="billMonthSelector" onchange="calculateMasalaAmounts()"></select>
+                    <select id="billYearSelector" onchange="calculateMasalaAmounts()"></select>
                 </div>
                 
                 <div class="table-container">
@@ -1651,9 +944,6 @@
                 </div>
                 
                 <div style="margin-top: 20px; text-align: center;">
-                    <button class="btn" onclick="calculateMasalaAmounts()">
-                        <span class="material-icons">calculate</span> ગણતરી કરો
-                    </button>
                     <button class="btn" onclick="printBills()">
                         <span class="material-icons">print</span> બિલ પ્રિન્ટ કરો
                     </button>
@@ -1859,7 +1149,19 @@
                 btn.classList.remove('active');
             });
             
-            event.currentTarget.classList.add('active');
+            // Find the button that corresponds to the page and activate it
+            const navButtons = {
+                'homePage': 0,
+                'beneficiaryPage': 1,
+                'stockPage': 2,
+                'reportPage': 3,
+                'billPage': 4,
+                'toolsPage': 5
+            };
+            
+            if (navButtons[pageId] !== undefined) {
+                document.querySelectorAll('.nav-btn')[navButtons[pageId]].classList.add('active');
+            }
             
             // Load data if needed
             if (pageId === 'beneficiaryPage') {
@@ -1995,7 +1297,7 @@
             updateStockTotals();
         }
 
-        // Update stock totals
+        // Update stock totals with improved display
         function updateStockTotals() {
             const items = [
                 { id: 'wheat', name: 'ઘઉં', unit: 'કિલો' },
@@ -2006,6 +1308,7 @@
             ];
             
             let html = '';
+            let grandTotal = 0;
             
             items.forEach(item => {
                 const openInput = document.getElementById(`${item.id}_open`);
@@ -2015,13 +1318,26 @@
                 const income = parseFloat(incomeInput?.value) || 0;
                 const total = opening + income;
                 
+                // Add to grand total (only for items with same unit)
+                if (item.unit === 'કિલો') {
+                    grandTotal += total;
+                }
+                
                 html += `
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                        <span>${item.name}:</span>
-                        <span>${total.toFixed(3)} ${item.unit}</span>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.5); border-radius: 6px;">
+                        <span style="font-weight: bold;">${item.name}:</span>
+                        <span style="font-weight: bold; color: #2d3748;">${total.toFixed(3)} ${item.unit}</span>
                     </div>
                 `;
             });
+            
+            // Add grand total for items with same unit
+            html += `
+                <div style="display: flex; justify-content: space-between; margin-top: 15px; padding: 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; color: white;">
+                    <span style="font-weight: bold;">કુલ જથ્થો (ઘઉં, ચોખા, ચણા, દાળ):</span>
+                    <span style="font-weight: bold;">${grandTotal.toFixed(3)} કિલો</span>
+                </div>
+            `;
             
             document.getElementById('stockTotals').innerHTML = html;
         }
@@ -2071,6 +1387,7 @@
         // Generate report (daily or monthly)
         function generateReport(isDaily) {
             const container = document.getElementById('reportTableContainer');
+            const summaryContainer = document.getElementById('beneficiarySummaryContainer');
             
             if (isDaily) {
                 const dateInput = document.getElementById('reportDate');
@@ -2100,50 +1417,40 @@
                         <tr>
                             <th rowspan="2">તારીખ</th>
                             <th rowspan="2">વાર</th>
-                            <th rowspan="2">કુલ લાભાર્થી</th>
-                            <th colspan="7">ઘઉં</th>
-                            <th colspan="7">ચોખા</th>
-                            <th colspan="7">તેલ</th>
-                            <th colspan="7">ચણા</th>
-                            <th colspan="7">દાળ</th>
+                            <th rowspan="2">સંખ્યા</th>
+                            <th colspan="5">ઘઉં</th>
+                            <th colspan="5">ચોખા</th>
+                            <th colspan="5">તેલ</th>
+                            <th colspan="5">ચણા</th>
+                            <th colspan="5">દાળ</th>
                         </tr>
                         <tr class="sub-header">
                             <!-- Wheat sub-headers -->
-                            <th>શરૂઆતી</th>
-                            <th>સવારના લાભાર્થી</th>
-                            <th>બપોરના લાભાર્થી</th>
+                            <th>કુલ જથ્થો</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                             <!-- Rice sub-headers -->
-                            <th>શરૂઆતી</th>
-                            <th>સવારના લાભાર્થી</th>
-                            <th>બપોરના લાભાર્થી</th>
+                            <th>કુલ જથ્થો</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                             <!-- Oil sub-headers -->
-                            <th>શરૂઆતી</th>
-                            <th>સવારના લાભાર્થી</th>
-                            <th>બપોરના લાભાર્થી</th>
+                            <th>કુલ જથ્થો</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                             <!-- Chana sub-headers -->
-                            <th>શરૂઆતી</th>
-                            <th>સવારના લાભાર્થી</th>
-                            <th>બપોરના લાભાર્થી</th>
+                            <th>કુલ જથ્થો</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                             <!-- Dal sub-headers -->
-                            <th>શરૂઆતી</th>
-                            <th>સવારના લાભાર્થી</th>
-                            <th>બપોરના લાભાર્થી</th>
+                            <th>કુલ જથ્થો</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
@@ -2175,8 +1482,6 @@
                     const income = appState.stock[`${item.id}_income`] || 0;
                     const totalQty = opening + income;
                     
-                    const morningBeneficiaries = getMorningBeneficiaries(item.id, dayOfWeek, beneficiaries);
-                    const afternoonBeneficiaries = getAfternoonBeneficiaries(item.id, dayOfWeek, beneficiaries);
                     const morningConsumption = calculateMorningConsumption(item.id, dayOfWeek, beneficiaries);
                     const afternoonConsumption = calculateAfternoonConsumption(item.id, dayOfWeek, beneficiaries);
                     const consumption = morningConsumption + afternoonConsumption;
@@ -2190,8 +1495,6 @@
                     
                     html += `
                         <td>${totalQty.toFixed(3)}</td>
-                        <td>${morningBeneficiaries}</td>
-                        <td>${afternoonBeneficiaries}</td>
                         <td>${morningConsumption.toFixed(3)}</td>
                         <td>${afternoonConsumption.toFixed(3)}</td>
                         <td>${consumption.toFixed(3)}</td>
@@ -2206,37 +1509,27 @@
                     <tr class="total-row">
                         <td colspan="3">કુલ</td>
                         <td>${totalQuantity.toFixed(3)}</td>
-                        <td>-</td>
-                        <td>-</td>
                         <td>${totalMorningConsumption.toFixed(3)}</td>
                         <td>${totalAfternoonConsumption.toFixed(3)}</td>
                         <td>${totalConsumption.toFixed(3)}</td>
                         <td>${totalClosing.toFixed(3)}</td>
                         <!-- Repeat for other items -->
                         <td>${totalQuantity.toFixed(3)}</td>
-                        <td>-</td>
-                        <td>-</td>
                         <td>${totalMorningConsumption.toFixed(3)}</td>
                         <td>${totalAfternoonConsumption.toFixed(3)}</td>
                         <td>${totalConsumption.toFixed(3)}</td>
                         <td>${totalClosing.toFixed(3)}</td>
                         <td>${totalQuantity.toFixed(3)}</td>
-                        <td>-</td>
-                        <td>-</td>
                         <td>${totalMorningConsumption.toFixed(3)}</td>
                         <td>${totalAfternoonConsumption.toFixed(3)}</td>
                         <td>${totalConsumption.toFixed(3)}</td>
                         <td>${totalClosing.toFixed(3)}</td>
                         <td>${totalQuantity.toFixed(3)}</td>
-                        <td>-</td>
-                        <td>-</td>
                         <td>${totalMorningConsumption.toFixed(3)}</td>
                         <td>${totalAfternoonConsumption.toFixed(3)}</td>
                         <td>${totalConsumption.toFixed(3)}</td>
                         <td>${totalClosing.toFixed(3)}</td>
                         <td>${totalQuantity.toFixed(3)}</td>
-                        <td>-</td>
-                        <td>-</td>
                         <td>${totalMorningConsumption.toFixed(3)}</td>
                         <td>${totalAfternoonConsumption.toFixed(3)}</td>
                         <td>${totalConsumption.toFixed(3)}</td>
@@ -2246,9 +1539,10 @@
                 
                 html += `</table>`;
                 container.innerHTML = html;
+                summaryContainer.style.display = 'none';
                 
             } else {
-                // Monthly report
+                // Monthly report - FIXED VERSION
                 const monthName = gujaratiMonths[appState.currentMonth];
                 const year = appState.currentYear;
                 const daysInMonth = new Date(appState.currentYear, appState.currentMonth + 1, 0).getDate();
@@ -2264,58 +1558,45 @@
 
                 // Generate monthly report table
                 let html = `
-                    <h3>${monthName} ${year} - માસિક રિપોર્ટ (સુધારેલ)</h3>
-                    <div style="background: #fff3cd; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
-                        <strong>સુધારો:</strong> હવે દરેક દિવસનું બંધ સિલક આગલા દિવસના ઓપનિંગ સ્ટોક તરીકે વપરાય છે.
-                    </div>
+                    <h3>${monthName} ${year} - માસિક રિપોર્ટ</h3>
                     <table class="wide-table">
                         <tr>
                             <th rowspan="2" class="date-column">તારીખ</th>
                             <th rowspan="2">વાર</th>
-                            <th rowspan="2">કુલ લાભાર્થી</th>
-                            <th colspan="7">ઘઉં</th>
-                            <th colspan="7">ચોખા</th>
-                            <th colspan="7">તેલ</th>
-                            <th colspan="7">ચણા</th>
-                            <th colspan="7">દાળ</th>
+                            <th rowspan="2">સંખ્યા</th>
+                            <th colspan="5">ઘઉં</th>
+                            <th colspan="5">ચોખા</th>
+                            <th colspan="5">તેલ</th>
+                            <th colspan="5">ચણા</th>
+                            <th colspan="5">દાળ</th>
                         </tr>
                         <tr class="sub-header">
                             <!-- Wheat sub-headers -->
                             <th>શરૂઆતી</th>
-                            <th>સવારના લાભાર્થી</th>
-                            <th>બપોરના લાભાર્થી</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                             <!-- Rice sub-headers -->
                             <th>શરૂઆતી</th>
-                            <th>સવારના લાભાર્થી</th>
-                            <th>બપોરના લાભાર્થી</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                             <!-- Oil sub-headers -->
                             <th>શરૂઆતી</th>
-                            <th>સવારના લાભાર્થી</th>
-                            <th>બપોરના લાભાર્થી</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                             <!-- Chana sub-headers -->
                             <th>શરૂઆતી</th>
-                            <th>સવારના લાભાર્થી</th>
-                            <th>બપોરના લાભાર્થી</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                             <!-- Dal sub-headers -->
                             <th>શરૂઆતી</th>
-                            <th>સવારના લાભાર્થી</th>
-                            <th>બપોરના લાભાર્થી</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
@@ -2324,11 +1605,11 @@
                 `;
                 
                 let monthlyTotals = {
-                    wheat: { morning: 0, afternoon: 0, total: 0, morningBeneficiaries: 0, afternoonBeneficiaries: 0 },
-                    rice: { morning: 0, afternoon: 0, total: 0, morningBeneficiaries: 0, afternoonBeneficiaries: 0 },
-                    oil: { morning: 0, afternoon: 0, total: 0, morningBeneficiaries: 0, afternoonBeneficiaries: 0 },
-                    chana: { morning: 0, afternoon: 0, total: 0, morningBeneficiaries: 0, afternoonBeneficiaries: 0 },
-                    dal: { morning: 0, afternoon: 0, total: 0, morningBeneficiaries: 0, afternoonBeneficiaries: 0 }
+                    wheat: { morning: 0, afternoon: 0, total: 0 },
+                    rice: { morning: 0, afternoon: 0, total: 0 },
+                    oil: { morning: 0, afternoon: 0, total: 0 },
+                    chana: { morning: 0, afternoon: 0, total: 0 },
+                    dal: { morning: 0, afternoon: 0, total: 0 }
                 };
                 
                 // Reset current stock for calculation
@@ -2351,7 +1632,7 @@
                                 <td class="date-column">${day}/${appState.currentMonth+1}</td>
                                 <td>${dayName}</td>
                                 <td>રજા</td>
-                                <td colspan="35">-</td>
+                                <td colspan="25">-</td>
                             </tr>
                         `;
                         continue;
@@ -2365,8 +1646,6 @@
                     for (const item of items) {
                         const openingStock = currentStock[item];
                         
-                        const morningBeneficiaries = getMorningBeneficiaries(item, dayOfWeek, beneficiaries);
-                        const afternoonBeneficiaries = getAfternoonBeneficiaries(item, dayOfWeek, beneficiaries);
                         const morningConsumption = calculateMorningConsumption(item, dayOfWeek, beneficiaries);
                         const afternoonConsumption = calculateAfternoonConsumption(item, dayOfWeek, beneficiaries);
                         const totalConsumption = morningConsumption + afternoonConsumption;
@@ -2379,13 +1658,9 @@
                         monthlyTotals[item].morning += morningConsumption;
                         monthlyTotals[item].afternoon += afternoonConsumption;
                         monthlyTotals[item].total += totalConsumption;
-                        monthlyTotals[item].morningBeneficiaries += morningBeneficiaries;
-                        monthlyTotals[item].afternoonBeneficiaries += afternoonBeneficiaries;
                         
                         html += `
                             <td>${openingStock.toFixed(3)}</td>
-                            <td>${morningBeneficiaries}</td>
-                            <td>${afternoonBeneficiaries}</td>
                             <td>${morningConsumption.toFixed(3)}</td>
                             <td>${afternoonConsumption.toFixed(3)}</td>
                             <td>${totalConsumption.toFixed(3)}</td>
@@ -2396,15 +1671,13 @@
                     html += `</tr>`;
                 }
                 
-                // Add monthly total row with beneficiary totals
+                // Add monthly total row
                 html += `<tr class="total-row">`;
-                html += `<td colspan="3">માસિક કુલ વપરાશ અને લાભાર્થી</td>`;
+                html += `<td colspan="3">માસિક કુલ વપરાશ</td>`;
                 
                 for (const item of items) {
                     html += `
                         <td>-</td>
-                        <td>${monthlyTotals[item].morningBeneficiaries}</td>
-                        <td>${monthlyTotals[item].afternoonBeneficiaries}</td>
                         <td>${monthlyTotals[item].morning.toFixed(3)}</td>
                         <td>${monthlyTotals[item].afternoon.toFixed(3)}</td>
                         <td>${monthlyTotals[item].total.toFixed(3)}</td>
@@ -2416,91 +1689,134 @@
                 html += `</table>`;
                 
                 container.innerHTML = html;
+                
+                // Generate beneficiary summary
+                generateBeneficiarySummary(monthlyTotals);
+                summaryContainer.style.display = 'block';
             }
             
             showToast('રિપોર્ટ બનાવાયો', 'success');
         }
 
-        // Get morning beneficiaries for a specific item and day
-        function getMorningBeneficiaries(item, dayOfWeek, beneficiaries) {
-            if (dayOfWeek === 0 || beneficiaries === 0) return 0; // Sunday or no beneficiaries
+        // Generate beneficiary summary table with corrected calculations
+        function generateBeneficiarySummary(monthlyTotals) {
+            const summaryTable = document.getElementById('beneficiarySummaryTable');
             
-            switch(item) {
-                case 'wheat':
-                    // ઘઉં - સોમ, બુધ, ગુરુ, શુક્ર, શનિ સવારે
-                    if ([1, 3, 4, 5, 6].includes(dayOfWeek)) {
-                        return beneficiaries;
-                    }
-                    break;
-                    
-                case 'rice':
-                    // ચોખા - મંગળ સવારે
-                    if (dayOfWeek === 2) {
-                        return beneficiaries;
-                    }
-                    break;
-                    
-                case 'oil':
-                    // તેલ - સોમ, મંગળ, બુધ, ગુરુ, શુક્ર, શનિ સવારે
-                    if ([1, 2, 3, 4, 5, 6].includes(dayOfWeek)) {
-                        return beneficiaries;
-                    }
-                    break;
-                    
-                case 'chana':
-                    // ચણા - no morning consumption
-                    return 0;
-                    
-                case 'dal':
-                    // દાળ - no morning consumption
-                    return 0;
+            let html = `
+                <tr>
+                    <th>ઇન્વેન્ટરી આઇટમ</th>
+                    <th>સવારના લાભાર્થી</th>
+                    <th>બપોરના લાભાર્થી</th>
+                    <th>કુલ લાભાર્થી</th>
+                </tr>
+            `;
+            
+            // Calculate beneficiaries for each item based on consumption
+            const itemCalculations = {
+                wheat: {
+                    morning: Math.round(monthlyTotals.wheat.morning / 0.030),
+                    afternoon: Math.round(monthlyTotals.wheat.afternoon / 0.050),
+                    total: 0
+                },
+                rice: {
+                    morning: Math.round(monthlyTotals.rice.morning / 0.030),
+                    afternoon: Math.round(monthlyTotals.rice.afternoon / 0.050),
+                    total: 0
+                },
+                oil: {
+                    morning: Math.round(monthlyTotals.oil.morning / 0.005),
+                    afternoon: Math.round(monthlyTotals.oil.afternoon / 0.008),
+                    total: 0
+                },
+                chana: {
+                    morning: 0,
+                    afternoon: Math.round(monthlyTotals.chana.afternoon / 0.020),
+                    total: 0
+                },
+                dal: {
+                    morning: 0,
+                    afternoon: Math.round(monthlyTotals.dal.afternoon / 0.020),
+                    total: 0
+                }
+            };
+            
+            // Calculate totals
+            for (const item in itemCalculations) {
+                itemCalculations[item].total = itemCalculations[item].morning + itemCalculations[item].afternoon;
             }
             
-            return 0;
+            const items = [
+                { id: 'wheat', name: 'ઘઉં' },
+                { id: 'rice', name: 'ચોખા' },
+                { id: 'oil', name: 'તેલ' },
+                { id: 'chana', name: 'ચણા' },
+                { id: 'dal', name: 'દાળ' }
+            ];
+            
+            let totalMorning = 0;
+            let totalAfternoon = 0;
+            let totalBeneficiaries = 0;
+            
+            items.forEach(item => {
+                const data = itemCalculations[item.id];
+                
+                totalMorning += data.morning;
+                totalAfternoon += data.afternoon;
+                totalBeneficiaries += data.total;
+                
+                html += `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${data.morning}</td>
+                        <td>${data.afternoon}</td>
+                        <td>${data.total}</td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                <tr class="total-row">
+                    <td>કુલ</td>
+                    <td>${totalMorning}</td>
+                    <td>${totalAfternoon}</td>
+                    <td>${totalBeneficiaries}</td>
+                </tr>
+            `;
+            
+            summaryTable.innerHTML = html;
         }
 
-        // Get afternoon beneficiaries for a specific item and day
-        function getAfternoonBeneficiaries(item, dayOfWeek, beneficiaries) {
-            if (dayOfWeek === 0 || beneficiaries === 0) return 0; // Sunday or no beneficiaries
+        // Check if an item is served on a specific day of the week
+        function isItemServed(item, dayOfWeek) {
+            // Sunday is holiday, no items served
+            if (dayOfWeek === 0) return false;
             
-            switch(item) {
-                case 'wheat':
-                    // ઘઉં - સોમ, મંગળ, શુક્ર બપોરે
-                    if ([1, 2, 5].includes(dayOfWeek)) {
-                        return beneficiaries;
-                    }
-                    break;
-                    
-                case 'rice':
-                    // ચોખા - બુધ, ગુરુ, શનિ બપોરે
-                    if ([3, 4, 6].includes(dayOfWeek)) {
-                        return beneficiaries;
-                    }
-                    break;
-                    
-                case 'oil':
-                    // તેલ - સોમ, મંગળ, બુધ, ગુરુ, શુક્ર, શનિ બપોરે
-                    if ([1, 2, 3, 4, 5, 6].includes(dayOfWeek)) {
-                        return beneficiaries;
-                    }
-                    break;
-                    
-                case 'chana':
-                    // ચણા - મંગળ, ગુરુ, શુક્ર બપોરે
-                    if ([2, 4, 5].includes(dayOfWeek)) {
-                        return beneficiaries;
-                    }
-                    break;
-                    
-                case 'dal':
-                    // દાળ - સોમ, બુધ બપોરે
-                    if ([1, 3].includes(dayOfWeek)) {
-                        return beneficiaries;
-                    }
-                    break;
+            // Wheat served on Monday, Wednesday, Thursday, Friday, Saturday
+            if (item === 'wheat') {
+                return [1, 3, 4, 5, 6].includes(dayOfWeek);
             }
             
-            return 0;
+            // Rice served on Tuesday, Wednesday, Thursday, Saturday
+            if (item === 'rice') {
+                return [2, 3, 4, 6].includes(dayOfWeek);
+            }
+            
+            // Oil served every working day
+            if (item === 'oil') {
+                return true;
+            }
+            
+            // Chana served on Tuesday, Thursday, Friday
+            if (item === 'chana') {
+                return [2, 4, 5].includes(dayOfWeek);
+            }
+            
+            // Dal served on Monday, Wednesday
+            if (item === 'dal') {
+                return [1, 3].includes(dayOfWeek);
+            }
+            
+            return false;
         }
 
         // Calculate morning consumption based on item type and day of week
@@ -2821,57 +2137,54 @@
             }
         }
 
-        // Export to PDF
+        // Export to PDF - IMPROVED VERSION with Unicode support
         function exportToPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            // Add title
-            doc.setFontSize(16);
-            doc.text('આંગણવાડી Patrak-4 રિપોર્ટ', 105, 15, { align: 'center' });
-            
-            // Add date
-            const monthName = gujaratiMonths[appState.currentMonth];
-            doc.setFontSize(12);
-            doc.text(`${monthName} ${appState.currentYear}`, 105, 25, { align: 'center' });
-            
-            // Get table data
-            const table = document.querySelector('.wide-table');
-            if (!table) {
-                showToast('કોઈ રિપોર્ટ ડેટા ઉપલબ્ધ નથી', 'error');
+            const reportContainer = document.getElementById('reportTableContainer');
+            if (!reportContainer || reportContainer.innerHTML.includes('કૃપા કરીને')) {
+                showToast('કૃપા કરીને પહેલા રિપોર્ટ બનાવો', 'error');
                 return;
             }
             
-            const headers = [];
-            const rows = [];
+            showToast('PDF બનાવવાનું શરૂ કર્યું...', 'success');
             
-            // Extract headers
-            const headerRows = table.querySelectorAll('tr');
-            headerRows[0].querySelectorAll('th, td').forEach(cell => {
-                headers.push(cell.textContent.trim());
+            // Use html2canvas for better Unicode support
+            html2canvas(reportContainer).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF('p', 'mm', 'a4');
+                
+                const imgWidth = 190;
+                const pageHeight = 280;
+                const imgHeight = canvas.height * imgWidth / canvas.width;
+                let heightLeft = imgHeight;
+                
+                let position = 10;
+                
+                // Add title
+                doc.setFontSize(16);
+                doc.text('આંગણવાડી Patrak-4 રિપોર્ટ', 105, 15, { align: 'center' });
+                
+                // Add date
+                const monthName = gujaratiMonths[appState.currentMonth];
+                doc.setFontSize(12);
+                doc.text(`${monthName} ${appState.currentYear}`, 105, 25, { align: 'center' });
+                
+                doc.addImage(imgData, 'PNG', 10, position + 20, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+                
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    doc.addPage();
+                    doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+                
+                doc.save(`આંગણવાડી_રિપોર્ટ_${appState.currentYear}_${appState.currentMonth+1}.pdf`);
+                showToast('PDF સફળતાપૂર્વક ડાઉનલોડ થયો', 'success');
+            }).catch(error => {
+                console.error('PDF generation error:', error);
+                showToast('PDF જનરેશનમાં ભૂલ આવી', 'error');
             });
-            
-            // Extract rows
-            for (let i = 1; i < headerRows.length; i++) {
-                const row = [];
-                headerRows[i].querySelectorAll('th, td').forEach(cell => {
-                    row.push(cell.textContent.trim());
-                });
-                rows.push(row);
-            }
-            
-            // Generate PDF table
-            doc.autoTable({
-                head: [headers],
-                body: rows,
-                startY: 30,
-                styles: { fontSize: 8 },
-                headStyles: { fillColor: [102, 126, 234] }
-            });
-            
-            // Save the PDF
-            doc.save(`Anganwadi_Report_${appState.currentYear}_${appState.currentMonth+1}.pdf`);
-            showToast('PDF સફળતાપૂર્વક ડાઉનલોડ થયો', 'success');
         }
 
         // Export to Excel
@@ -2892,7 +2205,7 @@
             XLSX.utils.book_append_sheet(wb, ws, 'રિપોર્ટ');
             
             // Generate and download Excel file
-            XLSX.writeFile(wb, `Anganwadi_Report_${appState.currentYear}_${appState.currentMonth+1}.xlsx`);
+            XLSX.writeFile(wb, `આંગણવાડી_રિપોર્ટ_${appState.currentYear}_${appState.currentMonth+1}.xlsx`);
             showToast('Excel સફળતાપૂર્વક ડાઉનલોડ થયો', 'success');
         }
     </script>
