@@ -240,6 +240,18 @@
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
 
+        .btn-success {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #ff9800 0%, #e68a00 100%);
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, #2196F3 0%, #0b7dda 100%);
+        }
+
         .btn-danger {
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
         }
@@ -617,6 +629,89 @@
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
 
+        /* Certificate Styles */
+        .certificate-box {
+            border: 3px solid #000;
+            padding: 50px;
+            margin: 30px auto;
+            max-width: 800px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .certificate-box h1 {
+            color: #5a67d8;
+            font-size: 24pt;
+            border-bottom: 4px double #5a67d8;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .certificate-box h2 {
+            font-size: 18pt;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        .certificate-box p {
+            font-size: 14pt;
+            margin: 20px 0;
+            line-height: 1.5;
+            text-align: justify;
+            text-align-last: center;
+        }
+
+        .detail {
+            font-weight: bold;
+            color: #000;
+            font-size: 16pt;
+            text-decoration: underline;
+            padding: 0 10px;
+        }
+
+        .signature-section {
+            margin-top: 70px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .signature-section span {
+            display: inline-block;
+            width: 40%;
+            border-top: 1px solid #000;
+            padding-top: 5px;
+            font-size: 12pt;
+        }
+
+        .certificate-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        @media print {
+            body > *:not(.print-only) {
+                display: none;
+            }
+            .print-only {
+                display: block;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .certificate-box {
+                border: 3px solid #000 !important;
+                padding: 50px !important;
+                margin: 30px !important;
+                text-align: center !important;
+                font-family: 'Arial', sans-serif !important;
+                box-shadow: none !important;
+            }
+        }
+
         @media (max-width: 768px) {
             .month-year-selector {
                 flex-direction: column;
@@ -651,6 +746,23 @@
                 padding: 8px;
                 font-size: 0.8rem;
             }
+            
+            .certificate-box {
+                padding: 20px;
+                margin: 15px;
+            }
+            
+            .certificate-box h1 {
+                font-size: 18pt;
+            }
+            
+            .certificate-box p {
+                font-size: 12pt;
+            }
+            
+            .certificate-buttons {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -683,7 +795,6 @@
             </button>
         </nav>
 
-        <!-- Home Page -->
         <div id="homePage" class="page active">
             <div class="card">
                 <h2>સ્વાગત છે</h2>
@@ -733,7 +844,6 @@
             </div>
         </div>
 
-        <!-- Beneficiary Page -->
         <div id="beneficiaryPage" class="page">
             <div class="card">
                 <h2>લાભાર્થી એન્ટ્રી</h2>
@@ -763,7 +873,6 @@
             </div>
         </div>
 
-        <!-- Stock Page -->
         <div id="stockPage" class="page">
             <div class="card">
                 <h2>સ્ટોક એન્ટ્રી</h2>
@@ -832,8 +941,7 @@
                 <div class="stock-total-box">
                     <h3>કુલ સ્ટોક</h3>
                     <div id="stockTotals">
-                        <!-- Stock totals will be displayed here -->
-                    </div>
+                        </div>
                 </div>
                 
                 <div style="margin-top: 20px; text-align: center;">
@@ -847,7 +955,6 @@
             </div>
         </div>
 
-        <!-- Report Page -->
         <div id="reportPage" class="page">
             <div class="card">
                 <h2>રિપોર્ટ</h2>
@@ -891,20 +998,36 @@
                 <h2>માસિક લાભાર્થી સારાંશ</h2>
                 <div class="table-container">
                     <table class="wide-table" id="beneficiarySummaryTable">
-                        <!-- Beneficiary summary will be displayed here -->
-                    </table>
+                        </table>
                 </div>
             </div>
         </div>
 
-        <!-- Bill Page -->
         <div id="billPage" class="page">
             <div class="card">
                 <h2>બિલ જનરેશન</h2>
+                <p>નોંધ: બિલની ગણતરી માટે પહેલા **રિપોર્ટ** પેજ પર માસિક રિપોર્ટ જનરેટ કરવું.</p>
                 <div class="month-year-selector">
                     <select id="billMonthSelector" onchange="calculateMasalaAmounts()"></select>
                     <select id="billYearSelector" onchange="calculateMasalaAmounts()"></select>
                 </div>
+                
+                <div class="tool-box" style="margin-bottom: 20px;">
+                    <h3>તૈયાર કરેલ રિપોર્ટ</h3>
+                    <p>અહીં જનરેટ થયેલ બિલનું પ્રમાણપત્ર જુઓ.</p>
+                    <div class="certificate-buttons">
+                        <button onclick="viewCertificate(1)" class="btn btn-success">
+                            <span class="material-icons">description</span> મસાલા 1.30 પ્રમાણપત્ર
+                        </button>
+                        <button onclick="viewCertificate(2)" class="btn btn-warning">
+                            <span class="material-icons">description</span> મસાલા 1.60 પ્રમાણપત્ર
+                        </button>
+                        <button onclick="viewCertificate(3)" class="btn btn-info">
+                            <span class="material-icons">description</span> માતૃ મંડળ 1.00 પ્રમાણપત્ર
+                        </button>
+                    </div>
+                </div>
+
                 
                 <div class="table-container">
                     <table class="wide-table">
@@ -924,7 +1047,7 @@
                         </tr>
                         <tr>
                             <td>મસાલા (ચણા, દાળ)</td>
-                            <td>રિપોર્ટમાં ચણા અને દાળના કુલ લાભાર્થી દીઠ</td>
+                            <td>**ચણા અને દાળ ખવડાવેલ દિવસોના** કુલ લાભાર્થી દીઠ</td>
                             <td>1.60</td>
                             <td id="masala2Beneficiaries">0</td>
                             <td id="masala2Amount">0.00</td>
@@ -951,12 +1074,10 @@
             </div>
         </div>
 
-        <!-- Tools Page -->
         <div id="toolsPage" class="page">
             <div class="card">
                 <h2>ઉપયોગી ટૂલ્સ</h2>
                 <div class="tools-grid">
-                    <!-- Calculator -->
                     <div class="tool-card">
                         <h3><span class="material-icons">calculate</span> કેલ્ક્યુલેટર</h3>
                         <div class="calculator">
@@ -988,7 +1109,6 @@
                         </div>
                     </div>
                     
-                    <!-- Age Calculator -->
                     <div class="tool-card">
                         <h3><span class="material-icons">cake</span> ઉંમર કેલ્ક્યુલેટર</h3>
                         <div class="form-group">
@@ -1007,7 +1127,6 @@
                         </div>
                     </div>
                     
-                    <!-- BMI Calculator -->
                     <div class="tool-card">
                         <h3><span class="material-icons">fitness_center</span> BMI કેલ્ક્યુલેટર</h3>
                         <div class="gender-selector">
@@ -1058,7 +1177,9 @@
             selectedDay: new Date().getDate(),
             beneficiaries: {},
             stock: {},
-            selectedGender: 'boy'
+            selectedGender: 'boy',
+            monthlyBeneficiaries: null,
+            billData: null
         };
 
         // Gujarati month names
@@ -1081,11 +1202,15 @@
             
             // Set default gender
             selectGender('boy');
+            
+            // Set report date to today
+            document.getElementById('reportDate').valueAsDate = new Date();
         });
 
         // Initialize month and year selectors
         function initializeSelectors() {
             const currentYear = new Date().getFullYear();
+            const currentMonth = new Date().getMonth();
             
             // Month selectors
             const monthSelectors = [
@@ -1102,7 +1227,7 @@
                         const option = document.createElement('option');
                         option.value = index;
                         option.textContent = month;
-                        if (index === appState.currentMonth) {
+                        if (index === currentMonth) {
                             option.selected = true;
                         }
                         selector.appendChild(option);
@@ -1125,7 +1250,7 @@
                         const option = document.createElement('option');
                         option.value = year;
                         option.textContent = year;
-                        if (year === appState.currentYear) {
+                        if (year === currentYear) {
                             option.selected = true;
                         }
                         selector.appendChild(option);
@@ -1389,6 +1514,27 @@
             const container = document.getElementById('reportTableContainer');
             const summaryContainer = document.getElementById('beneficiarySummaryContainer');
             
+            if (!isDaily) {
+                // For monthly report, use the month/year selectors from the report page
+                const monthSelector = document.getElementById('reportMonthSelector');
+                const yearSelector = document.getElementById('reportYearSelector');
+                
+                if (monthSelector && yearSelector) {
+                    appState.currentMonth = parseInt(monthSelector.value);
+                    appState.currentYear = parseInt(yearSelector.value);
+                }
+            }
+
+            // Load saved beneficiaries for the selected month/year
+            const savedData = localStorage.getItem(`beneficiaries_${appState.currentYear}_${appState.currentMonth}`);
+            if (savedData) {
+                appState.beneficiaries = JSON.parse(savedData);
+            } else {
+                appState.beneficiaries = {};
+                showToast('આ મહિનાનો કોઈ ડેટા નથી', 'error');
+                return;
+            }
+
             if (isDaily) {
                 const dateInput = document.getElementById('reportDate');
                 if (!dateInput || !dateInput.value) {
@@ -1403,8 +1549,12 @@
                 const dayOfWeek = date.getDay();
                 const dayName = gujaratiDays[dayOfWeek];
                 
-                if (month !== appState.currentMonth || year !== appState.currentYear) {
-                    showToast('પસંદ કરેલ તારીખ ચાલુ મહિનાની નથી', 'error');
+                // Check if the selected date is in the selected month/year
+                const reportMonth = parseInt(document.getElementById('reportMonthSelector').value);
+                const reportYear = parseInt(document.getElementById('reportYearSelector').value);
+                
+                if (month !== reportMonth || year !== reportYear) {
+                    showToast('પસંદ કરેલ તારીખ સિલેક્ટ કરેલ મહિનાની નથી', 'error');
                     return;
                 }
                 
@@ -1413,501 +1563,156 @@
                 // Generate daily report table
                 let html = `
                     <h3>${day}/${month+1}/${year} (${dayName}) - દૈનિક રિપોર્ટ</h3>
+                    <div class="table-container">
                     <table class="wide-table">
                         <tr>
-                            <th rowspan="2">તારીખ</th>
-                            <th rowspan="2">વાર</th>
-                            <th rowspan="2">સંખ્યા</th>
-                            <th colspan="5">ઘઉં</th>
-                            <th colspan="5">ચોખા</th>
-                            <th colspan="5">તેલ</th>
-                            <th colspan="5">ચણા</th>
-                            <th colspan="5">દાળ</th>
-                        </tr>
-                        <tr class="sub-header">
-                            <!-- Wheat sub-headers -->
-                            <th>કુલ જથ્થો</th>
-                            <th>સવારની વપરાશ</th>
-                            <th>બપોરની વપરાશ</th>
-                            <th>કુલ વપરાશ</th>
-                            <th>બંધ સિલક</th>
-                            <!-- Rice sub-headers -->
-                            <th>કુલ જથ્થો</th>
-                            <th>સવારની વપરાશ</th>
-                            <th>બપોરની વપરાશ</th>
-                            <th>કુલ વપરાશ</th>
-                            <th>બંધ સિલક</th>
-                            <!-- Oil sub-headers -->
-                            <th>કુલ જથ્થો</th>
-                            <th>સવારની વપરાશ</th>
-                            <th>બપોરની વપરાશ</th>
-                            <th>કુલ વપરાશ</th>
-                            <th>બંધ સિલક</th>
-                            <!-- Chana sub-headers -->
-                            <th>કુલ જથ્થો</th>
-                            <th>સવારની વપરાશ</th>
-                            <th>બપોરની વપરાશ</th>
-                            <th>કુલ વપરાશ</th>
-                            <th>બંધ સિલક</th>
-                            <!-- Dal sub-headers -->
-                            <th>કુલ જથ્થો</th>
-                            <th>સવારની વપરાશ</th>
-                            <th>બપોરની વપરાશ</th>
-                            <th>કુલ વપરાશ</th>
-                            <th>બંધ સિલક</th>
+                            <th>તારીખ</th>
+                            <th>વાર</th>
+                            <th>લાભાર્થીઓની સંખ્યા</th>
+                            <th>સ્ટેટસ</th>
                         </tr>
                 `;
                 
-                const items = [
-                    { id: 'wheat', name: 'ઘઉં', unit: 'કિલો' },
-                    { id: 'rice', name: 'ચોખા', unit: 'કિલો' },
-                    { id: 'oil', name: 'તેલ', unit: 'લિટર' },
-                    { id: 'chana', name: 'ચણા', unit: 'કિલો' },
-                    { id: 'dal', name: 'દાળ', unit: 'કિલો' }
-                ];
-                
-                let totalQuantity = 0;
-                let totalMorningConsumption = 0;
-                let totalAfternoonConsumption = 0;
-                let totalConsumption = 0;
-                let totalClosing = 0;
-                
-                html += `<tr>`;
-                html += `<td class="date-column">${day}/${month+1}</td>`;
-                html += `<td>${dayName}</td>`;
-                html += `<td>${beneficiaries}</td>`;
-                
-                for (const item of items) {
-                    const opening = appState.stock[`${item.id}_open`] || 0;
-                    const income = appState.stock[`${item.id}_income`] || 0;
-                    const totalQty = opening + income;
-                    
-                    const morningConsumption = calculateMorningConsumption(item.id, dayOfWeek, beneficiaries);
-                    const afternoonConsumption = calculateAfternoonConsumption(item.id, dayOfWeek, beneficiaries);
-                    const consumption = morningConsumption + afternoonConsumption;
-                    const closing = totalQty - consumption;
-                    
-                    totalQuantity += totalQty;
-                    totalMorningConsumption += morningConsumption;
-                    totalAfternoonConsumption += afternoonConsumption;
-                    totalConsumption += consumption;
-                    totalClosing += closing;
-                    
+                if (dayOfWeek === 0) { // Sunday/Holiday
                     html += `
-                        <td>${totalQty.toFixed(3)}</td>
-                        <td>${morningConsumption.toFixed(3)}</td>
-                        <td>${afternoonConsumption.toFixed(3)}</td>
-                        <td>${consumption.toFixed(3)}</td>
-                        <td>${closing.toFixed(3)}</td>
+                        <tr class="holiday-row">
+                            <td>${day}/${month+1}/${year}</td>
+                            <td>${dayName}</td>
+                            <td>0</td>
+                            <td>રજા</td>
+                        </tr>
+                    `;
+                } else {
+                    html += `
+                        <tr>
+                            <td>${day}/${month+1}/${year}</td>
+                            <td>${dayName}</td>
+                            <td>${beneficiaries}</td>
+                            <td>કામકાજ દિવસ</td>
+                        </tr>
                     `;
                 }
                 
-                html += `</tr>`;
-                
-                // Add total row
-                html += `
-                    <tr class="total-row">
-                        <td colspan="3">કુલ</td>
-                        <td>${totalQuantity.toFixed(3)}</td>
-                        <td>${totalMorningConsumption.toFixed(3)}</td>
-                        <td>${totalAfternoonConsumption.toFixed(3)}</td>
-                        <td>${totalConsumption.toFixed(3)}</td>
-                        <td>${totalClosing.toFixed(3)}</td>
-                        <!-- Repeat for other items -->
-                        <td>${totalQuantity.toFixed(3)}</td>
-                        <td>${totalMorningConsumption.toFixed(3)}</td>
-                        <td>${totalAfternoonConsumption.toFixed(3)}</td>
-                        <td>${totalConsumption.toFixed(3)}</td>
-                        <td>${totalClosing.toFixed(3)}</td>
-                        <td>${totalQuantity.toFixed(3)}</td>
-                        <td>${totalMorningConsumption.toFixed(3)}</td>
-                        <td>${totalAfternoonConsumption.toFixed(3)}</td>
-                        <td>${totalConsumption.toFixed(3)}</td>
-                        <td>${totalClosing.toFixed(3)}</td>
-                        <td>${totalQuantity.toFixed(3)}</td>
-                        <td>${totalMorningConsumption.toFixed(3)}</td>
-                        <td>${totalAfternoonConsumption.toFixed(3)}</td>
-                        <td>${totalConsumption.toFixed(3)}</td>
-                        <td>${totalClosing.toFixed(3)}</td>
-                        <td>${totalQuantity.toFixed(3)}</td>
-                        <td>${totalMorningConsumption.toFixed(3)}</td>
-                        <td>${totalAfternoonConsumption.toFixed(3)}</td>
-                        <td>${totalConsumption.toFixed(3)}</td>
-                        <td>${totalClosing.toFixed(3)}</td>
-                    </tr>
-                `;
-                
-                html += `</table>`;
+                html += `</table></div>`;
                 container.innerHTML = html;
                 summaryContainer.style.display = 'none';
                 
             } else {
-                // Monthly report - FIXED VERSION
+                // Monthly report
                 const monthName = gujaratiMonths[appState.currentMonth];
                 const year = appState.currentYear;
                 const daysInMonth = new Date(appState.currentYear, appState.currentMonth + 1, 0).getDate();
                 
-                // Initialize stock for each item
-                const items = ['wheat', 'rice', 'oil', 'chana', 'dal'];
-                let currentStock = {};
-                items.forEach(item => {
-                    const opening = appState.stock[`${item}_open`] || 0;
-                    const income = appState.stock[`${item}_income`] || 0;
-                    currentStock[item] = opening + income;
-                });
-
                 // Generate monthly report table
                 let html = `
                     <h3>${monthName} ${year} - માસિક રિપોર્ટ</h3>
+                    <div class="table-container">
                     <table class="wide-table">
                         <tr>
-                            <th rowspan="2" class="date-column">તારીખ</th>
-                            <th rowspan="2">વાર</th>
-                            <th rowspan="2">સંખ્યા</th>
-                            <th colspan="5">ઘઉં</th>
-                            <th colspan="5">ચોખા</th>
-                            <th colspan="5">તેલ</th>
-                            <th colspan="5">ચણા</th>
-                            <th colspan="5">દાળ</th>
-                        </tr>
-                        <tr class="sub-header">
-                            <!-- Wheat sub-headers -->
-                            <th>શરૂઆતી</th>
-                            <th>સવારની વપરાશ</th>
-                            <th>બપોરની વપરાશ</th>
-                            <th>કુલ વપરાશ</th>
-                            <th>બંધ સિલક</th>
-                            <!-- Rice sub-headers -->
-                            <th>શરૂઆતી</th>
-                            <th>સવારની વપરાશ</th>
-                            <th>બપોરની વપરાશ</th>
-                            <th>કુલ વપરાશ</th>
-                            <th>બંધ સિલક</th>
-                            <!-- Oil sub-headers -->
-                            <th>શરૂઆતી</th>
-                            <th>સવારની વપરાશ</th>
-                            <th>બપોરની વપરાશ</th>
-                            <th>કુલ વપરાશ</th>
-                            <th>બંધ સિલક</th>
-                            <!-- Chana sub-headers -->
-                            <th>શરૂઆતી</th>
-                            <th>સવારની વપરાશ</th>
-                            <th>બપોરની વપરાશ</th>
-                            <th>કુલ વપરાશ</th>
-                            <th>બંધ સિલક</th>
-                            <!-- Dal sub-headers -->
-                            <th>શરૂઆતી</th>
-                            <th>સવારની વપરાશ</th>
-                            <th>બપોરની વપરાશ</th>
-                            <th>કુલ વપરાશ</th>
-                            <th>બંધ સિલક</th>
+                            <th class="date-column">તારીખ</th>
+                            <th>વાર</th>
+                            <th>લાભાર્થીઓની સંખ્યા</th>
+                            <th>સ્ટેટસ</th>
                         </tr>
                 `;
                 
-                let monthlyTotals = {
-                    wheat: { morning: 0, afternoon: 0, total: 0 },
-                    rice: { morning: 0, afternoon: 0, total: 0 },
-                    oil: { morning: 0, afternoon: 0, total: 0 },
-                    chana: { morning: 0, afternoon: 0, total: 0 },
-                    dal: { morning: 0, afternoon: 0, total: 0 }
-                };
-                
-                // Reset current stock for calculation
-                items.forEach(item => {
-                    const opening = appState.stock[`${item}_open`] || 0;
-                    const income = appState.stock[`${item}_income`] || 0;
-                    currentStock[item] = opening + income;
-                });
+                let totalBeneficiaries = 0;
+                let workingDays = 0;
                 
                 // Calculate for each day
                 for (let day = 1; day <= daysInMonth; day++) {
-                    const dayOfWeek = new Date(appState.currentYear, appState.currentMonth, day).getDay();
+                    const date = new Date(appState.currentYear, appState.currentMonth, day);
+                    const dayOfWeek = date.getDay();
                     const dayName = gujaratiDays[dayOfWeek];
                     const beneficiaries = appState.beneficiaries[day] || 0;
                     
-                    // Skip Sundays in calculation
+                    // Skip Sundays/Holidays (dayOfWeek 0 = Sunday)
                     if (dayOfWeek === 0) {
                         html += `
                             <tr class="holiday-row">
                                 <td class="date-column">${day}/${appState.currentMonth+1}</td>
                                 <td>${dayName}</td>
+                                <td>0</td>
                                 <td>રજા</td>
-                                <td colspan="25">-</td>
                             </tr>
                         `;
-                        continue;
-                    }
-                    
-                    html += `<tr>`;
-                    html += `<td class="date-column">${day}/${appState.currentMonth+1}</td>`;
-                    html += `<td>${dayName}</td>`;
-                    html += `<td>${beneficiaries}</td>`;
-                    
-                    for (const item of items) {
-                        const openingStock = currentStock[item];
-                        
-                        const morningConsumption = calculateMorningConsumption(item, dayOfWeek, beneficiaries);
-                        const afternoonConsumption = calculateAfternoonConsumption(item, dayOfWeek, beneficiaries);
-                        const totalConsumption = morningConsumption + afternoonConsumption;
-                        const closingStock = openingStock - totalConsumption;
-                        
-                        // Update current stock for next day
-                        currentStock[item] = closingStock;
-                        
-                        // Add to monthly totals
-                        monthlyTotals[item].morning += morningConsumption;
-                        monthlyTotals[item].afternoon += afternoonConsumption;
-                        monthlyTotals[item].total += totalConsumption;
-                        
+                    } else {
                         html += `
-                            <td>${openingStock.toFixed(3)}</td>
-                            <td>${morningConsumption.toFixed(3)}</td>
-                            <td>${afternoonConsumption.toFixed(3)}</td>
-                            <td>${totalConsumption.toFixed(3)}</td>
-                            <td>${closingStock.toFixed(3)}</td>
+                            <tr>
+                                <td class="date-column">${day}/${appState.currentMonth+1}</td>
+                                <td>${dayName}</td>
+                                <td>${beneficiaries}</td>
+                                <td>કામકાજ દિવસ</td>
+                            </tr>
                         `;
+                        totalBeneficiaries += beneficiaries;
+                        workingDays++;
                     }
-                    
-                    html += `</tr>`;
                 }
                 
                 // Add monthly total row
-                html += `<tr class="total-row">`;
-                html += `<td colspan="3">માસિક કુલ વપરાશ</td>`;
+                const averageBeneficiaries = workingDays > 0 ? (totalBeneficiaries / workingDays).toFixed(2) : 0;
                 
-                for (const item of items) {
-                    html += `
-                        <td>-</td>
-                        <td>${monthlyTotals[item].morning.toFixed(3)}</td>
-                        <td>${monthlyTotals[item].afternoon.toFixed(3)}</td>
-                        <td>${monthlyTotals[item].total.toFixed(3)}</td>
-                        <td>-</td>
-                    `;
-                }
+                html += `
+                    <tr class="total-row">
+                        <td colspan="2">માસિક કુલ</td>
+                        <td>${totalBeneficiaries}</td>
+                        <td>${workingDays} કામકાજ દિવસ</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="2">સરેરાશ દૈનિક લાભાર્થી</td>
+                        <td colspan="2">${averageBeneficiaries}</td>
+                    </tr>
+                `;
                 
-                html += `</tr>`;
-                html += `</table>`;
+                html += `</table></div>`;
                 
                 container.innerHTML = html;
                 
                 // Generate beneficiary summary
-                generateBeneficiarySummary(monthlyTotals);
+                generateBeneficiarySummary(totalBeneficiaries, workingDays);
                 summaryContainer.style.display = 'block';
+                
+                // Store data for bill calculation
+                appState.monthlyBeneficiaries = {
+                    total: totalBeneficiaries,
+                    workingDays: workingDays,
+                    average: parseFloat(averageBeneficiaries)
+                };
             }
             
             showToast('રિપોર્ટ બનાવાયો', 'success');
         }
 
-        // Generate beneficiary summary table with corrected calculations
-        function generateBeneficiarySummary(monthlyTotals) {
+        // Generate beneficiary summary table
+        function generateBeneficiarySummary(totalBeneficiaries, workingDays) {
             const summaryTable = document.getElementById('beneficiarySummaryTable');
+            
+            const averageBeneficiaries = workingDays > 0 ? (totalBeneficiaries / workingDays).toFixed(2) : 0;
             
             let html = `
                 <tr>
-                    <th>ઇન્વેન્ટરી આઇટમ</th>
-                    <th>સવારના લાભાર્થી</th>
-                    <th>બપોરના લાભાર્થી</th>
-                    <th>કુલ લાભાર્થી</th>
+                    <th>વર્ણન</th>
+                    <th>સંખ્યા</th>
                 </tr>
-            `;
-            
-            // Calculate beneficiaries for each item based on consumption
-            const itemCalculations = {
-                wheat: {
-                    morning: Math.round(monthlyTotals.wheat.morning / 0.030),
-                    afternoon: Math.round(monthlyTotals.wheat.afternoon / 0.050),
-                    total: 0
-                },
-                rice: {
-                    morning: Math.round(monthlyTotals.rice.morning / 0.030),
-                    afternoon: Math.round(monthlyTotals.rice.afternoon / 0.050),
-                    total: 0
-                },
-                oil: {
-                    morning: Math.round(monthlyTotals.oil.morning / 0.005),
-                    afternoon: Math.round(monthlyTotals.oil.afternoon / 0.008),
-                    total: 0
-                },
-                chana: {
-                    morning: 0,
-                    afternoon: Math.round(monthlyTotals.chana.afternoon / 0.020),
-                    total: 0
-                },
-                dal: {
-                    morning: 0,
-                    afternoon: Math.round(monthlyTotals.dal.afternoon / 0.020),
-                    total: 0
-                }
-            };
-            
-            // Calculate totals
-            for (const item in itemCalculations) {
-                itemCalculations[item].total = itemCalculations[item].morning + itemCalculations[item].afternoon;
-            }
-            
-            const items = [
-                { id: 'wheat', name: 'ઘઉં' },
-                { id: 'rice', name: 'ચોખા' },
-                { id: 'oil', name: 'તેલ' },
-                { id: 'chana', name: 'ચણા' },
-                { id: 'dal', name: 'દાળ' }
-            ];
-            
-            let totalMorning = 0;
-            let totalAfternoon = 0;
-            let totalBeneficiaries = 0;
-            
-            items.forEach(item => {
-                const data = itemCalculations[item.id];
-                
-                totalMorning += data.morning;
-                totalAfternoon += data.afternoon;
-                totalBeneficiaries += data.total;
-                
-                html += `
-                    <tr>
-                        <td>${item.name}</td>
-                        <td>${data.morning}</td>
-                        <td>${data.afternoon}</td>
-                        <td>${data.total}</td>
-                    </tr>
-                `;
-            });
-            
-            html += `
-                <tr class="total-row">
-                    <td>કુલ</td>
-                    <td>${totalMorning}</td>
-                    <td>${totalAfternoon}</td>
+                <tr>
+                    <td>કુલ લાભાર્થી</td>
                     <td>${totalBeneficiaries}</td>
+                </tr>
+                <tr>
+                    <td>કામકાજ દિવસ</td>
+                    <td>${workingDays}</td>
+                </tr>
+                <tr>
+                    <td>સરેરાશ દૈનિક લાભાર્થી</td>
+                    <td>${averageBeneficiaries}</td>
                 </tr>
             `;
             
             summaryTable.innerHTML = html;
         }
 
-        // Check if an item is served on a specific day of the week
-        function isItemServed(item, dayOfWeek) {
-            // Sunday is holiday, no items served
-            if (dayOfWeek === 0) return false;
-            
-            // Wheat served on Monday, Wednesday, Thursday, Friday, Saturday
-            if (item === 'wheat') {
-                return [1, 3, 4, 5, 6].includes(dayOfWeek);
-            }
-            
-            // Rice served on Tuesday, Wednesday, Thursday, Saturday
-            if (item === 'rice') {
-                return [2, 3, 4, 6].includes(dayOfWeek);
-            }
-            
-            // Oil served every working day
-            if (item === 'oil') {
-                return true;
-            }
-            
-            // Chana served on Tuesday, Thursday, Friday
-            if (item === 'chana') {
-                return [2, 4, 5].includes(dayOfWeek);
-            }
-            
-            // Dal served on Monday, Wednesday
-            if (item === 'dal') {
-                return [1, 3].includes(dayOfWeek);
-            }
-            
-            return false;
-        }
-
-        // Calculate morning consumption based on item type and day of week
-        function calculateMorningConsumption(item, dayOfWeek, beneficiaries) {
-            if (dayOfWeek === 0 || beneficiaries === 0) return 0; // Sunday or no beneficiaries
-            
-            let consumption = 0;
-            
-            switch(item) {
-                case 'wheat':
-                    // ઘઉં - સોમ, બુધ, ગુરુ, શુક્ર, શનિ સવારે 30ગ્રામ પ્રતિ લાભાર્થી
-                    if ([1, 3, 4, 5, 6].includes(dayOfWeek)) { // Monday, Wednesday, Thursday, Friday, Saturday
-                        consumption = 0.030 * beneficiaries; // 30g = 0.030kg
-                    }
-                    break;
-                    
-                case 'rice':
-                    // ચોખા - મંગળ સવારે 30ગ્રામ પ્રતિ લાભાર્થી
-                    if (dayOfWeek === 2) { // Tuesday
-                        consumption = 0.030 * beneficiaries; // 30g = 0.030kg
-                    }
-                    break;
-                    
-                case 'oil':
-                    // તેલ - સોમ, મંગળ, બુધ, ગુરુ, શુક્ર, શનિ સવારે 5 ગ્રામ પ્રતિ લાભાર્થી
-                    if ([1, 2, 3, 4, 5, 6].includes(dayOfWeek)) { // All working days
-                        consumption = 0.005 * beneficiaries; // 5g = 0.005kg
-                    }
-                    break;
-                    
-                case 'chana':
-                    // ચણા - no morning consumption
-                    consumption = 0;
-                    break;
-                    
-                case 'dal':
-                    // દાળ - no morning consumption
-                    consumption = 0;
-                    break;
-            }
-            
-            return consumption;
-        }
-
-        // Calculate afternoon consumption based on item type and day of week
-        function calculateAfternoonConsumption(item, dayOfWeek, beneficiaries) {
-            if (dayOfWeek === 0 || beneficiaries === 0) return 0; // Sunday or no beneficiaries
-            
-            let consumption = 0;
-            
-            switch(item) {
-                case 'wheat':
-                    // ઘઉં - સોમ, મંગળ, શુક્ર બપોરે 50 ગ્રામ પ્રતિ લાભાર્થી
-                    if ([1, 2, 5].includes(dayOfWeek)) { // Monday, Tuesday, Friday
-                        consumption = 0.050 * beneficiaries; // 50g = 0.050kg
-                    }
-                    break;
-                    
-                case 'rice':
-                    // ચોખા - બુધ, ગુરુ, શનિ બપોરે 50 ગ્રામ પ્રતિ લાભાર્થી
-                    if ([3, 4, 6].includes(dayOfWeek)) { // Wednesday, Thursday, Saturday
-                        consumption = 0.050 * beneficiaries; // 50g = 0.050kg
-                    }
-                    break;
-                    
-                case 'oil':
-                    // તેલ - સોમ, મંગળ, બુધ, ગુરુ, શુક્ર, શનિ બપોરે 8 ગ્રામ પ્રતિ લાભાર્થી
-                    if ([1, 2, 3, 4, 5, 6].includes(dayOfWeek)) { // All working days
-                        consumption = 0.008 * beneficiaries; // 8g = 0.008kg
-                    }
-                    break;
-                    
-                case 'chana':
-                    // ચણા - મંગળ, ગુરુ, શુક્ર બપોરે 20 ગ્રામ પ્રતિ લાભાર્થી
-                    if ([2, 4, 5].includes(dayOfWeek)) { // Tuesday, Thursday, Friday
-                        consumption = 0.020 * beneficiaries; // 20g = 0.020kg
-                    }
-                    break;
-                    
-                case 'dal':
-                    // દાળ - સોમ, બુધ બપોરે 20 ગ્રામ પ્રતિ લાભાર્થી
-                    if ([1, 3].includes(dayOfWeek)) { // Monday, Wednesday
-                        consumption = 0.020 * beneficiaries; // 20g = 0.020kg
-                    }
-                    break;
-            }
-            
-            return consumption;
-        }
-
-        // Calculate masala amounts for bill page
+        // Calculate masala amounts for bill page - CORRECTED VERSION
         function calculateMasalaAmounts() {
             const monthSelector = document.getElementById('billMonthSelector');
             const yearSelector = document.getElementById('billYearSelector');
@@ -1917,25 +1722,48 @@
                 appState.currentYear = parseInt(yearSelector.value);
             }
             
-            // Load saved beneficiaries
+            // Load beneficiaries data for the selected month
             const savedData = localStorage.getItem(`beneficiaries_${appState.currentYear}_${appState.currentMonth}`);
-            if (savedData) {
-                appState.beneficiaries = JSON.parse(savedData);
-            } else {
-                appState.beneficiaries = {};
+            if (!savedData) {
+                showToast('આ મહિનાનો કોઈ ડેટા નથી', 'error');
+                return;
             }
             
-            // Calculate total beneficiaries
+            const beneficiaries = JSON.parse(savedData);
+            
+            // Calculate total beneficiaries and working days
             let totalBeneficiaries = 0;
-            for (const day in appState.beneficiaries) {
-                totalBeneficiaries += appState.beneficiaries[day];
+            let workingDays = 0;
+            
+            const daysInMonth = new Date(appState.currentYear, appState.currentMonth + 1, 0).getDate();
+            
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(appState.currentYear, appState.currentMonth, day);
+                const dayOfWeek = date.getDay();
+                
+                // Skip Sundays (holidays)
+                if (dayOfWeek !== 0) {
+                    const dayBeneficiaries = beneficiaries[day] || 0;
+                    totalBeneficiaries += dayBeneficiaries;
+                    workingDays++;
+                }
             }
             
-            // Calculate amounts
-            const masala1Amount = totalBeneficiaries * 1.30;
-            const masala2Amount = totalBeneficiaries * 1.60;
-            const masala3Amount = totalBeneficiaries * 1.00;
-            const totalAmount = masala1Amount + masala2Amount + masala3Amount;
+            // Calculate masala amounts based on the rules:
+            const masala1Rate = 1.30;
+            const masala2Rate = 1.60;
+            const masala3Rate = 1.00;
+            
+            // Masala 1: Total beneficiaries from report × 1.30
+            const masala1Amount = totalBeneficiaries * masala1Rate;
+            
+            // Masala 2: Total beneficiaries from report × 1.60
+            const masala2Amount = totalBeneficiaries * masala2Rate;
+            
+            // Masala 3: Total beneficiaries from report × 1.00 (for matru mandal)
+            const masala3Amount = totalBeneficiaries * masala3Rate;
+            
+            const totalMasalaAmount = masala1Amount + masala2Amount + masala3Amount;
             
             // Update UI
             document.getElementById('masala1Beneficiaries').textContent = totalBeneficiaries;
@@ -1947,12 +1775,230 @@
             document.getElementById('masala3Beneficiaries').textContent = totalBeneficiaries;
             document.getElementById('masala3Amount').textContent = masala3Amount.toFixed(2);
             
-            document.getElementById('totalMasalaAmount').textContent = totalAmount.toFixed(2);
+            document.getElementById('totalMasalaAmount').textContent = totalMasalaAmount.toFixed(2);
+            
+            // Store for certificate
+            appState.billData = {
+                masala1: {
+                    beneficiaries: totalBeneficiaries,
+                    amount: masala1Amount,
+                    rate: masala1Rate,
+                    description: "સામાન્ય મસાલા બિલ"
+                },
+                masala2: {
+                    beneficiaries: totalBeneficiaries,
+                    amount: masala2Amount,
+                    rate: masala2Rate,
+                    description: "ચણા અને દાળ મસાલા બિલ"
+                },
+                masala3: {
+                    beneficiaries: totalBeneficiaries,
+                    amount: masala3Amount,
+                    rate: masala3Rate,
+                    description: "માતૃ મંડળ મસાલા બિલ"
+                },
+                totalAmount: totalMasalaAmount,
+                month: appState.currentMonth,
+                year: appState.currentYear,
+                workingDays: workingDays,
+                totalBeneficiaries: totalBeneficiaries
+            };
+            
+            showToast('બિલની ગણતરી કરવામાં આવી', 'success');
+        }
+
+        // View Certificate for specific masala type - CORRECTED VERSION
+        function viewCertificate(masalaType) {
+            if (!appState.billData) {
+                showToast('પહેલા બિલની ગણતરી કરો', 'error');
+                return;
+            }
+            
+            const monthName = gujaratiMonths[appState.billData.month];
+            const year = appState.billData.year;
+            
+            let masalaData, certificateTitle, certificateDescription;
+            
+            if (masalaType === 1) {
+                masalaData = appState.billData.masala1;
+                certificateTitle = "મસાલા બિલ પ્રમાણપત્ર (1.30 રૂપિયા)";
+                certificateDescription = "સામાન્ય મસાલા બિલ";
+            } else if (masalaType === 2) {
+                masalaData = appState.billData.masala2;
+                certificateTitle = "મસાલા બિલ પ્રમાણપત્ર (1.60 રૂપિયા)";
+                certificateDescription = "ચણા અને દાળ મસાલા બિલ";
+            } else if (masalaType === 3) {
+                masalaData = appState.billData.masala3;
+                certificateTitle = "માતૃ મંડળ બિલ પ્રમાણપત્ર (1.00 રૂપિયા)";
+                certificateDescription = "માતૃ મંડળ મસાલા બિલ";
+            } else {
+                showToast('અમાન્ય મસાલા પ્રકાર', 'error');
+                return;
+            }
+            
+            const beneficiaries = masalaData.beneficiaries;
+            const amount = masalaData.amount;
+            const rate = masalaData.rate;
+            
+            // Create certificate HTML
+            const certificateHTML = `
+                <div class="certificate-box">
+                    <h1>${certificateTitle}</h1>
+                    
+                    <p>પ્રમાણપત્રની તારીખ: <span class="detail">${new Date().toLocaleDateString('gu-IN')}</span></p>
+                    
+                    <h2>માસિક બિલની વિગતો</h2>
+
+                    <p>પ્રમાણિત કરવામાં આવે છે કે આંગણવાડી કેન્દ્ર દ્વારા <span class="detail">${monthName} - ${year}</span> મહિના દરમિયાન, <span class="detail">${certificateDescription}</span> માટે કુલ <span class="detail">${beneficiaries}</span> લાભાર્થીઓ માટે ભોજન સેવા પૂરી પાડવામાં આવેલ છે.</p>
+
+                    <p>દર: ₹ <span class="detail">${rate.toFixed(2)}</span> પ્રતિ લાભાર્થી</p>
+
+                    <p>કુલ લાભાર્થી: <span class="detail">${beneficiaries}</span> × ₹ <span class="detail">${rate.toFixed(2)}</span> = ₹ <span class="detail">${amount.toFixed(2)}</span></p>
+
+                    <p>આ માસિક સેવાઓ માટેનું <span class="detail">કુલ મસાલા બિલ</span> ની રકમ ₹ <span class="detail">${amount.toFixed(2)}</span> (માત્ર અંકોમાં) થાય છે.</p>
+
+                    <p style="text-align: left; margin-top: 40px; font-style: italic;">આ પ્રમાણપત્ર આંગણવાડીના માસિક ભોજન બિલની ચુકવણી માટે રજૂ કરવામાં આવે છે.</p>
+
+                    <div class="signature-section">
+                        <span>આંગણવાડી કાર્યકરની સહી</span>
+                        <span>સુપરવાઇઝર/સંબંધિત અધિકારીની સહી</span>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn" onclick="printCertificate()">
+                        <span class="material-icons">print</span> પ્રિન્ટ કરો
+                    </button>
+                </div>
+            `;
+            
+            // Show certificate in report container
+            const container = document.getElementById('reportTableContainer');
+            container.innerHTML = certificateHTML;
+            
+            // Switch to report page to show certificate
+            showPage('reportPage');
+            
+            showToast('પ્રમાણપત્ર બનાવાયો', 'success');
+        }
+
+        // Print certificate
+        function printCertificate() {
+            window.print();
         }
 
         // Print bills
         function printBills() {
             window.print();
+        }
+
+        // Show toast message
+        function showToast(message, type = '') {
+            const toast = document.getElementById('toast');
+            if (!toast) return;
+            
+            toast.textContent = message;
+            toast.className = 'toast';
+            
+            if (type) {
+                toast.classList.add(type);
+            }
+            
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // BMI Calculator - Select Gender
+        function selectGender(gender) {
+            appState.selectedGender = gender;
+            
+            document.getElementById('boyBtn').classList.remove('active');
+            document.getElementById('girlBtn').classList.remove('active');
+            document.getElementById(gender + 'Btn').classList.add('active');
+        }
+
+        // Age Calculator
+        function calculateAge() {
+            const birthDate = new Date(document.getElementById('birthDate').value);
+            const currentDate = new Date(document.getElementById('currentDate').value);
+            
+            if (isNaN(birthDate.getTime()) || isNaN(currentDate.getTime())) {
+                showToast('કૃપા કરીને બંને તારીખો દાખલ કરો', 'error');
+                return;
+            }
+            
+            if (birthDate > currentDate) {
+                showToast('જન્મ તારીખ આજની તારીખથી મોટી હોઈ શકે નહીં', 'error');
+                return;
+            }
+            
+            let years = currentDate.getFullYear() - birthDate.getFullYear();
+            let months = currentDate.getMonth() - birthDate.getMonth();
+            let days = currentDate.getDate() - birthDate.getDate();
+            
+            if (days < 0) {
+                months--;
+                const prevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+                days += prevMonth.getDate();
+            }
+            
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+            
+            const result = `ઉંમર: ${years} વર્ષ, ${months} મહિના, ${days} દિવસ`;
+            document.getElementById('ageResult').textContent = result;
+        }
+
+        // BMI Calculator
+        function calculateBMI() {
+            const ageMonthsInput = document.getElementById('ageMonths');
+            const heightInput = document.getElementById('height');
+            const weightInput = document.getElementById('weight');
+
+            const ageMonths = parseInt(ageMonthsInput.value);
+            const height = parseFloat(heightInput.value);
+            const weight = parseFloat(weightInput.value);
+            
+            if (!ageMonths || isNaN(ageMonths) || !height || isNaN(height) || !weight || isNaN(weight)) {
+                showToast('કૃપા કરીને બધી વિગતો ભરો', 'error');
+                return;
+            }
+            
+            if (height <= 0 || weight <= 0) {
+                showToast('ઊંચાઈ અને વજન 0 કરતા વધારે હોવા જોઈએ', 'error');
+                return;
+            }
+            
+            // Calculate BMI
+            const heightInMeters = height / 100;
+            const bmi = weight / (heightInMeters * heightInMeters);
+            
+            // Determine BMI category
+            let category = '';
+            let color = '';
+            
+            if (bmi < 18.5) {
+                category = 'અંડરવેઇટ (Underweight)';
+                color = '#ff9800';
+            } else if (bmi >= 18.5 && bmi <= 24.9) {
+                category = 'સામાન્ય (Normal)';
+                color = '#4caf50';
+            } else if (bmi >= 25 && bmi <= 29.9) {
+                category = 'ઓવરવેઇટ (Overweight)';
+                color = '#ff9800';
+            } else {
+                category = 'ઓબેસ (Obese)';
+                color = '#f44336';
+            }
+            
+            const result = `BMI: ${bmi.toFixed(1)} (${category})`;
+            document.getElementById('bmiResult').textContent = result;
+            document.getElementById('bmiResult').style.backgroundColor = color;
+            document.getElementById('bmiResult').style.color = 'white';
         }
 
         // Calculator Functions
@@ -1981,139 +2027,19 @@
         function calculateResult() {
             const display = document.getElementById('calcDisplay');
             try {
-                // Replace × with * for evaluation
                 const expression = display.textContent.replace(/×/g, '*');
-                display.textContent = eval(expression);
+                const result = new Function('return ' + expression)(); 
+                display.textContent = result;
             } catch (error) {
                 display.textContent = 'Error';
             }
         }
 
-        // Age Calculator
-        function calculateAge() {
-            const birthDate = new Date(document.getElementById('birthDate').value);
-            const currentDate = new Date(document.getElementById('currentDate').value);
-            
-            if (!birthDate || !currentDate) {
-                showToast('કૃપા કરીને બંને તારીખો દાખલ કરો', 'error');
-                return;
-            }
-            
-            if (birthDate > currentDate) {
-                showToast('જન્મ તારીખ આજની તારીખથી મોટી હોઈ શકે નહીં', 'error');
-                return;
-            }
-            
-            let years = currentDate.getFullYear() - birthDate.getFullYear();
-            let months = currentDate.getMonth() - birthDate.getMonth();
-            let days = currentDate.getDate() - birthDate.getDate();
-            
-            if (days < 0) {
-                months--;
-                // Get days in previous month
-                const prevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
-                days += prevMonth.getDate();
-            }
-            
-            if (months < 0) {
-                years--;
-                months += 12;
-            }
-            
-            const result = `ઉંમર: ${years} વર્ષ, ${months} મહિના, ${days} દિવસ`;
-            document.getElementById('ageResult').textContent = result;
-        }
-
-        // BMI Calculator
-        function selectGender(gender) {
-            appState.selectedGender = gender;
-            
-            // Update UI
-            document.getElementById('boyBtn').classList.remove('active');
-            document.getElementById('girlBtn').classList.remove('active');
-            document.getElementById(gender + 'Btn').classList.add('active');
-        }
-
-        function calculateBMI() {
-            const ageMonths = parseInt(document.getElementById('ageMonths').value);
-            const height = parseFloat(document.getElementById('height').value);
-            const weight = parseFloat(document.getElementById('weight').value);
-            
-            if (!ageMonths || !height || !weight) {
-                showToast('કૃપા કરીને બધી વિગતો ભરો', 'error');
-                return;
-            }
-            
-            if (height <= 0 || weight <= 0) {
-                showToast('ઊંચાઈ અને વજન 0 કરતા વધારે હોવા જોઈએ', 'error');
-                return;
-            }
-            
-            // Calculate BMI
-            const heightInMeters = height / 100;
-            const bmi = weight / (heightInMeters * heightInMeters);
-            
-            // Determine BMI category based on age and gender
-            let category = '';
-            let color = '';
-            
-            if (ageMonths <= 60) { // Up to 5 years
-                if (bmi < 14) {
-                    category = 'અંડરવેઇટ';
-                    color = '#ff9800';
-                } else if (bmi >= 14 && bmi <= 18) {
-                    category = 'સામાન્ય';
-                    color = '#4caf50';
-                } else {
-                    category = 'ઓવરવેઇટ';
-                    color = '#f44336';
-                }
-            } else { // Above 5 years
-                if (bmi < 18.5) {
-                    category = 'અંડરવેઇટ';
-                    color = '#ff9800';
-                } else if (bmi >= 18.5 && bmi <= 24.9) {
-                    category = 'સામાન્ય';
-                    color = '#4caf50';
-                } else if (bmi >= 25 && bmi <= 29.9) {
-                    category = 'ઓવરવેઇટ';
-                    color = '#ff9800';
-                } else {
-                    category = 'ઓબેસ';
-                    color = '#f44336';
-                }
-            }
-            
-            const result = `BMI: ${bmi.toFixed(1)} (${category})`;
-            document.getElementById('bmiResult').textContent = result;
-            document.getElementById('bmiResult').style.backgroundColor = color;
-            document.getElementById('bmiResult').style.color = 'white';
-        }
-
-        // Show toast message
-        function showToast(message, type = '') {
-            const toast = document.getElementById('toast');
-            if (!toast) return;
-            
-            toast.textContent = message;
-            toast.className = 'toast';
-            
-            if (type) {
-                toast.classList.add(type);
-            }
-            
-            toast.classList.add('show');
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-
-        // Toggle full screen mode
+        // Other utility functions
         function toggleFullScreen() {
             if (!document.fullscreenElement) {
                 document.documentElement.requestFullscreen().catch(err => {
-                    console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+                    showToast('ફુલ સ્ક્રીન મોડ સપોર્ટ કરતું નથી', 'error');
                 });
             } else {
                 if (document.exitFullscreen) {
@@ -2122,7 +2048,6 @@
             }
         }
 
-        // Share report
         function shareReport() {
             if (navigator.share) {
                 navigator.share({
@@ -2137,7 +2062,6 @@
             }
         }
 
-        // Export to PDF - IMPROVED VERSION with Unicode support
         function exportToPDF() {
             const reportContainer = document.getElementById('reportTableContainer');
             if (!reportContainer || reportContainer.innerHTML.includes('કૃપા કરીને')) {
@@ -2147,38 +2071,16 @@
             
             showToast('PDF બનાવવાનું શરૂ કર્યું...', 'success');
             
-            // Use html2canvas for better Unicode support
             html2canvas(reportContainer).then(canvas => {
                 const imgData = canvas.toDataURL('image/png');
                 const { jsPDF } = window.jspdf;
-                const doc = new jsPDF('p', 'mm', 'a4');
                 
-                const imgWidth = 190;
-                const pageHeight = 280;
+                const doc = new jsPDF('l', 'mm', 'a4');
+                const pageWidth = doc.internal.pageSize.getWidth();
+                const imgWidth = pageWidth - 20;
                 const imgHeight = canvas.height * imgWidth / canvas.width;
-                let heightLeft = imgHeight;
                 
-                let position = 10;
-                
-                // Add title
-                doc.setFontSize(16);
-                doc.text('આંગણવાડી Patrak-4 રિપોર્ટ', 105, 15, { align: 'center' });
-                
-                // Add date
-                const monthName = gujaratiMonths[appState.currentMonth];
-                doc.setFontSize(12);
-                doc.text(`${monthName} ${appState.currentYear}`, 105, 25, { align: 'center' });
-                
-                doc.addImage(imgData, 'PNG', 10, position + 20, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
-                
-                while (heightLeft >= 0) {
-                    position = heightLeft - imgHeight;
-                    doc.addPage();
-                    doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-                    heightLeft -= pageHeight;
-                }
-                
+                doc.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
                 doc.save(`આંગણવાડી_રિપોર્ટ_${appState.currentYear}_${appState.currentMonth+1}.pdf`);
                 showToast('PDF સફળતાપૂર્વક ડાઉનલોડ થયો', 'success');
             }).catch(error => {
@@ -2187,24 +2089,16 @@
             });
         }
 
-        // Export to Excel
         function exportToExcel() {
-            const table = document.querySelector('.wide-table');
+            const table = document.querySelector('#reportTableContainer .wide-table');
             if (!table) {
                 showToast('કોઈ રિપોર્ટ ડેટા ઉપલબ્ધ નથી', 'error');
                 return;
             }
             
-            // Create workbook
             const wb = XLSX.utils.book_new();
-            
-            // Extract table data
             const ws = XLSX.utils.table_to_sheet(table);
-            
-            // Add worksheet to workbook
             XLSX.utils.book_append_sheet(wb, ws, 'રિપોર્ટ');
-            
-            // Generate and download Excel file
             XLSX.writeFile(wb, `આંગણવાડી_રિપોર્ટ_${appState.currentYear}_${appState.currentMonth+1}.xlsx`);
             showToast('Excel સફળતાપૂર્વક ડાઉનલોડ થયો', 'success');
         }
