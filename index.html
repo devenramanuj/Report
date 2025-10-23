@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="gu">
 <head>
@@ -853,6 +852,15 @@
             .certificate {
                 padding: 20px;
             }
+            
+            .certificate-footer {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .signature-box {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -1316,7 +1324,6 @@
                 <div class="certificate-content">
                     <p>આંગણવાડી કેન્દ્રનું નામ:- <span id="centerName130"></span></p>
                     <p>આથી પ્રમાણપત્ર આપવામાં આવે છે. કે શ્રીમતી <span id="workerName130"></span> આંગણવાડી કાર્યકર એ આ બીલના નાણા પોતાના પદડના ચુકવેલ છે. આ બીલના નાણા તેઓએ આ અગાઉ લીધેલ નથી. જેની મે ખાત્રી કરેલ છે. આંગણવાડી વર્કરે મસાલા ખરીદીની નોંધ આંગણવાડીના મસાલા રજીસ્ટરના પાના નં <span id="registerPage130"></span> ઉપર કરેલ છે. ખરીદ કરેલ મસાલા આંગણવાડી કેન્દ્ર ઉપરજ વપરાશ કરવામાં આવે છે.</p>
-                    <p>આંગણવાડી કાર્યકરની સહી...</p>
                     <p>પત્રક નં-૪ ના કોલમ નં-૯ મુજબ લાભાર્થીની સંખ્યા <span id="beneficiaries130"></span> પૈસા = ૧.૩૦ પૈસા મુજબ રકમ</p>
                     <p>રજુ કરેલ મસાલા બીલની રકમ રૂ <span id="submittedAmount130"></span></p>
                     <p>ચુકવવા પાત્ર મસાલા બીલની રકમ રૂ <span id="payableAmount130"></span></p>
@@ -1324,20 +1331,54 @@
                 </div>
                 <div class="certificate-footer">
                     <div class="signature-box">
-                        સુપરવાઇઝરની સહી:-
+                        સુપરવાઈઝરની સહી:-
                         <div class="signature-line"></div>
                         <span id="supervisorName130"></span>
                     </div>
                     <div class="signature-box">
-                        સેજો - <span id="sejo130"></span>
+                        આંગણવાડી કાર્યકરની સહી:-
                         <div class="signature-line"></div>
-                        તારીખ:- <span id="certificateDate130"></span>
+                        <span id="workerName130Sign"></span>
                     </div>
                 </div>
             </div>
             <div class="blank-half">
                 <!-- Blank space as required -->
             </div>
+        </div>
+    </div>
+    
+        <div id="certificateModal130" class="certificate-modal">
+        <div class="certificate-container">
+            <button class="certificate-close" onclick="closeCertificate('certificateModal130')">×</button>
+            <div class="certificate">
+                <div class="certificate-header">
+                    <h2>:: મસાલા બીલ પ્રમાણપત્ર ::</h2>
+                </div>
+                <div class="certificate-content">
+                    <p>આંગણવાડી કેન્દ્રનું નામ:- <span id="centerName130"></span></p>
+                    <p>તારીખ:- <span id="certificateDate130"></span></p> 
+                    <p>આથી પ્રમાણપત્ર આપવામાં આવે છે. કે શ્રીમતી <span id="workerName130"></span> આંગણવાડી કાર્યકર એ આ બીલના નાણા પોતાના પદડના ચુકવેલ છે. આ બીલના નાણા તેઓએ આ અગાઉ લીધેલ નથી. જેની મે ખાત્રી કરેલ છે. આંગણવાડી વર્કરે મસાલા ખરીદીની નોંધ આંગણવાડીના મસાલા રજીસ્ટરના પાના નં <span id="registerPage130"></span> ઉપર કરેલ છે. ખરીદ કરેલ મસાલા આંગણવાડી કેન્દ્ર ઉપરજ વપરાશ કરવામાં આવે છે.</p>
+                    <p>પત્રક નં-૪ ના કોલમ નં-૯ મુજબ લાભાર્થીની સંખ્યા <span id="beneficiaries130"></span> પૈસા = ૧.૩૦ પૈસા મુજબ રકમ</p>
+                    <p>રજુ કરેલ મસાલા બીલની રકમ રૂ <span id="submittedAmount130"></span></p>
+                    <p>ચુકવવા પાત્ર મસાલા બીલની રકમ રૂ <span id="payableAmount130"></span></p>
+                    <p>સદરહું બીલની નોંધ આંગણવાડી કેન્દ્રના મસાલા રજીસ્ટરમાં જમા કરેલ છે.</p>
+                </div>
+                <div class="certificate-footer">
+                    <div class="signature-box">
+                        સુપરવાઈઝરની સહી:-
+                        <div class="signature-line"></div>
+                        <span id="supervisorName130"></span>
+                    </div>
+                    <div class="signature-box">
+                        આંગણવાડી કાર્યકરની સહી:-
+                        <div class="signature-line"></div>
+                        <span id="workerName130Sign"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="blank-half">
+                </div>
         </div>
     </div>
     
@@ -1350,8 +1391,8 @@
                 </div>
                 <div class="certificate-content">
                     <p>આંગણવાડી કેન્દ્રનું નામ:- <span id="centerName160"></span></p>
+                    <p>તારીખ:- <span id="certificateDate160"></span></p>
                     <p>આથી પ્રમાણપત્ર આપવામાં આવે છે. કે શ્રીમતી <span id="workerName160"></span> આંગણવાડી કાર્યકર એ આ બીલના નાણા પોતાના પદડના ચુકવેલ છે. આ બીલના નાણા તેઓએ આ અગાઉ લીધેલ નથી. જેની મે ખાત્રી કરેલ છે. આંગણવાડી વર્કરે મસાલા ખરીદીની નોંધ આંગણવાડીના મસાલા રજીસ્ટરના પાના નં <span id="registerPage160"></span> ઉપર કરેલ છે. ખરીદ કરેલ મસાલા આંગણવાડી કેન્દ્ર ઉપરજ વપરાશ કરવામાં આવે છે.</p>
-                    <p>આંગણવાડી કાર્યકરની સહી...</p>
                     <p>પત્રક નં-૪ ના કોલમ નં-૯ મુજબ લાભાર્થીની સંખ્યા <span id="beneficiaries160"></span> પૈસા = ૧.૬૦ પૈસા મુજબ રકમ</p>
                     <p>રજુ કરેલ મસાલા બીલની રકમ રૂ <span id="submittedAmount160"></span></p>
                     <p>ચુકવવા પાત્ર મસાલા બીલની રકમ રૂ <span id="payableAmount160"></span></p>
@@ -1359,20 +1400,19 @@
                 </div>
                 <div class="certificate-footer">
                     <div class="signature-box">
-                        સુપરવાઇઝરની સહી:-
+                        સુપરવાઈઝરની સહી:-
                         <div class="signature-line"></div>
                         <span id="supervisorName160"></span>
                     </div>
                     <div class="signature-box">
-                        સેજો - <span id="sejo160"></span>
+                        આંગણવાડી કાર્યકરની સહી:-
                         <div class="signature-line"></div>
-                        તારીખ:- <span id="certificateDate160"></span>
+                        <span id="workerName160Sign"></span>
                     </div>
                 </div>
             </div>
             <div class="blank-half">
-                <!-- Blank space as required -->
-            </div>
+                </div>
         </div>
     </div>
     
@@ -1385,8 +1425,8 @@
                 </div>
                 <div class="certificate-content">
                     <p>આંગણવાડી કેન્દ્રનું નામ:- <span id="centerName100"></span></p>
+                    <p>તારીખ:- <span id="certificateDate100"></span></p>
                     <p>આથી પ્રમાણપત્ર આપવામાં આવે છે. કે શ્રીમતી <span id="workerName100"></span> આંગણવાડી કાર્યકર એ આ બીલના નાણા પોતાના પદડના ચુકવેલ છે. આ બીલના નાણા તેઓએ આ અગાઉ લીધેલ નથી. જેની મે ખાત્રી કરેલ છે. આંગણવાડી વર્કરે મસાલા ખરીદીની નોંધ આંગણવાડીના મસાલા રજીસ્ટરના પાના નં <span id="registerPage100"></span> ઉપર કરેલ છે. ખરીદ કરેલ મસાલા આંગણવાડી કેન્દ્ર ઉપરજ વપરાશ કરવામાં આવે છે.</p>
-                    <p>આંગણવાડી કાર્યકરની સહી...</p>
                     <p>પત્રક નં-૪ ના કોલમ નં-૯ મુજબ લાભાર્થીની સંખ્યા <span id="beneficiaries100"></span> પૈસા = ૧.૦૦ પૈસા મુજબ રકમ</p>
                     <p>રજુ કરેલ મસાલા બીલની રકમ રૂ <span id="submittedAmount100"></span></p>
                     <p>ચુકવવા પાત્ર મસાલા બીલની રકમ રૂ <span id="payableAmount100"></span></p>
@@ -1394,22 +1434,22 @@
                 </div>
                 <div class="certificate-footer">
                     <div class="signature-box">
-                        સુપરવાઇઝરની સહી:-
+                        સુપરવાઈઝરની સહી:-
                         <div class="signature-line"></div>
                         <span id="supervisorName100"></span>
                     </div>
                     <div class="signature-box">
-                        સેજો - <span id="sejo100"></span>
+                        આંગણવાડી કાર્યકરની સહી:-
                         <div class="signature-line"></div>
-                        તારીખ:- <span id="certificateDate100"></span>
+                        <span id="workerName100Sign"></span>
                     </div>
                 </div>
             </div>
             <div class="blank-half">
-                <!-- Blank space as required -->
-            </div>
+                </div>
         </div>
     </div>
+
 
     <footer>
         <div class="footer-content">
@@ -1975,7 +2015,7 @@
                     currentStock[item] = opening + income;
                 });
 
-                // Generate monthly report table
+                // Generate monthly report table with new columns for morning and afternoon beneficiaries
                 let html = `
                     <h3>${monthName} ${year} - માસિક રિપોર્ટ</h3>
                     <table class="wide-table">
@@ -1983,39 +2023,49 @@
                             <th rowspan="2" class="date-column">તારીખ</th>
                             <th rowspan="2">વાર</th>
                             <th rowspan="2">સંખ્યા</th>
-                            <th colspan="5">ઘઉં</th>
-                            <th colspan="5">ચોખા</th>
-                            <th colspan="5">તેલ</th>
-                            <th colspan="5">ચણા</th>
-                            <th colspan="5">દાળ</th>
+                            <th colspan="7">ઘઉં</th>
+                            <th colspan="7">ચોખા</th>
+                            <th colspan="7">તેલ</th>
+                            <th colspan="7">ચણા</th>
+                            <th colspan="7">દાળ</th>
                         </tr>
                         <tr class="sub-header">
                             <!-- Wheat sub-headers -->
                             <th>શરૂઆતી</th>
+                            <th>સવારના લાભાર્થી</th>
+                            <th>બપોરના લાભાર્થી</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                             <!-- Rice sub-headers -->
                             <th>શરૂઆતી</th>
+                            <th>સવારના લાભાર્થી</th>
+                            <th>બપોરના લાભાર્થી</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                             <!-- Oil sub-headers -->
                             <th>શરૂઆતી</th>
+                            <th>સવારના લાભાર્થી</th>
+                            <th>બપોરના લાભાર્થી</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                             <!-- Chana sub-headers -->
                             <th>શરૂઆતી</th>
+                            <th>સવારના લાભાર્થી</th>
+                            <th>બપોરના લાભાર્થી</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                             <!-- Dal sub-headers -->
                             <th>શરૂઆતી</th>
+                            <th>સવારના લાભાર્થી</th>
+                            <th>બપોરના લાભાર્થી</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
@@ -2024,11 +2074,11 @@
                 `;
                 
                 let monthlyTotals = {
-                    wheat: { morning: 0, afternoon: 0, total: 0 },
-                    rice: { morning: 0, afternoon: 0, total: 0 },
-                    oil: { morning: 0, afternoon: 0, total: 0 },
-                    chana: { morning: 0, afternoon: 0, total: 0 },
-                    dal: { morning: 0, afternoon: 0, total: 0 }
+                    wheat: { morning: 0, afternoon: 0, total: 0, morningBeneficiaries: 0, afternoonBeneficiaries: 0 },
+                    rice: { morning: 0, afternoon: 0, total: 0, morningBeneficiaries: 0, afternoonBeneficiaries: 0 },
+                    oil: { morning: 0, afternoon: 0, total: 0, morningBeneficiaries: 0, afternoonBeneficiaries: 0 },
+                    chana: { morning: 0, afternoon: 0, total: 0, morningBeneficiaries: 0, afternoonBeneficiaries: 0 },
+                    dal: { morning: 0, afternoon: 0, total: 0, morningBeneficiaries: 0, afternoonBeneficiaries: 0 }
                 };
                 
                 // Reset current stock for calculation
@@ -2051,7 +2101,7 @@
                                 <td class="date-column">${day}/${appState.currentMonth+1}</td>
                                 <td>${dayName}</td>
                                 <td>રજા</td>
-                                <td colspan="25">-</td>
+                                <td colspan="35">-</td>
                             </tr>
                         `;
                         continue;
@@ -2070,6 +2120,10 @@
                         const totalConsumption = morningConsumption + afternoonConsumption;
                         const closingStock = openingStock - totalConsumption;
                         
+                        // Calculate morning and afternoon beneficiaries (only if item is served)
+                        const morningBeneficiaries = isItemServedInMorning(item, dayOfWeek) ? beneficiaries : 0;
+                        const afternoonBeneficiaries = isItemServedInAfternoon(item, dayOfWeek) ? beneficiaries : 0;
+                        
                         // Update current stock for next day
                         currentStock[item] = closingStock;
                         
@@ -2077,9 +2131,13 @@
                         monthlyTotals[item].morning += morningConsumption;
                         monthlyTotals[item].afternoon += afternoonConsumption;
                         monthlyTotals[item].total += totalConsumption;
+                        monthlyTotals[item].morningBeneficiaries += morningBeneficiaries;
+                        monthlyTotals[item].afternoonBeneficiaries += afternoonBeneficiaries;
                         
                         html += `
                             <td>${openingStock.toFixed(3)}</td>
+                            <td>${morningBeneficiaries}</td>
+                            <td>${afternoonBeneficiaries}</td>
                             <td>${morningConsumption.toFixed(3)}</td>
                             <td>${afternoonConsumption.toFixed(3)}</td>
                             <td>${totalConsumption.toFixed(3)}</td>
@@ -2092,11 +2150,13 @@
                 
                 // Add monthly total row
                 html += `<tr class="total-row">`;
-                html += `<td colspan="3">માસિક કુલ વપરાશ</td>`;
+                html += `<td colspan="3">માસિક કુલ</td>`;
                 
                 for (const item of items) {
                     html += `
                         <td>-</td>
+                        <td>${monthlyTotals[item].morningBeneficiaries}</td>
+                        <td>${monthlyTotals[item].afternoonBeneficiaries}</td>
                         <td>${monthlyTotals[item].morning.toFixed(3)}</td>
                         <td>${monthlyTotals[item].afternoon.toFixed(3)}</td>
                         <td>${monthlyTotals[item].total.toFixed(3)}</td>
@@ -2117,6 +2177,46 @@
             showToast('રિપોર્ટ બનાવાયો', 'success');
         }
 
+        // Check if an item is served in the morning on a specific day of the week
+        function isItemServedInMorning(item, dayOfWeek) {
+            if (dayOfWeek === 0) return false; // Sunday
+            
+            switch(item) {
+                case 'wheat':
+                    return [1, 3, 4, 5, 6].includes(dayOfWeek); // Monday, Wednesday, Thursday, Friday, Saturday
+                case 'rice':
+                    return dayOfWeek === 2; // Tuesday
+                case 'oil':
+                    return [1, 2, 3, 4, 5, 6].includes(dayOfWeek); // All working days
+                case 'chana':
+                    return false; // No morning consumption
+                case 'dal':
+                    return false; // No morning consumption
+                default:
+                    return false;
+            }
+        }
+
+        // Check if an item is served in the afternoon on a specific day of the week
+        function isItemServedInAfternoon(item, dayOfWeek) {
+            if (dayOfWeek === 0) return false; // Sunday
+            
+            switch(item) {
+                case 'wheat':
+                    return [1, 2, 5].includes(dayOfWeek); // Monday, Tuesday, Friday
+                case 'rice':
+                    return [3, 4, 6].includes(dayOfWeek); // Wednesday, Thursday, Saturday
+                case 'oil':
+                    return [1, 2, 3, 4, 5, 6].includes(dayOfWeek); // All working days
+                case 'chana':
+                    return [2, 4, 5].includes(dayOfWeek); // Tuesday, Thursday, Friday
+                case 'dal':
+                    return [1, 3].includes(dayOfWeek); // Monday, Wednesday
+                default:
+                    return false;
+            }
+        }
+
         // Generate beneficiary summary table with corrected calculations
         function generateBeneficiarySummary(monthlyTotals) {
             const summaryTable = document.getElementById('beneficiarySummaryTable');
@@ -2129,40 +2229,6 @@
                     <th>કુલ લાભાર્થી</th>
                 </tr>
             `;
-            
-            // Calculate beneficiaries for each item based on consumption
-            const itemCalculations = {
-                wheat: {
-                    morning: Math.round(monthlyTotals.wheat.morning / 0.030),
-                    afternoon: Math.round(monthlyTotals.wheat.afternoon / 0.050),
-                    total: 0
-                },
-                rice: {
-                    morning: Math.round(monthlyTotals.rice.morning / 0.030),
-                    afternoon: Math.round(monthlyTotals.rice.afternoon / 0.050),
-                    total: 0
-                },
-                oil: {
-                    morning: Math.round(monthlyTotals.oil.morning / 0.005),
-                    afternoon: Math.round(monthlyTotals.oil.afternoon / 0.008),
-                    total: 0
-                },
-                chana: {
-                    morning: 0,
-                    afternoon: Math.round(monthlyTotals.chana.afternoon / 0.020),
-                    total: 0
-                },
-                dal: {
-                    morning: 0,
-                    afternoon: Math.round(monthlyTotals.dal.afternoon / 0.020),
-                    total: 0
-                }
-            };
-            
-            // Calculate totals
-            for (const item in itemCalculations) {
-                itemCalculations[item].total = itemCalculations[item].morning + itemCalculations[item].afternoon;
-            }
             
             const items = [
                 { id: 'wheat', name: 'ઘઉં' },
@@ -2177,18 +2243,18 @@
             let totalBeneficiaries = 0;
             
             items.forEach(item => {
-                const data = itemCalculations[item.id];
+                const data = monthlyTotals[item.id];
                 
-                totalMorning += data.morning;
-                totalAfternoon += data.afternoon;
-                totalBeneficiaries += data.total;
+                totalMorning += data.morningBeneficiaries;
+                totalAfternoon += data.afternoonBeneficiaries;
+                totalBeneficiaries += (data.morningBeneficiaries + data.afternoonBeneficiaries);
                 
                 html += `
                     <tr>
                         <td>${item.name}</td>
-                        <td>${data.morning}</td>
-                        <td>${data.afternoon}</td>
-                        <td>${data.total}</td>
+                        <td>${data.morningBeneficiaries}</td>
+                        <td>${data.afternoonBeneficiaries}</td>
+                        <td>${data.morningBeneficiaries + data.afternoonBeneficiaries}</td>
                     </tr>
                 `;
             });
@@ -2370,72 +2436,110 @@
         }
 
         // Generate certificate for 1.30 paise masala bill
-        function generateMasala130Certificate() {
-            if (!validateCertificateInputs()) return;
-            
-            // Get values from input fields
-            const centerName = document.getElementById('centerName').value;
-            const workerName = document.getElementById('workerName').value;
-            const registerPage = document.getElementById('registerPage').value;
-            const supervisorName = document.getElementById('supervisorName').value;
-            const sejo = document.getElementById('sejo').value;
-            const certificateDate = document.getElementById('certificateDate').value;
-            
-            // Get bill calculation values
-            const beneficiaries = document.getElementById('masala1Beneficiaries').textContent;
-            const amount = document.getElementById('masala1Amount').textContent;
-            
-            // Format date
-            const formattedDate = formatDate(certificateDate);
-            
-            // Populate certificate
-            document.getElementById('centerName130').textContent = centerName;
-            document.getElementById('workerName130').textContent = workerName;
-            document.getElementById('registerPage130').textContent = registerPage;
-            document.getElementById('supervisorName130').textContent = supervisorName;
-            document.getElementById('sejo130').textContent = sejo;
-            document.getElementById('certificateDate130').textContent = formattedDate;
-            document.getElementById('beneficiaries130').textContent = beneficiaries;
-            document.getElementById('submittedAmount130').textContent = amount;
-            document.getElementById('payableAmount130').textContent = amount;
-            
-            // Show certificate modal
-            document.getElementById('certificateModal130').style.display = 'block';
-        }
-        
-        // Generate certificate for 1.60 paise masala bill
-        function generateMasala160Certificate() {
-            if (!validateCertificateInputs()) return;
-            
-            // Get values from input fields
-            const centerName = document.getElementById('centerName').value;
-            const workerName = document.getElementById('workerName').value;
-            const registerPage = document.getElementById('registerPage').value;
-            const supervisorName = document.getElementById('supervisorName').value;
-            const sejo = document.getElementById('sejo').value;
-            const certificateDate = document.getElementById('certificateDate').value;
-            
-            // Get bill calculation values
-            const beneficiaries = document.getElementById('masala2Beneficiaries').textContent;
-            const amount = document.getElementById('masala2Amount').textContent;
-            
-            // Format date
-            const formattedDate = formatDate(certificateDate);
-            
-            // Populate certificate
-            document.getElementById('centerName160').textContent = centerName;
-            document.getElementById('workerName160').textContent = workerName;
-            document.getElementById('registerPage160').textContent = registerPage;
-            document.getElementById('supervisorName160').textContent = supervisorName;
-            document.getElementById('sejo160').textContent = sejo;
-            document.getElementById('certificateDate160').textContent = formattedDate;
-            document.getElementById('beneficiaries160').textContent = beneficiaries;
-            document.getElementById('submittedAmount160').textContent = amount;
-            document.getElementById('payableAmount160').textContent = amount;
-            
-            // Show certificate modal
-            document.getElementById('certificateModal160').style.display = 'block';
-        }
+function generateMasala130Certificate() {
+    if (!validateCertificateInputs()) return;
+    
+    // Get values from input fields
+    const centerName = document.getElementById('centerName').value;
+    const workerName = document.getElementById('workerName').value;
+    const registerPage = document.getElementById('registerPage').value;
+    const supervisorName = document.getElementById('supervisorName').value;
+    // const sejo = document.getElementById('sejo').value; // sejo is not used in certificate text, hence commented out
+    const certificateDate = document.getElementById('certificateDate').value;
+    
+    // Get bill calculation values
+    const beneficiaries = document.getElementById('masala1Beneficiaries').textContent;
+    const amount = document.getElementById('masala1Amount').textContent;
+    
+    // Format date
+    const formattedDate = formatDate(certificateDate);
+    
+    // Populate certificate
+    document.getElementById('centerName130').textContent = centerName;
+    document.getElementById('workerName130').textContent = workerName;
+    document.getElementById('workerName130Sign').textContent = workerName;
+    document.getElementById('registerPage130').textContent = registerPage;
+    document.getElementById('supervisorName130').textContent = supervisorName;
+    // FIXED: Ensure ID exists in the modal HTML, which we did in the previous response.
+    document.getElementById('certificateDate130').textContent = formattedDate; 
+    document.getElementById('beneficiaries130').textContent = beneficiaries;
+    document.getElementById('submittedAmount130').textContent = amount;
+    document.getElementById('payableAmount130').textContent = amount;
+    
+    // Show certificate modal
+    document.getElementById('certificateModal130').style.display = 'block';
+}
+
+// Generate certificate for 1.60 paise masala bill
+function generateMasala160Certificate() {
+    if (!validateCertificateInputs()) return;
+    
+    // Get values from input fields
+    const centerName = document.getElementById('centerName').value;
+    const workerName = document.getElementById('workerName').value;
+    const registerPage = document.getElementById('registerPage').value;
+    const supervisorName = document.getElementById('supervisorName').value;
+    // const sejo = document.getElementById('sejo').value;
+    const certificateDate = document.getElementById('certificateDate').value;
+    
+    // Get bill calculation values
+    const beneficiaries = document.getElementById('masala2Beneficiaries').textContent;
+    const amount = document.getElementById('masala2Amount').textContent;
+    
+    // Format date
+    const formattedDate = formatDate(certificateDate);
+    
+    // Populate certificate
+    document.getElementById('centerName160').textContent = centerName;
+    document.getElementById('workerName160').textContent = workerName;
+    document.getElementById('workerName160Sign').textContent = workerName;
+    document.getElementById('registerPage160').textContent = registerPage;
+    document.getElementById('supervisorName160').textContent = supervisorName;
+    // FIXED: Ensure ID exists in the modal HTML.
+    document.getElementById('certificateDate160').textContent = formattedDate; 
+    document.getElementById('beneficiaries160').textContent = beneficiaries;
+    document.getElementById('submittedAmount160').textContent = amount;
+    document.getElementById('payableAmount160').textContent = amount;
+    
+    // Show certificate modal
+    document.getElementById('certificateModal160').style.display = 'block';
+}
+
+// Generate certificate for 1.00 paise masala bill
+function generateMasala100Certificate() {
+    if (!validateCertificateInputs()) return;
+    
+    // Get values from input fields
+    const centerName = document.getElementById('centerName').value;
+    const workerName = document.getElementById('workerName').value;
+    const registerPage = document.getElementById('registerPage').value;
+    const supervisorName = document.getElementById('supervisorName').value;
+    // const sejo = document.getElementById('sejo').value;
+    const certificateDate = document.getElementById('certificateDate').value;
+    
+    // Get bill calculation values
+    const beneficiaries = document.getElementById('masala3Beneficiaries').textContent;
+    const amount = document.getElementById('masala3Amount').textContent;
+    
+    // Format date
+    const formattedDate = formatDate(certificateDate);
+    
+    // Populate certificate
+    document.getElementById('centerName100').textContent = centerName;
+    document.getElementById('workerName100').textContent = workerName;
+    document.getElementById('workerName100Sign').textContent = workerName;
+    document.getElementById('registerPage100').textContent = registerPage;
+    document.getElementById('supervisorName100').textContent = supervisorName;
+    // FIXED: Ensure ID exists in the modal HTML.
+    document.getElementById('certificateDate100').textContent = formattedDate; 
+    document.getElementById('beneficiaries100').textContent = beneficiaries;
+    document.getElementById('submittedAmount100').textContent = amount;
+    document.getElementById('payableAmount100').textContent = amount;
+    
+    // Show certificate modal
+    document.getElementById('certificateModal100').style.display = 'block';
+}
+
         
         // Generate certificate for 1.00 paise masala bill
         function generateMasala100Certificate() {
@@ -2459,6 +2563,7 @@
             // Populate certificate
             document.getElementById('centerName100').textContent = centerName;
             document.getElementById('workerName100').textContent = workerName;
+            document.getElementById('workerName100Sign').textContent = workerName;
             document.getElementById('registerPage100').textContent = registerPage;
             document.getElementById('supervisorName100').textContent = supervisorName;
             document.getElementById('sejo100').textContent = sejo;
