@@ -1135,94 +1135,94 @@
         </div>
 
         <!-- Bill Page -->
-        <div id="billPage" class="page">
-            <div class="card">
-                <h2>બિલ જનરેશન</h2>
-                <div class="month-year-selector">
-                    <select id="billMonthSelector" onchange="calculateMasalaAmounts()"></select>
-                    <select id="billYearSelector" onchange="calculateMasalaAmounts()"></select>
-                </div>
-                
-                <div class="certificate-inputs no-print">
-                    <div class="form-group">
-                        <label for="centerName">આંગણવાડી કેન્દ્રનું નામ</label>
-                        <input type="text" id="centerName" placeholder="આંગણવાડી કેન્દ્રનું નામ">
-                    </div>
-                    <div class="form-group">
-                        <label for="workerName">આંગણવાડી કાર્યકરનું નામ</label>
-                        <input type="text" id="workerName" placeholder="આંગણવાડી કાર્યકરનું નામ">
-                    </div>
-                    <div class="form-group">
-                        <label for="registerPage">મસાલા રજીસ્ટર પાના નં</label>
-                        <input type="text" id="registerPage" placeholder="મસાલા રજીસ્ટર પાના નં">
-                    </div>
-                    <div class="form-group">
-                        <label for="supervisorName">સુપરવાઇઝરનું નામ</label>
-                        <input type="text" id="supervisorName" placeholder="સુપરવાઇઝરનું નામ">
-                    </div>
-                    <div class="form-group">
-                        <label for="sejo">સેજો</label>
-                        <input type="text" id="sejo" placeholder="સેજો">
-                    </div>
-                    <div class="form-group">
-                        <label for="certificateDate">તારીખ</label>
-                        <input type="date" id="certificateDate">
-                    </div>
-                </div>
-                
-                <div class="table-container">
-                    <table class="wide-table">
-                        <tr>
-                            <th>મસાલા પ્રકાર</th>
-                            <th>વર્ણન</th>
-                            <th>દર (રૂપિયા)</th>
-                            <th>કુલ લાભાર્થી</th>
-                            <th>કુલ રકમ (રૂપિયા)</th>
-                        </tr>
-                        <tr>
-                            <td>મસાલા</td>
-                            <td>રિપોર્ટમાં દર્શાવેલા કુલ લાભાર્થી દીઠ</td>
-                            <td>1.30</td>
-                            <td id="masala1Beneficiaries">0</td>
-                            <td id="masala1Amount">0.00</td>
-                        </tr>
-                        <tr>
-                            <td>મસાલા (ચણા, દાળ)</td>
-                            <td>રિપોર્ટમાં ચણા અને દાળના કુલ લાભાર્થી દીઠ</td>
-                            <td>1.60</td>
-                            <td id="masala2Beneficiaries">0</td>
-                            <td id="masala2Amount">0.00</td>
-                        </tr>
-                        <tr>
-                            <td>મસાલા (માતૃમંડળ)</td>
-                            <td>રિપોર્ટમાં કુલ લાભાર્થી દીઠ</td>
-                            <td>1.00</td>
-                            <td id="masala3Beneficiaries">0</td>
-                            <td id="masala3Amount">0.00</td>
-                        </tr>
-                        <tr class="total-row">
-                            <td colspan="4">કુલ</td>
-                            <td id="totalMasalaAmount">0.00</td>
-                        </tr>
-                    </table>
-                </div>
-                
-                <div class="certificate-actions no-print">
-                    <button class="btn" onclick="generateMasala130Certificate()">
-                        <span class="material-icons">receipt</span> 1.30 પૈસા બીલ પ્રમાણપત્ર
-                    </button>
-                    <button class="btn" onclick="generateMasala160Certificate()">
-                        <span class="material-icons">receipt</span> 1.60 પૈસા બીલ પ્રમાણપત્ર
-                    </button>
-                    <button class="btn" onclick="generateMasala100Certificate()">
-                        <span class="material-icons">receipt</span> 1.00 પૈસા બીલ પ્રમાણપત્ર
-                    </button>
-                    <button class="btn" onclick="printAllCertificates()">
-                        <span class="material-icons">print</span> બધા પ્રમાણપત્ર પ્રિન્ટ કરો
-                    </button>
-                </div>
+<div id="billPage" class="page">
+    <div class="card">
+        <h2>બિલ જનરેશન</h2>
+        <div class="month-year-selector">
+            <select id="billMonthSelector" onchange="calculateMasalaAmounts()"></select>
+            <select id="billYearSelector" onchange="calculateMasalaAmounts()"></select>
+        </div>
+        
+        <div class="certificate-inputs no-print">
+            <div class="form-group">
+                <label for="centerName">આંગણવાડી કેન્દ્રનું નામ</label>
+                <input type="text" id="centerName" placeholder="આંગણવાડી કેન્દ્રનું નામ">
+            </div>
+            <div class="form-group">
+                <label for="workerName">આંગણવાડી કાર્યકરનું નામ</label>
+                <input type="text" id="workerName" placeholder="આંગણવાડી કાર્યકરનું નામ">
+            </div>
+            <div class="form-group">
+                <label for="registerPage">મસાલા રજીસ્ટર પાના નં</label>
+                <input type="text" id="registerPage" value="1" placeholder="મસાલા રજીસ્ટર પાના નં">
+            </div>
+            <div class="form-group">
+                <label for="supervisorName">સુપરવાઇઝરનું નામ</label>
+                <input type="text" id="supervisorName" value="abc" placeholder="સુપરવાઇઝરનું નામ">
+            </div>
+            <div class="form-group">
+                <label for="sejo">સેજો</label>
+                <input type="text" id="sejo" placeholder="સેજો">
+            </div>
+            <div class="form-group">
+                <label for="certificateDate">તારીખ</label>
+                <input type="date" id="certificateDate">
             </div>
         </div>
+        
+        <div class="table-container">
+            <table class="wide-table">
+                <tr>
+                    <th>મસાલા પ્રકાર</th>
+                    <th>વર્ણન</th>
+                    <th>દર (રૂપિયા)</th>
+                    <th>કુલ લાભાર્થી</th>
+                    <th>કુલ રકમ (રૂપિયા)</th>
+                </tr>
+                <tr>
+                    <td>મસાલા</td>
+                    <td>રિપોર્ટમાં દર્શાવેલા કુલ લાભાર્થી દીઠ</td>
+                    <td>1.30</td>
+                    <td id="masala1Beneficiaries">0</td>
+                    <td id="masala1Amount">0.00</td>
+                </tr>
+                <tr>
+                    <td>મસાલા (ચણા, દાળ)</td>
+                    <td>રિપોર્ટમાં ચણા અને દાળના કુલ લાભાર્થી દીઠ</td>
+                    <td>1.60</td>
+                    <td id="masala2Beneficiaries">0</td>
+                    <td id="masala2Amount">0.00</td>
+                </tr>
+                <tr>
+                    <td>મસાલા (માતૃમંડળ)</td>
+                    <td>રિપોર્ટમાં કુલ લાભાર્થી દીઠ</td>
+                    <td>1.00</td>
+                    <td id="masala3Beneficiaries">0</td>
+                    <td id="masala3Amount">0.00</td>
+                </tr>
+                <tr class="total-row">
+                    <td colspan="4">કુલ</td>
+                    <td id="totalMasalaAmount">0.00</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="certificate-actions no-print">
+            <button class="btn" onclick="generateMasala130Certificate()">
+                <span class="material-icons">receipt</span> 1.30 પૈસા બીલ પ્રમાણપત્ર
+            </button>
+            <button class="btn" onclick="generateMasala160Certificate()">
+                <span class="material-icons">receipt</span> 1.60 પૈસા બીલ પ્રમાણપત્ર
+            </button>
+            <button class="btn" onclick="generateMasala100Certificate()">
+                <span class="material-icons">receipt</span> 1.00 પૈસા બીલ પ્રમાણપત્ર
+            </button>
+            <button class="btn" onclick="printAllCertificates()">
+                <span class="material-icons">print</span> બધા પ્રમાણપત્ર પ્રિન્ટ કરો
+            </button>
+        </div>
+    </div>
+</div>
 
         <!-- Tools Page -->
         <div id="toolsPage" class="page">
@@ -2882,5 +2882,35 @@ function generateMasala100Certificate() {
             showToast('Excel સફળતાપૂર્વક ડાઉનલોડ થયો', 'success');
         }
     </script>
+<!-- Copyright Section -->
+<footer>
+    <div class="footer-content">
+        <p>© Devendra Ramanuj 2025. All rights reserved.</p>
+    </div>
+</footer>
+
+<style>
+footer {
+    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-content p {
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+</style>
+
+
+
 </body>
 </html>
