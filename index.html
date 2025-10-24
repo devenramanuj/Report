@@ -1135,94 +1135,94 @@
         </div>
 
         <!-- Bill Page -->
-<div id="billPage" class="page">
-    <div class="card">
-        <h2>બિલ જનરેશન</h2>
-        <div class="month-year-selector">
-            <select id="billMonthSelector" onchange="calculateMasalaAmounts()"></select>
-            <select id="billYearSelector" onchange="calculateMasalaAmounts()"></select>
+        <div id="billPage" class="page">
+            <div class="card">
+                <h2>બિલ જનરેશન</h2>
+                <div class="month-year-selector">
+                    <select id="billMonthSelector" onchange="calculateMasalaAmounts()"></select>
+                    <select id="billYearSelector" onchange="calculateMasalaAmounts()"></select>
+                </div>
+                
+                <div class="certificate-inputs no-print">
+                    <div class="form-group">
+                        <label for="centerName">આંગણવાડી કેન્દ્રનું નામ</label>
+                        <input type="text" id="centerName" placeholder="આંગણવાડી કેન્દ્રનું નામ">
+                    </div>
+                    <div class="form-group">
+                        <label for="workerName">આંગણવાડી કાર્યકરનું નામ</label>
+                        <input type="text" id="workerName" placeholder="આંગણવાડી કાર્યકરનું નામ">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPage">મસાલા રજીસ્ટર પાના નં</label>
+                        <input type="text" id="registerPage" value="1" placeholder="મસાલા રજીસ્ટર પાના નં">
+                    </div>
+                    <div class="form-group">
+                        <label for="supervisorName">સુપરવાઇઝરનું નામ</label>
+                        <input type="text" id="supervisorName" value="abc" placeholder="સુપરવાઇઝરનું નામ">
+                    </div>
+                    <div class="form-group">
+                        <label for="sejo">સેજો</label>
+                        <input type="text" id="sejo" placeholder="સેજો">
+                    </div>
+                    <div class="form-group">
+                        <label for="certificateDate">તારીખ</label>
+                        <input type="date" id="certificateDate">
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="wide-table">
+                        <tr>
+                            <th>મસાલા પ્રકાર</th>
+                            <th>વર્ણન</th>
+                            <th>દર (રૂપિયા)</th>
+                            <th>કુલ લાભાર્થી</th>
+                            <th>કુલ રકમ (રૂપિયા)</th>
+                        </tr>
+                        <tr>
+                            <td>મસાલા</td>
+                            <td>રિપોર્ટમાં દર્શાવેલા કુલ લાભાર્થી દીઠ</td>
+                            <td>1.30</td>
+                            <td id="masala1Beneficiaries">0</td>
+                            <td id="masala1Amount">0.00</td>
+                        </tr>
+                        <tr>
+                            <td>મસાલા (ચણા, દાળ)</td>
+                            <td>રિપોર્ટમાં ચણા અને દાળના કુલ લાભાર્થી દીઠ</td>
+                            <td>1.60</td>
+                            <td id="masala2Beneficiaries">0</td>
+                            <td id="masala2Amount">0.00</td>
+                        </tr>
+                        <tr>
+                            <td>મસાલા (માતૃમંડળ)</td>
+                            <td>રિપોર્ટમાં કુલ લાભાર્થી દીઠ</td>
+                            <td>1.00</td>
+                            <td id="masala3Beneficiaries">0</td>
+                            <td id="masala3Amount">0.00</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="4">કુલ</td>
+                            <td id="totalMasalaAmount">0.00</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="certificate-actions no-print">
+                    <button class="btn" onclick="generateMasala130Certificate()">
+                        <span class="material-icons">receipt</span> 1.30 પૈસા બીલ પ્રમાણપત્ર
+                    </button>
+                    <button class="btn" onclick="generateMasala160Certificate()">
+                        <span class="material-icons">receipt</span> 1.60 પૈસા બીલ પ્રમાણપત્ર
+                    </button>
+                    <button class="btn" onclick="generateMasala100Certificate()">
+                        <span class="material-icons">receipt</span> 1.00 પૈસા બીલ પ્રમાણપત્ર
+                    </button>
+                    <button class="btn" onclick="printAllCertificates()">
+                        <span class="material-icons">print</span> બધા પ્રમાણપત્ર પ્રિન્ટ કરો
+                    </button>
+                </div>
+            </div>
         </div>
-        
-        <div class="certificate-inputs no-print">
-            <div class="form-group">
-                <label for="centerName">આંગણવાડી કેન્દ્રનું નામ</label>
-                <input type="text" id="centerName" placeholder="આંગણવાડી કેન્દ્રનું નામ">
-            </div>
-            <div class="form-group">
-                <label for="workerName">આંગણવાડી કાર્યકરનું નામ</label>
-                <input type="text" id="workerName" placeholder="આંગણવાડી કાર્યકરનું નામ">
-            </div>
-            <div class="form-group">
-                <label for="registerPage">મસાલા રજીસ્ટર પાના નં</label>
-                <input type="text" id="registerPage" value="1" placeholder="મસાલા રજીસ્ટર પાના નં">
-            </div>
-            <div class="form-group">
-                <label for="supervisorName">સુપરવાઇઝરનું નામ</label>
-                <input type="text" id="supervisorName" value="abc" placeholder="સુપરવાઇઝરનું નામ">
-            </div>
-            <div class="form-group">
-                <label for="sejo">સેજો</label>
-                <input type="text" id="sejo" placeholder="સેજો">
-            </div>
-            <div class="form-group">
-                <label for="certificateDate">તારીખ</label>
-                <input type="date" id="certificateDate">
-            </div>
-        </div>
-        
-        <div class="table-container">
-            <table class="wide-table">
-                <tr>
-                    <th>મસાલા પ્રકાર</th>
-                    <th>વર્ણન</th>
-                    <th>દર (રૂપિયા)</th>
-                    <th>કુલ લાભાર્થી</th>
-                    <th>કુલ રકમ (રૂપિયા)</th>
-                </tr>
-                <tr>
-                    <td>મસાલા</td>
-                    <td>રિપોર્ટમાં દર્શાવેલા કુલ લાભાર્થી દીઠ</td>
-                    <td>1.30</td>
-                    <td id="masala1Beneficiaries">0</td>
-                    <td id="masala1Amount">0.00</td>
-                </tr>
-                <tr>
-                    <td>મસાલા (ચણા, દાળ)</td>
-                    <td>રિપોર્ટમાં ચણા અને દાળના કુલ લાભાર્થી દીઠ</td>
-                    <td>1.60</td>
-                    <td id="masala2Beneficiaries">0</td>
-                    <td id="masala2Amount">0.00</td>
-                </tr>
-                <tr>
-                    <td>મસાલા (માતૃમંડળ)</td>
-                    <td>રિપોર્ટમાં કુલ લાભાર્થી દીઠ</td>
-                    <td>1.00</td>
-                    <td id="masala3Beneficiaries">0</td>
-                    <td id="masala3Amount">0.00</td>
-                </tr>
-                <tr class="total-row">
-                    <td colspan="4">કુલ</td>
-                    <td id="totalMasalaAmount">0.00</td>
-                </tr>
-            </table>
-        </div>
-        
-        <div class="certificate-actions no-print">
-            <button class="btn" onclick="generateMasala130Certificate()">
-                <span class="material-icons">receipt</span> 1.30 પૈસા બીલ પ્રમાણપત્ર
-            </button>
-            <button class="btn" onclick="generateMasala160Certificate()">
-                <span class="material-icons">receipt</span> 1.60 પૈસા બીલ પ્રમાણપત્ર
-            </button>
-            <button class="btn" onclick="generateMasala100Certificate()">
-                <span class="material-icons">receipt</span> 1.00 પૈસા બીલ પ્રમાણપત્ર
-            </button>
-            <button class="btn" onclick="printAllCertificates()">
-                <span class="material-icons">print</span> બધા પ્રમાણપત્ર પ્રિન્ટ કરો
-            </button>
-        </div>
-    </div>
-</div>
 
         <!-- Tools Page -->
         <div id="toolsPage" class="page">
@@ -1323,6 +1323,7 @@
                 </div>
                 <div class="certificate-content">
                     <p>આંગણવાડી કેન્દ્રનું નામ:- <span id="centerName130"></span></p>
+                    <p>તારીખ:- <span id="certificateDate130"></span></p> 
                     <p>આથી પ્રમાણપત્ર આપવામાં આવે છે. કે શ્રીમતી <span id="workerName130"></span> આંગણવાડી કાર્યકર એ આ બીલના નાણા પોતાના પદડના ચુકવેલ છે. આ બીલના નાણા તેઓએ આ અગાઉ લીધેલ નથી. જેની મે ખાત્રી કરેલ છે. આંગણવાડી વર્કરે મસાલા ખરીદીની નોંધ આંગણવાડીના મસાલા રજીસ્ટરના પાના નં <span id="registerPage130"></span> ઉપર કરેલ છે. ખરીદ કરેલ મસાલા આંગણવાડી કેન્દ્ર ઉપરજ વપરાશ કરવામાં આવે છે.</p>
                     <p>પત્રક નં-૪ ના કોલમ નં-૯ મુજબ લાભાર્થીની સંખ્યા <span id="beneficiaries130"></span> પૈસા = ૧.૩૦ પૈસા મુજબ રકમ</p>
                     <p>રજુ કરેલ મસાલા બીલની રકમ રૂ <span id="submittedAmount130"></span></p>
@@ -1345,40 +1346,6 @@
             <div class="blank-half">
                 <!-- Blank space as required -->
             </div>
-        </div>
-    </div>
-    
-        <div id="certificateModal130" class="certificate-modal">
-        <div class="certificate-container">
-            <button class="certificate-close" onclick="closeCertificate('certificateModal130')">×</button>
-            <div class="certificate">
-                <div class="certificate-header">
-                    <h2>:: મસાલા બીલ પ્રમાણપત્ર ::</h2>
-                </div>
-                <div class="certificate-content">
-                    <p>આંગણવાડી કેન્દ્રનું નામ:- <span id="centerName130"></span></p>
-                    <p>તારીખ:- <span id="certificateDate130"></span></p> 
-                    <p>આથી પ્રમાણપત્ર આપવામાં આવે છે. કે શ્રીમતી <span id="workerName130"></span> આંગણવાડી કાર્યકર એ આ બીલના નાણા પોતાના પદડના ચુકવેલ છે. આ બીલના નાણા તેઓએ આ અગાઉ લીધેલ નથી. જેની મે ખાત્રી કરેલ છે. આંગણવાડી વર્કરે મસાલા ખરીદીની નોંધ આંગણવાડીના મસાલા રજીસ્ટરના પાના નં <span id="registerPage130"></span> ઉપર કરેલ છે. ખરીદ કરેલ મસાલા આંગણવાડી કેન્દ્ર ઉપરજ વપરાશ કરવામાં આવે છે.</p>
-                    <p>પત્રક નં-૪ ના કોલમ નં-૯ મુજબ લાભાર્થીની સંખ્યા <span id="beneficiaries130"></span> પૈસા = ૧.૩૦ પૈસા મુજબ રકમ</p>
-                    <p>રજુ કરેલ મસાલા બીલની રકમ રૂ <span id="submittedAmount130"></span></p>
-                    <p>ચુકવવા પાત્ર મસાલા બીલની રકમ રૂ <span id="payableAmount130"></span></p>
-                    <p>સદરહું બીલની નોંધ આંગણવાડી કેન્દ્રના મસાલા રજીસ્ટરમાં જમા કરેલ છે.</p>
-                </div>
-                <div class="certificate-footer">
-                    <div class="signature-box">
-                        સુપરવાઈઝરની સહી:-
-                        <div class="signature-line"></div>
-                        <span id="supervisorName130"></span>
-                    </div>
-                    <div class="signature-box">
-                        આંગણવાડી કાર્યકરની સહી:-
-                        <div class="signature-line"></div>
-                        <span id="workerName130Sign"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="blank-half">
-                </div>
         </div>
     </div>
     
@@ -1412,7 +1379,8 @@
                 </div>
             </div>
             <div class="blank-half">
-                </div>
+                <!-- Blank space as required -->
+            </div>
         </div>
     </div>
     
@@ -1446,10 +1414,10 @@
                 </div>
             </div>
             <div class="blank-half">
-                </div>
+                <!-- Blank space as required -->
+            </div>
         </div>
     </div>
-
 
     <footer>
         <div class="footer-content">
@@ -2436,111 +2404,71 @@
         }
 
         // Generate certificate for 1.30 paise masala bill
-function generateMasala130Certificate() {
-    if (!validateCertificateInputs()) return;
-    
-    // Get values from input fields
-    const centerName = document.getElementById('centerName').value;
-    const workerName = document.getElementById('workerName').value;
-    const registerPage = document.getElementById('registerPage').value;
-    const supervisorName = document.getElementById('supervisorName').value;
-    // const sejo = document.getElementById('sejo').value; // sejo is not used in certificate text, hence commented out
-    const certificateDate = document.getElementById('certificateDate').value;
-    
-    // Get bill calculation values
-    const beneficiaries = document.getElementById('masala1Beneficiaries').textContent;
-    const amount = document.getElementById('masala1Amount').textContent;
-    
-    // Format date
-    const formattedDate = formatDate(certificateDate);
-    
-    // Populate certificate
-    document.getElementById('centerName130').textContent = centerName;
-    document.getElementById('workerName130').textContent = workerName;
-    document.getElementById('workerName130Sign').textContent = workerName;
-    document.getElementById('registerPage130').textContent = registerPage;
-    document.getElementById('supervisorName130').textContent = supervisorName;
-    // FIXED: Ensure ID exists in the modal HTML, which we did in the previous response.
-    document.getElementById('certificateDate130').textContent = formattedDate; 
-    document.getElementById('beneficiaries130').textContent = beneficiaries;
-    document.getElementById('submittedAmount130').textContent = amount;
-    document.getElementById('payableAmount130').textContent = amount;
-    
-    // Show certificate modal
-    document.getElementById('certificateModal130').style.display = 'block';
-}
+        function generateMasala130Certificate() {
+            if (!validateCertificateInputs()) return;
+            
+            // Get values from input fields
+            const centerName = document.getElementById('centerName').value;
+            const workerName = document.getElementById('workerName').value;
+            const registerPage = document.getElementById('registerPage').value;
+            const supervisorName = document.getElementById('supervisorName').value;
+            const certificateDate = document.getElementById('certificateDate').value;
+            
+            // Get bill calculation values
+            const beneficiaries = document.getElementById('masala1Beneficiaries').textContent;
+            const amount = document.getElementById('masala1Amount').textContent;
+            
+            // Format date
+            const formattedDate = formatDate(certificateDate);
+            
+            // Populate certificate
+            document.getElementById('centerName130').textContent = centerName;
+            document.getElementById('workerName130').textContent = workerName;
+            document.getElementById('workerName130Sign').textContent = workerName;
+            document.getElementById('registerPage130').textContent = registerPage;
+            document.getElementById('supervisorName130').textContent = supervisorName;
+            document.getElementById('certificateDate130').textContent = formattedDate;
+            document.getElementById('beneficiaries130').textContent = beneficiaries;
+            document.getElementById('submittedAmount130').textContent = amount;
+            document.getElementById('payableAmount130').textContent = amount;
+            
+            // Show certificate modal
+            document.getElementById('certificateModal130').style.display = 'block';
+        }
 
-// Generate certificate for 1.60 paise masala bill
-function generateMasala160Certificate() {
-    if (!validateCertificateInputs()) return;
-    
-    // Get values from input fields
-    const centerName = document.getElementById('centerName').value;
-    const workerName = document.getElementById('workerName').value;
-    const registerPage = document.getElementById('registerPage').value;
-    const supervisorName = document.getElementById('supervisorName').value;
-    // const sejo = document.getElementById('sejo').value;
-    const certificateDate = document.getElementById('certificateDate').value;
-    
-    // Get bill calculation values
-    const beneficiaries = document.getElementById('masala2Beneficiaries').textContent;
-    const amount = document.getElementById('masala2Amount').textContent;
-    
-    // Format date
-    const formattedDate = formatDate(certificateDate);
-    
-    // Populate certificate
-    document.getElementById('centerName160').textContent = centerName;
-    document.getElementById('workerName160').textContent = workerName;
-    document.getElementById('workerName160Sign').textContent = workerName;
-    document.getElementById('registerPage160').textContent = registerPage;
-    document.getElementById('supervisorName160').textContent = supervisorName;
-    // FIXED: Ensure ID exists in the modal HTML.
-    document.getElementById('certificateDate160').textContent = formattedDate; 
-    document.getElementById('beneficiaries160').textContent = beneficiaries;
-    document.getElementById('submittedAmount160').textContent = amount;
-    document.getElementById('payableAmount160').textContent = amount;
-    
-    // Show certificate modal
-    document.getElementById('certificateModal160').style.display = 'block';
-}
+        // Generate certificate for 1.60 paise masala bill
+        function generateMasala160Certificate() {
+            if (!validateCertificateInputs()) return;
+            
+            // Get values from input fields
+            const centerName = document.getElementById('centerName').value;
+            const workerName = document.getElementById('workerName').value;
+            const registerPage = document.getElementById('registerPage').value;
+            const supervisorName = document.getElementById('supervisorName').value;
+            const certificateDate = document.getElementById('certificateDate').value;
+            
+            // Get bill calculation values
+            const beneficiaries = document.getElementById('masala2Beneficiaries').textContent;
+            const amount = document.getElementById('masala2Amount').textContent;
+            
+            // Format date
+            const formattedDate = formatDate(certificateDate);
+            
+            // Populate certificate
+            document.getElementById('centerName160').textContent = centerName;
+            document.getElementById('workerName160').textContent = workerName;
+            document.getElementById('workerName160Sign').textContent = workerName;
+            document.getElementById('registerPage160').textContent = registerPage;
+            document.getElementById('supervisorName160').textContent = supervisorName;
+            document.getElementById('certificateDate160').textContent = formattedDate;
+            document.getElementById('beneficiaries160').textContent = beneficiaries;
+            document.getElementById('submittedAmount160').textContent = amount;
+            document.getElementById('payableAmount160').textContent = amount;
+            
+            // Show certificate modal
+            document.getElementById('certificateModal160').style.display = 'block';
+        }
 
-// Generate certificate for 1.00 paise masala bill
-function generateMasala100Certificate() {
-    if (!validateCertificateInputs()) return;
-    
-    // Get values from input fields
-    const centerName = document.getElementById('centerName').value;
-    const workerName = document.getElementById('workerName').value;
-    const registerPage = document.getElementById('registerPage').value;
-    const supervisorName = document.getElementById('supervisorName').value;
-    // const sejo = document.getElementById('sejo').value;
-    const certificateDate = document.getElementById('certificateDate').value;
-    
-    // Get bill calculation values
-    const beneficiaries = document.getElementById('masala3Beneficiaries').textContent;
-    const amount = document.getElementById('masala3Amount').textContent;
-    
-    // Format date
-    const formattedDate = formatDate(certificateDate);
-    
-    // Populate certificate
-    document.getElementById('centerName100').textContent = centerName;
-    document.getElementById('workerName100').textContent = workerName;
-    document.getElementById('workerName100Sign').textContent = workerName;
-    document.getElementById('registerPage100').textContent = registerPage;
-    document.getElementById('supervisorName100').textContent = supervisorName;
-    // FIXED: Ensure ID exists in the modal HTML.
-    document.getElementById('certificateDate100').textContent = formattedDate; 
-    document.getElementById('beneficiaries100').textContent = beneficiaries;
-    document.getElementById('submittedAmount100').textContent = amount;
-    document.getElementById('payableAmount100').textContent = amount;
-    
-    // Show certificate modal
-    document.getElementById('certificateModal100').style.display = 'block';
-}
-
-        
         // Generate certificate for 1.00 paise masala bill
         function generateMasala100Certificate() {
             if (!validateCertificateInputs()) return;
@@ -2550,7 +2478,6 @@ function generateMasala100Certificate() {
             const workerName = document.getElementById('workerName').value;
             const registerPage = document.getElementById('registerPage').value;
             const supervisorName = document.getElementById('supervisorName').value;
-            const sejo = document.getElementById('sejo').value;
             const certificateDate = document.getElementById('certificateDate').value;
             
             // Get bill calculation values
@@ -2566,7 +2493,6 @@ function generateMasala100Certificate() {
             document.getElementById('workerName100Sign').textContent = workerName;
             document.getElementById('registerPage100').textContent = registerPage;
             document.getElementById('supervisorName100').textContent = supervisorName;
-            document.getElementById('sejo100').textContent = sejo;
             document.getElementById('certificateDate100').textContent = formattedDate;
             document.getElementById('beneficiaries100').textContent = beneficiaries;
             document.getElementById('submittedAmount100').textContent = amount;
