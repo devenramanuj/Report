@@ -1414,6 +1414,9 @@
                 <button class="btn" onclick="shareReport()">
                     <span class="material-icons">share</span> શેર કરો
                 </button>
+                <button class="btn" onclick="shareViaWhatsApp()">
+                    <span class="material-icons">chat</span> WhatsApp
+                </button>
                 <button class="btn" onclick="printReport()">
                     <span class="material-icons">print</span> પ્રિન્ટ કરો
                 </button>
@@ -1463,6 +1466,9 @@
                 </button>
                 <button class="btn" onclick="shareMatruMandalReport()">
                     <span class="material-icons">share</span> શેર કરો
+                </button>
+                <button class="btn" onclick="shareMatruMandalViaWhatsApp()">
+                    <span class="material-icons">chat</span> WhatsApp
                 </button>
                 <button class="btn" onclick="printMatruMandalReport()">
                     <span class="material-icons">print</span> પ્રિન્ટ કરો
@@ -3171,6 +3177,163 @@
             document.getElementById('totalMasalaAmount').textContent = totalAmount.toFixed(2);
         }
 
+        // ========== SHARING FUNCTIONALITY ==========
+
+        // Share report with actual data
+        function shareReport() {
+            const reportContainer = document.getElementById('reportTableContainer');
+            
+            if (!reportContainer || reportContainer.innerHTML.includes('કૃપા કરીને')) {
+                showToast('કૃપા કરીને પહેલા રિપોર્ટ બનાવો', 'error');
+                return;
+            }
+
+            // Get report title and data
+            const monthName = gujaratiMonths[appState.currentMonth];
+            const year = appState.currentYear;
+            const reportTitle = `આંગણવાડી રિપોર્ટ - ${monthName} ${year}`;
+            
+            // Extract table data as text
+            const table = reportContainer.querySelector('.wide-table');
+            let reportText = reportTitle + '\n\n';
+            
+            if (table) {
+                const rows = table.querySelectorAll('tr');
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('th, td');
+                    let rowText = '';
+                    cells.forEach(cell => {
+                        rowText += cell.textContent.trim() + '\t';
+                    });
+                    reportText += rowText + '\n';
+                });
+            }
+
+            // Create share data
+            const shareData = {
+                title: reportTitle,
+                text: reportText,
+                url: window.location.href
+            };
+
+            // Try Web Share API first
+            if (navigator.share) {
+                navigator.share(shareData)
+                    .then(() => console.log('રિપોર્ટ શેર થયો'))
+                    .catch(error => {
+                        console.log('શેર કરવામાં ભૂલ:', error);
+                        // Fallback to download
+                        downloadAsTextFile(reportText, `રિપોર્ટ_${year}_${appState.currentMonth+1}.txt`);
+                    });
+            } else {
+                // Fallback for browsers without Web Share API
+                showToast('આ બ્રાઉઝર ડાયરેક્ટ શેરિંગ સપોર્ટ કરતું નથી. રિપોર્ટ ડાઉનલોડ કરવામાં આવી છે.', 'success');
+                downloadAsTextFile(reportText, `રિપોર્ટ_${year}_${appState.currentMonth+1}.txt`);
+            }
+        }
+
+        // Share Matru Mandal report with actual data
+        function shareMatruMandalReport() {
+            const reportContainer = document.getElementById('matruMandalReportTableContainer');
+            
+            if (!reportContainer || reportContainer.innerHTML.includes('કૃપા કરીને')) {
+                showToast('કૃપા કરીને પહેલા માતૃમંડળ રિપોર્ટ બનાવો', 'error');
+                return;
+            }
+
+            // Get report title and data
+            const monthName = gujaratiMonths[appState.currentMonth];
+            const year = appState.currentYear;
+            const reportTitle = `માતૃમંડળ રિપોર્ટ - ${monthName} ${year}`;
+            
+            // Extract table data as text
+            const table = reportContainer.querySelector('.wide-table');
+            let reportText = reportTitle + '\n\n';
+            
+            if (table) {
+                const rows = table.querySelectorAll('tr');
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('th, td');
+                    let rowText = '';
+                    cells.forEach(cell => {
+                        rowText += cell.textContent.trim() + '\t';
+                    });
+                    reportText += rowText + '\n';
+                });
+            }
+
+            // Create share data
+            const shareData = {
+                title: reportTitle,
+                text: reportText,
+                url: window.location.href
+            };
+
+            // Try Web Share API first
+            if (navigator.share) {
+                navigator.share(shareData)
+                    .then(() => console.log('માતૃમંડળ રિપોર્ટ શેર થયો'))
+                    .catch(error => {
+                        console.log('શેર કરવામાં ભૂલ:', error);
+                        // Fallback to download
+                        downloadAsTextFile(reportText, `માતૃમંડળ_રિપોર્ટ_${year}_${appState.currentMonth+1}.txt`);
+                    });
+            } else {
+                // Fallback for browsers without Web Share API
+                showToast('આ બ્રાઉઝર ડાયરેક્ટ શેરિંગ સપોર્ટ કરતું નથી. રિપોર્ટ ડાઉનલોડ કરવામાં આવી છે.', 'success');
+                downloadAsTextFile(reportText, `માતૃમંડળ_રિપોર્ટ_${year}_${appState.currentMonth+1}.txt`);
+            }
+        }
+
+        // Helper function to download text as file
+        function downloadAsTextFile(text, filename) {
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+
+        // WhatsApp share for reports
+        function shareViaWhatsApp() {
+            const reportContainer = document.getElementById('reportTableContainer');
+            
+            if (!reportContainer || reportContainer.innerHTML.includes('કૃપા કરીને')) {
+                showToast('કૃપા કરીને પહેલા રિપોર્ટ બનાવો', 'error');
+                return;
+            }
+
+            const monthName = gujaratiMonths[appState.currentMonth];
+            const year = appState.currentYear;
+            const reportTitle = `આંગણવાડી રિપોર્ટ - ${monthName} ${year}`;
+            
+            // Create a simplified version for WhatsApp
+            let whatsappText = encodeURIComponent(reportTitle + '\n\n' + window.location.href);
+            window.open(`https://wa.me/?text=${whatsappText}`, '_blank');
+        }
+
+        // WhatsApp share for Matru Mandal reports
+        function shareMatruMandalViaWhatsApp() {
+            const reportContainer = document.getElementById('matruMandalReportTableContainer');
+            
+            if (!reportContainer || reportContainer.innerHTML.includes('કૃપા કરીને')) {
+                showToast('કૃપા કરીને પહેલા માતૃમંડળ રિપોર્ટ બનાવો', 'error');
+                return;
+            }
+
+            const monthName = gujaratiMonths[appState.currentMonth];
+            const year = appState.currentYear;
+            const reportTitle = `માતૃમંડળ રિપોર્ટ - ${monthName} ${year}`;
+            
+            // Create a simplified version for WhatsApp
+            let whatsappText = encodeURIComponent(reportTitle + '\n\n' + window.location.href);
+            window.open(`https://wa.me/?text=${whatsappText}`, '_blank');
+        }
+
         // ========== TOOLS ==========
 
         // Show toast message
@@ -3340,36 +3503,6 @@
             }
         }
 
-        // Share report
-        function shareReport() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'આંગણવાડી Patrak-4 રિપોર્ટ',
-                    text: 'આંગણવાડી Patrak-4 એપ્લિકેશનમાં બનાવેલ રિપોર્ટ',
-                    url: window.location.href
-                })
-                .then(() => console.log('રિપોર્ટ શેર થયો'))
-                .catch(error => console.log('શેર કરવામાં ભૂલ:', error));
-            } else {
-                showToast('આ બ્રાઉઝર શેરિંગ સપોર્ટ કરતું નથી', 'error');
-            }
-        }
-
-        // Share Matru Mandal report
-        function shareMatruMandalReport() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'માતૃમંડળ રિપોર્ટ - આંગણવાડી Patrak-4',
-                    text: 'માતૃમંડળ રિપોર્ટ - આંગણવાડી Patrak-4 એપ્લિકેશનમાં બનાવેલ રિપોર્ટ',
-                    url: window.location.href
-                })
-                .then(() => console.log('માતૃમંડળ રિપોર્ટ શેર થયો'))
-                .catch(error => console.log('શેર કરવામાં ભૂલ:', error));
-            } else {
-                showToast('આ બ્રાઉઝર શેરિંગ સપોર્ટ કરતું નથી', 'error');
-            }
-        }
-
         // ========== PRINT FUNCTIONS ==========
 
         // Custom print function for reports
@@ -3508,9 +3641,10 @@
             }, 500);
         }
 
-        // Export to PDF
+        // Enhanced PDF Export with Mobile Compatibility
         function exportToPDF() {
             const reportContainer = document.getElementById('reportTableContainer');
+            
             if (!reportContainer || reportContainer.innerHTML.includes('કૃપા કરીને')) {
                 showToast('કૃપા કરીને પહેલા રિપોર્ટ બનાવો', 'error');
                 return;
@@ -3518,48 +3652,115 @@
             
             showToast('PDF બનાવવાનું શરૂ કર્યું...', 'success');
             
-            html2canvas(reportContainer).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF('p', 'mm', 'a4');
+            try {
+                html2canvas(reportContainer, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    backgroundColor: '#ffffff',
+                    onclone: function(clonedDoc) {
+                        const clonedContainer = clonedDoc.getElementById('reportTableContainer');
+                        if (clonedContainer) {
+                            clonedContainer.style.width = '100%';
+                            clonedContainer.style.overflow = 'visible';
+                        }
+                    }
+                }).then(canvas => {
+                    try {
+                        const { jsPDF } = window.jspdf;
+                        const doc = new jsPDF('p', 'mm', 'a4');
+                        
+                        const monthName = gujaratiMonths[appState.currentMonth];
+                        const year = appState.currentYear;
+                        
+                        // Add title
+                        doc.setFontSize(16);
+                        doc.text('રિપોર્ટ - આંગણવાડી Patrak-4', 105, 15, { align: 'center' });
+                        
+                        // Add date
+                        doc.setFontSize(12);
+                        doc.text(`${monthName} ${year}`, 105, 25, { align: 'center' });
+                        
+                        // Convert canvas to image with proper dimensions
+                        const imgData = canvas.toDataURL('image/png', 1.0);
+                        const imgWidth = 190;
+                        const pageHeight = doc.internal.pageSize.height;
+                        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                        
+                        let heightLeft = imgHeight;
+                        let position = 40;
+                        
+                        // Add first page
+                        doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+                        
+                        // Add additional pages if needed
+                        while (heightLeft >= 0) {
+                            position = heightLeft - imgHeight;
+                            doc.addPage();
+                            doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                            heightLeft -= pageHeight;
+                        }
+                        
+                        // Add footer
+                        const totalPages = doc.internal.getNumberOfPages();
+                        for (let i = 1; i <= totalPages; i++) {
+                            doc.setPage(i);
+                            doc.setFontSize(8);
+                            doc.text(
+                                `Generated on: ${new Date().toLocaleDateString('gu-IN')} - Page ${i} of ${totalPages}`,
+                                10,
+                                doc.internal.pageSize.height - 10
+                            );
+                        }
+                        
+                        // Use different save methods for mobile compatibility
+                        const filename = `રિપોર્ટ_${year}_${appState.currentMonth+1}.pdf`;
+                        
+                        try {
+                            doc.save(filename);
+                            showToast('PDF સફળતાપૂર્વક ડાઉનલોડ થયો', 'success');
+                        } catch (saveError) {
+                            console.log('Direct save failed, trying blob method:', saveError);
+                            
+                            // Method 2: Use blob and createObjectURL
+                            const pdfBlob = doc.output('blob');
+                            const url = URL.createObjectURL(pdfBlob);
+                            
+                            const link = document.createElement('a');
+                            link.href = url;
+                            link.download = filename;
+                            link.style.display = 'none';
+                            
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                            
+                            // Clean up
+                            setTimeout(() => URL.revokeObjectURL(url), 100);
+                            
+                            showToast('PDF સફળતાપૂર્વક ડાઉનલોડ થયો', 'success');
+                        }
+                        
+                    } catch (pdfError) {
+                        console.error('PDF creation error:', pdfError);
+                        showToast('PDF બનાવવામાં ભૂલ આવી. કૃપા કરીને ફરી પ્રયાસ કરો.', 'error');
+                    }
+                }).catch(error => {
+                    console.error('Canvas generation error:', error);
+                    showToast('રિપોર્ટની છબી બનાવવામાં ભૂલ આવી', 'error');
+                });
                 
-                const imgWidth = 190;
-                const pageHeight = 280;
-                const imgHeight = canvas.height * imgWidth / canvas.width;
-                let heightLeft = imgHeight;
-                
-                let position = 10;
-                
-                // Add title
-                doc.setFontSize(16);
-                doc.text('રિપોર્ટ - આંગણવાડી Patrak-4', 105, 15, { align: 'center' });
-                
-                // Add date
-                const monthName = gujaratiMonths[appState.currentMonth];
-                doc.setFontSize(12);
-                doc.text(`${monthName} ${appState.currentYear}`, 105, 25, { align: 'center' });
-                
-                doc.addImage(imgData, 'PNG', 10, position + 20, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
-                
-                while (heightLeft >= 0) {
-                    position = heightLeft - imgHeight;
-                    doc.addPage();
-                    doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-                    heightLeft -= pageHeight;
-                }
-                
-                doc.save(`રિપોર્ટ_${appState.currentYear}_${appState.currentMonth+1}.pdf`);
-                showToast('PDF સફળતાપૂર્વક ડાઉનલોડ થયો', 'success');
-            }).catch(error => {
-                console.error('PDF generation error:', error);
-                showToast('PDF જનરેશનમાં ભૂલ આવી', 'error');
-            });
+            } catch (error) {
+                console.error('PDF export initialization error:', error);
+                showToast('PDF એક્સપોર્ટ શરૂ કરવામાં ભૂલ આવી', 'error');
+            }
         }
 
-        // Export Matru Mandal to PDF
+        // Enhanced Matru Mandal PDF Export
         function exportMatruMandalToPDF() {
             const reportContainer = document.getElementById('matruMandalReportTableContainer');
+            
             if (!reportContainer || reportContainer.innerHTML.includes('કૃપા કરીને')) {
                 showToast('કૃપા કરીને પહેલા માતૃમંડળ રિપોર્ટ બનાવો', 'error');
                 return;
@@ -3567,43 +3768,106 @@
             
             showToast('માતૃમંડળ PDF બનાવવાનું શરૂ કર્યું...', 'success');
             
-            html2canvas(reportContainer).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF('p', 'mm', 'a4');
+            try {
+                html2canvas(reportContainer, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    backgroundColor: '#ffffff',
+                    onclone: function(clonedDoc) {
+                        const clonedContainer = clonedDoc.getElementById('matruMandalReportTableContainer');
+                        if (clonedContainer) {
+                            clonedContainer.style.width = '100%';
+                            clonedContainer.style.overflow = 'visible';
+                        }
+                    }
+                }).then(canvas => {
+                    try {
+                        const { jsPDF } = window.jspdf;
+                        const doc = new jsPDF('p', 'mm', 'a4');
+                        
+                        const monthName = gujaratiMonths[appState.currentMonth];
+                        const year = appState.currentYear;
+                        
+                        // Add title
+                        doc.setFontSize(16);
+                        doc.text('માતૃમંડળ રિપોર્ટ - આંગણવાડી Patrak-4', 105, 15, { align: 'center' });
+                        
+                        // Add date
+                        doc.setFontSize(12);
+                        doc.text(`${monthName} ${year}`, 105, 25, { align: 'center' });
+                        
+                        // Convert canvas to image
+                        const imgData = canvas.toDataURL('image/png', 1.0);
+                        const imgWidth = 190;
+                        const pageHeight = doc.internal.pageSize.height;
+                        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                        
+                        let heightLeft = imgHeight;
+                        let position = 40;
+                        
+                        // Add first page
+                        doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+                        
+                        // Add additional pages if needed
+                        while (heightLeft >= 0) {
+                            position = heightLeft - imgHeight;
+                            doc.addPage();
+                            doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                            heightLeft -= pageHeight;
+                        }
+                        
+                        // Add footer
+                        const totalPages = doc.internal.getNumberOfPages();
+                        for (let i = 1; i <= totalPages; i++) {
+                            doc.setPage(i);
+                            doc.setFontSize(8);
+                            doc.text(
+                                `Generated on: ${new Date().toLocaleDateString('gu-IN')} - Page ${i} of ${totalPages}`,
+                                10,
+                                doc.internal.pageSize.height - 10
+                            );
+                        }
+                        
+                        const filename = `માતૃમંડળ_રિપોર્ટ_${year}_${appState.currentMonth+1}.pdf`;
+                        
+                        try {
+                            doc.save(filename);
+                            showToast('માતૃમંડળ PDF સફળતાપૂર્વક ડાઉનલોડ થયો', 'success');
+                        } catch (saveError) {
+                            console.log('Direct save failed, trying blob method:', saveError);
+                            
+                            const pdfBlob = doc.output('blob');
+                            const url = URL.createObjectURL(pdfBlob);
+                            
+                            const link = document.createElement('a');
+                            link.href = url;
+                            link.download = filename;
+                            link.style.display = 'none';
+                            
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                            
+                            setTimeout(() => URL.revokeObjectURL(url), 100);
+                            
+                            showToast('માતૃમંડળ PDF સફળતાપૂર્વક ડાઉનલોડ થયો', 'success');
+                        }
+                        
+                    } catch (pdfError) {
+                        console.error('Matru Mandal PDF creation error:', pdfError);
+                        showToast('માતૃમંડળ PDF બનાવવામાં ભૂલ આવી', 'error');
+                    }
+                }).catch(error => {
+                    console.error('Matru Mandal canvas generation error:', error);
+                    showToast('માતૃમંડળ રિપોર્ટની છબી બનાવવામાં ભૂલ આવી', 'error');
+                });
                 
-                const imgWidth = 190;
-                const pageHeight = 280;
-                const imgHeight = canvas.height * imgWidth / canvas.width;
-                let heightLeft = imgHeight;
-                
-                let position = 10;
-                
-                // Add title
-                doc.setFontSize(16);
-                doc.text('માતૃમંડળ રિપોર્ટ - આંગણવાડી Patrak-4', 105, 15, { align: 'center' });
-                
-                // Add date
-                const monthName = gujaratiMonths[appState.currentMonth];
-                doc.setFontSize(12);
-                doc.text(`${monthName} ${appState.currentYear}`, 105, 25, { align: 'center' });
-                
-                doc.addImage(imgData, 'PNG', 10, position + 20, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
-                
-                while (heightLeft >= 0) {
-                    position = heightLeft - imgHeight;
-                    doc.addPage();
-                    doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-                    heightLeft -= pageHeight;
-                }
-                
-                doc.save(`માતૃમંડળ_રિપોર્ટ_${appState.currentYear}_${appState.currentMonth+1}.pdf`);
-                showToast('માતૃમંડળ PDF સફળતાપૂર્વક ડાઉનલોડ થયો', 'success');
-            }).catch(error => {
-                console.error('PDF generation error:', error);
-                showToast('PDF જનરેશનમાં ભૂલ આવી', 'error');
-            });
+            } catch (error) {
+                console.error('Matru Mandal PDF export initialization error:', error);
+                showToast('માતૃમંડળ PDF એક્સપોર્ટ શરૂ કરવામાં ભૂલ આવી', 'error');
+            }
         }
 
         // Export to Excel
@@ -3746,8 +4010,6 @@
 
         function printAllCertificates() {
             showToast('બધા પ્રમાણપત્ર પ્રિન્ટ કરવાનું શરૂ કર્યું', 'success');
-            // This would typically open all certificates for printing
-            // For now, we'll just show a message
         }
 
         function closeCertificate(modalId) {
