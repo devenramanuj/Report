@@ -2522,7 +2522,7 @@
                 
                 const beneficiaries = appState.beneficiaries[day] || 0;
                 
-                // Generate daily report table with afternoon columns
+                // Generate daily report table with total consumption and closing stock
                 let html = `
                     <h3>${day}/${month+1}/${year} (${dayName}) - દૈનિક રિપોર્ટ</h3>
                     <table class="wide-table">
@@ -2530,11 +2530,11 @@
                             <th rowspan="2">તારીખ</th>
                             <th rowspan="2">વાર</th>
                             <th rowspan="2">સંખ્યા</th>
-                            <th colspan="4">ઘઉં</th>
-                            <th colspan="4">ચોખા</th>
-                            <th colspan="4">તેલ</th>
-                            <th colspan="3">ચણા</th>
-                            <th colspan="3">દાળ</th>
+                            <th colspan="6">ઘઉં</th>
+                            <th colspan="6">ચોખા</th>
+                            <th colspan="6">તેલ</th>
+                            <th colspan="5">ચણા</th>
+                            <th colspan="5">દાળ</th>
                         </tr>
                         <tr class="sub-header">
                             <!-- Wheat sub-headers -->
@@ -2542,23 +2542,33 @@
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની સંખ્યા</th>
                             <th>બપોરની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
+                            <th>બંધ સિલક</th>
                             <!-- Rice sub-headers -->
                             <th>સવારની સંખ્યા</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની સંખ્યા</th>
                             <th>બપોરની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
+                            <th>બંધ સિલક</th>
                             <!-- Oil sub-headers -->
                             <th>સવારની સંખ્યા</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની સંખ્યા</th>
                             <th>બપોરની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
+                            <th>બંધ સિલક</th>
                             <!-- Chana sub-headers -->
                             <th>સવારની સંખ્યા</th>
                             <th>સવારની વપરાશ</th>
+                            <th>બપોરની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                             <!-- Dal sub-headers -->
                             <th>સવારની સંખ્યા</th>
                             <th>સવારની વપરાશ</th>
+                            <th>બપોરની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                         </tr>
                 `;
@@ -2566,15 +2576,30 @@
                 // Calculate consumption for all items
                 const wheatMorningConsumption = calculateMorningConsumption('wheat', dayOfWeek, beneficiaries);
                 const wheatAfternoonConsumption = calculateAfternoonConsumption('wheat', dayOfWeek, beneficiaries);
+                const wheatTotalConsumption = wheatMorningConsumption + wheatAfternoonConsumption;
+                
                 const riceMorningConsumption = calculateMorningConsumption('rice', dayOfWeek, beneficiaries);
                 const riceAfternoonConsumption = calculateAfternoonConsumption('rice', dayOfWeek, beneficiaries);
+                const riceTotalConsumption = riceMorningConsumption + riceAfternoonConsumption;
+                
                 const oilMorningConsumption = calculateMorningConsumption('oil', dayOfWeek, beneficiaries);
                 const oilAfternoonConsumption = calculateAfternoonConsumption('oil', dayOfWeek, beneficiaries);
+                const oilTotalConsumption = oilMorningConsumption + oilAfternoonConsumption;
+                
+                const chanaMorningConsumption = calculateMorningConsumption('chana', dayOfWeek, beneficiaries);
+                const chanaAfternoonConsumption = calculateAfternoonConsumption('chana', dayOfWeek, beneficiaries);
+                const chanaTotalConsumption = chanaMorningConsumption + chanaAfternoonConsumption;
+                
+                const dalMorningConsumption = calculateMorningConsumption('dal', dayOfWeek, beneficiaries);
+                const dalAfternoonConsumption = calculateAfternoonConsumption('dal', dayOfWeek, beneficiaries);
+                const dalTotalConsumption = dalMorningConsumption + dalAfternoonConsumption;
                 
                 // Calculate closing stock
-                const wheatClosing = calculateClosingStock('wheat', wheatMorningConsumption + wheatAfternoonConsumption);
-                const riceClosing = calculateClosingStock('rice', riceMorningConsumption + riceAfternoonConsumption);
-                const oilClosing = calculateClosingStock('oil', oilMorningConsumption + oilAfternoonConsumption);
+                const wheatClosing = calculateClosingStock('wheat', wheatTotalConsumption);
+                const riceClosing = calculateClosingStock('rice', riceTotalConsumption);
+                const oilClosing = calculateClosingStock('oil', oilTotalConsumption);
+                const chanaClosing = calculateClosingStock('chana', chanaTotalConsumption);
+                const dalClosing = calculateClosingStock('dal', dalTotalConsumption);
                 
                 // Morning and afternoon beneficiaries count
                 const wheatMorningBeneficiaries = isItemServedInMorning('wheat', dayOfWeek) ? beneficiaries : 0;
@@ -2595,6 +2620,8 @@
                     <td>${wheatMorningConsumption.toFixed(3)}</td>
                     <td>${wheatAfternoonBeneficiaries}</td>
                     <td>${wheatAfternoonConsumption.toFixed(3)}</td>
+                    <td>${wheatTotalConsumption.toFixed(3)}</td>
+                    <td>${wheatClosing.toFixed(3)}</td>
                 `;
                 
                 // Rice columns
@@ -2603,6 +2630,8 @@
                     <td>${riceMorningConsumption.toFixed(3)}</td>
                     <td>${riceAfternoonBeneficiaries}</td>
                     <td>${riceAfternoonConsumption.toFixed(3)}</td>
+                    <td>${riceTotalConsumption.toFixed(3)}</td>
+                    <td>${riceClosing.toFixed(3)}</td>
                 `;
                 
                 // Oil columns
@@ -2611,23 +2640,30 @@
                     <td>${oilMorningConsumption.toFixed(3)}</td>
                     <td>${oilAfternoonBeneficiaries}</td>
                     <td>${oilAfternoonConsumption.toFixed(3)}</td>
+                    <td>${oilTotalConsumption.toFixed(3)}</td>
+                    <td>${oilClosing.toFixed(3)}</td>
                 `;
                 
-                // Chana columns (not served in afternoon)
+                // Chana columns
                 html += `
                     <td>0</td>
-                    <td>0.000</td>
-                    <td>${calculateClosingStock('chana', 0).toFixed(3)}</td>
+                    <td>${chanaMorningConsumption.toFixed(3)}</td>
+                    <td>${chanaAfternoonConsumption.toFixed(3)}</td>
+                    <td>${chanaTotalConsumption.toFixed(3)}</td>
+                    <td>${chanaClosing.toFixed(3)}</td>
                 `;
                 
-                // Dal columns (not served in afternoon)
+                // Dal columns
                 html += `
                     <td>0</td>
-                    <td>0.000</td>
-                    <td>${calculateClosingStock('dal', 0).toFixed(3)}</td>
+                    <td>${dalMorningConsumption.toFixed(3)}</td>
+                    <td>${dalAfternoonConsumption.toFixed(3)}</td>
+                    <td>${dalTotalConsumption.toFixed(3)}</td>
+                    <td>${dalClosing.toFixed(3)}</td>
                 `;
                 
                 html += `</tr>`;
+                
                 html += `</table>`;
                 container.innerHTML = html;
                 
@@ -2646,7 +2682,7 @@
                     currentStock[item] = opening + income;
                 });
 
-                // Generate monthly report table with afternoon columns
+                // Generate monthly report table with total consumption and closing stock
                 let html = `
                     <h3>${monthName} ${year} - માસિક રિપોર્ટ</h3>
                     <table class="wide-table">
@@ -2654,11 +2690,11 @@
                             <th rowspan="2" class="date-column">તારીખ</th>
                             <th rowspan="2">વાર</th>
                             <th rowspan="2">સંખ્યા</th>
-                            <th colspan="4">ઘઉં</th>
-                            <th colspan="4">ચોખા</th>
-                            <th colspan="4">તેલ</th>
-                            <th colspan="3">ચણા</th>
-                            <th colspan="3">દાળ</th>
+                            <th colspan="6">ઘઉં</th>
+                            <th colspan="6">ચોખા</th>
+                            <th colspan="6">તેલ</th>
+                            <th colspan="5">ચણા</th>
+                            <th colspan="5">દાળ</th>
                         </tr>
                         <tr class="sub-header">
                             <!-- Wheat sub-headers -->
@@ -2666,33 +2702,43 @@
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની સંખ્યા</th>
                             <th>બપોરની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
+                            <th>બંધ સિલક</th>
                             <!-- Rice sub-headers -->
                             <th>સવારની સંખ્યા</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની સંખ્યા</th>
                             <th>બપોરની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
+                            <th>બંધ સિલક</th>
                             <!-- Oil sub-headers -->
                             <th>સવારની સંખ્યા</th>
                             <th>સવારની વપરાશ</th>
                             <th>બપોરની સંખ્યા</th>
                             <th>બપોરની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
+                            <th>બંધ સિલક</th>
                             <!-- Chana sub-headers -->
                             <th>સવારની સંખ્યા</th>
                             <th>સવારની વપરાશ</th>
+                            <th>બપોરની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                             <!-- Dal sub-headers -->
                             <th>સવારની સંખ્યા</th>
                             <th>સવારની વપરાશ</th>
+                            <th>બપોરની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                         </tr>
                 `;
                 
                 let monthlyTotals = {
-                    wheat: { morningBeneficiaries: 0, morningConsumption: 0, afternoonBeneficiaries: 0, afternoonConsumption: 0 },
-                    rice: { morningBeneficiaries: 0, morningConsumption: 0, afternoonBeneficiaries: 0, afternoonConsumption: 0 },
-                    oil: { morningBeneficiaries: 0, morningConsumption: 0, afternoonBeneficiaries: 0, afternoonConsumption: 0 },
-                    chana: { morningBeneficiaries: 0, morningConsumption: 0 },
-                    dal: { morningBeneficiaries: 0, morningConsumption: 0 }
+                    wheat: { morningBeneficiaries: 0, morningConsumption: 0, afternoonBeneficiaries: 0, afternoonConsumption: 0, totalConsumption: 0 },
+                    rice: { morningBeneficiaries: 0, morningConsumption: 0, afternoonBeneficiaries: 0, afternoonConsumption: 0, totalConsumption: 0 },
+                    oil: { morningBeneficiaries: 0, morningConsumption: 0, afternoonBeneficiaries: 0, afternoonConsumption: 0, totalConsumption: 0 },
+                    chana: { morningBeneficiaries: 0, morningConsumption: 0, afternoonConsumption: 0, totalConsumption: 0 },
+                    dal: { morningBeneficiaries: 0, morningConsumption: 0, afternoonConsumption: 0, totalConsumption: 0 }
                 };
                 
                 // Calculate for each day
@@ -2708,7 +2754,7 @@
                                 <td class="date-column">${day}/${appState.currentMonth+1}</td>
                                 <td>${dayName}</td>
                                 <td>રજા</td>
-                                <td colspan="18">-</td>
+                                <td colspan="28">-</td>
                             </tr>
                         `;
                         continue;
@@ -2722,10 +2768,23 @@
                     // Calculate consumption for all items
                     const wheatMorningConsumption = calculateMorningConsumption('wheat', dayOfWeek, beneficiaries);
                     const wheatAfternoonConsumption = calculateAfternoonConsumption('wheat', dayOfWeek, beneficiaries);
+                    const wheatTotalConsumption = wheatMorningConsumption + wheatAfternoonConsumption;
+                    
                     const riceMorningConsumption = calculateMorningConsumption('rice', dayOfWeek, beneficiaries);
                     const riceAfternoonConsumption = calculateAfternoonConsumption('rice', dayOfWeek, beneficiaries);
+                    const riceTotalConsumption = riceMorningConsumption + riceAfternoonConsumption;
+                    
                     const oilMorningConsumption = calculateMorningConsumption('oil', dayOfWeek, beneficiaries);
                     const oilAfternoonConsumption = calculateAfternoonConsumption('oil', dayOfWeek, beneficiaries);
+                    const oilTotalConsumption = oilMorningConsumption + oilAfternoonConsumption;
+                    
+                    const chanaMorningConsumption = calculateMorningConsumption('chana', dayOfWeek, beneficiaries);
+                    const chanaAfternoonConsumption = calculateAfternoonConsumption('chana', dayOfWeek, beneficiaries);
+                    const chanaTotalConsumption = chanaMorningConsumption + chanaAfternoonConsumption;
+                    
+                    const dalMorningConsumption = calculateMorningConsumption('dal', dayOfWeek, beneficiaries);
+                    const dalAfternoonConsumption = calculateAfternoonConsumption('dal', dayOfWeek, beneficiaries);
+                    const dalTotalConsumption = dalMorningConsumption + dalAfternoonConsumption;
                     
                     // Morning and afternoon beneficiaries count
                     const wheatMorningBeneficiaries = isItemServedInMorning('wheat', dayOfWeek) ? beneficiaries : 0;
@@ -2736,32 +2795,47 @@
                     const oilAfternoonBeneficiaries = isItemServedInAfternoon('oil', dayOfWeek) ? beneficiaries : 0;
                     
                     // Calculate closing stock
-                    const wheatClosing = currentStock['wheat'] - (wheatMorningConsumption + wheatAfternoonConsumption);
-                    const riceClosing = currentStock['rice'] - (riceMorningConsumption + riceAfternoonConsumption);
-                    const oilClosing = currentStock['oil'] - (oilMorningConsumption + oilAfternoonConsumption);
-                    const chanaClosing = currentStock['chana']; // No consumption
-                    const dalClosing = currentStock['dal']; // No consumption
+                    const wheatClosing = currentStock['wheat'] - wheatTotalConsumption;
+                    const riceClosing = currentStock['rice'] - riceTotalConsumption;
+                    const oilClosing = currentStock['oil'] - oilTotalConsumption;
+                    const chanaClosing = currentStock['chana'] - chanaTotalConsumption;
+                    const dalClosing = currentStock['dal'] - dalTotalConsumption;
                     
                     // Update current stock for next day
                     currentStock['wheat'] = wheatClosing;
                     currentStock['rice'] = riceClosing;
                     currentStock['oil'] = oilClosing;
+                    currentStock['chana'] = chanaClosing;
+                    currentStock['dal'] = dalClosing;
                     
                     // Add to monthly totals
                     monthlyTotals.wheat.morningBeneficiaries += wheatMorningBeneficiaries;
                     monthlyTotals.wheat.morningConsumption += wheatMorningConsumption;
                     monthlyTotals.wheat.afternoonBeneficiaries += wheatAfternoonBeneficiaries;
                     monthlyTotals.wheat.afternoonConsumption += wheatAfternoonConsumption;
+                    monthlyTotals.wheat.totalConsumption += wheatTotalConsumption;
                     
                     monthlyTotals.rice.morningBeneficiaries += riceMorningBeneficiaries;
                     monthlyTotals.rice.morningConsumption += riceMorningConsumption;
                     monthlyTotals.rice.afternoonBeneficiaries += riceAfternoonBeneficiaries;
                     monthlyTotals.rice.afternoonConsumption += riceAfternoonConsumption;
+                    monthlyTotals.rice.totalConsumption += riceTotalConsumption;
                     
                     monthlyTotals.oil.morningBeneficiaries += oilMorningBeneficiaries;
                     monthlyTotals.oil.morningConsumption += oilMorningConsumption;
                     monthlyTotals.oil.afternoonBeneficiaries += oilAfternoonBeneficiaries;
                     monthlyTotals.oil.afternoonConsumption += oilAfternoonConsumption;
+                    monthlyTotals.oil.totalConsumption += oilTotalConsumption;
+                    
+                    monthlyTotals.chana.morningBeneficiaries += 0; // No morning beneficiaries for chana
+                    monthlyTotals.chana.morningConsumption += chanaMorningConsumption;
+                    monthlyTotals.chana.afternoonConsumption += chanaAfternoonConsumption;
+                    monthlyTotals.chana.totalConsumption += chanaTotalConsumption;
+                    
+                    monthlyTotals.dal.morningBeneficiaries += 0; // No morning beneficiaries for dal
+                    monthlyTotals.dal.morningConsumption += dalMorningConsumption;
+                    monthlyTotals.dal.afternoonConsumption += dalAfternoonConsumption;
+                    monthlyTotals.dal.totalConsumption += dalTotalConsumption;
                     
                     // Wheat columns
                     html += `
@@ -2769,6 +2843,8 @@
                         <td>${wheatMorningConsumption.toFixed(3)}</td>
                         <td>${wheatAfternoonBeneficiaries}</td>
                         <td>${wheatAfternoonConsumption.toFixed(3)}</td>
+                        <td>${wheatTotalConsumption.toFixed(3)}</td>
+                        <td>${wheatClosing.toFixed(3)}</td>
                     `;
                     
                     // Rice columns
@@ -2777,6 +2853,8 @@
                         <td>${riceMorningConsumption.toFixed(3)}</td>
                         <td>${riceAfternoonBeneficiaries}</td>
                         <td>${riceAfternoonConsumption.toFixed(3)}</td>
+                        <td>${riceTotalConsumption.toFixed(3)}</td>
+                        <td>${riceClosing.toFixed(3)}</td>
                     `;
                     
                     // Oil columns
@@ -2785,19 +2863,25 @@
                         <td>${oilMorningConsumption.toFixed(3)}</td>
                         <td>${oilAfternoonBeneficiaries}</td>
                         <td>${oilAfternoonConsumption.toFixed(3)}</td>
+                        <td>${oilTotalConsumption.toFixed(3)}</td>
+                        <td>${oilClosing.toFixed(3)}</td>
                     `;
                     
-                    // Chana columns (not served in morning or afternoon)
+                    // Chana columns
                     html += `
                         <td>0</td>
-                        <td>0.000</td>
+                        <td>${chanaMorningConsumption.toFixed(3)}</td>
+                        <td>${chanaAfternoonConsumption.toFixed(3)}</td>
+                        <td>${chanaTotalConsumption.toFixed(3)}</td>
                         <td>${chanaClosing.toFixed(3)}</td>
                     `;
                     
-                    // Dal columns (not served in morning or afternoon)
+                    // Dal columns
                     html += `
                         <td>0</td>
-                        <td>0.000</td>
+                        <td>${dalMorningConsumption.toFixed(3)}</td>
+                        <td>${dalAfternoonConsumption.toFixed(3)}</td>
+                        <td>${dalTotalConsumption.toFixed(3)}</td>
                         <td>${dalClosing.toFixed(3)}</td>
                     `;
                     
@@ -2814,6 +2898,8 @@
                     <td>${monthlyTotals.wheat.morningConsumption.toFixed(3)}</td>
                     <td>${monthlyTotals.wheat.afternoonBeneficiaries}</td>
                     <td>${monthlyTotals.wheat.afternoonConsumption.toFixed(3)}</td>
+                    <td>${monthlyTotals.wheat.totalConsumption.toFixed(3)}</td>
+                    <td>-</td>
                 `;
                 
                 // Rice totals
@@ -2822,6 +2908,8 @@
                     <td>${monthlyTotals.rice.morningConsumption.toFixed(3)}</td>
                     <td>${monthlyTotals.rice.afternoonBeneficiaries}</td>
                     <td>${monthlyTotals.rice.afternoonConsumption.toFixed(3)}</td>
+                    <td>${monthlyTotals.rice.totalConsumption.toFixed(3)}</td>
+                    <td>-</td>
                 `;
                 
                 // Oil totals
@@ -2830,23 +2918,42 @@
                     <td>${monthlyTotals.oil.morningConsumption.toFixed(3)}</td>
                     <td>${monthlyTotals.oil.afternoonBeneficiaries}</td>
                     <td>${monthlyTotals.oil.afternoonConsumption.toFixed(3)}</td>
-                `;
-                
-                // Chana totals (not served in morning or afternoon)
-                html += `
-                    <td>0</td>
-                    <td>0.000</td>
+                    <td>${monthlyTotals.oil.totalConsumption.toFixed(3)}</td>
                     <td>-</td>
                 `;
                 
-                // Dal totals (not served in morning or afternoon)
+                // Chana totals
                 html += `
                     <td>0</td>
-                    <td>0.000</td>
+                    <td>${monthlyTotals.chana.morningConsumption.toFixed(3)}</td>
+                    <td>${monthlyTotals.chana.afternoonConsumption.toFixed(3)}</td>
+                    <td>${monthlyTotals.chana.totalConsumption.toFixed(3)}</td>
+                    <td>-</td>
+                `;
+                
+                // Dal totals
+                html += `
+                    <td>0</td>
+                    <td>${monthlyTotals.dal.morningConsumption.toFixed(3)}</td>
+                    <td>${monthlyTotals.dal.afternoonConsumption.toFixed(3)}</td>
+                    <td>${monthlyTotals.dal.totalConsumption.toFixed(3)}</td>
                     <td>-</td>
                 `;
                 
                 html += `</tr>`;
+                
+                // Add closing stock row
+                html += `
+                    <tr class="total-row">
+                        <td colspan="3">બંધ સિલક</td>
+                        <td colspan="6">${currentStock['wheat'].toFixed(3)} કિલો</td>
+                        <td colspan="6">${currentStock['rice'].toFixed(3)} કિલો</td>
+                        <td colspan="6">${currentStock['oil'].toFixed(3)} લિટર</td>
+                        <td colspan="5">${currentStock['chana'].toFixed(3)} કિલો</td>
+                        <td colspan="5">${currentStock['dal'].toFixed(3)} કિલો</td>
+                    </tr>
+                `;
+                
                 html += `</table>`;
                 
                 container.innerHTML = html;
@@ -3070,7 +3177,7 @@
                 
                 const beneficiaries = appState.beneficiaries[day] || 0;
                 
-                // Generate daily Matru Mandal report table
+                // Generate daily Matru Mandal report table - Only morning data for wheat and rice
                 let html = `
                     <h3>${day}/${month+1}/${year} (${dayName}) - માતૃમંડળ દૈનિક રિપોર્ટ</h3>
                     <table class="wide-table">
@@ -3080,57 +3187,65 @@
                             <th rowspan="2">સંખ્યા</th>
                             <th colspan="4">ઘઉં</th>
                             <th colspan="4">ચોખા</th>
-                            <th colspan="3">શીંગદાણા</th>
-                            <th colspan="3">તલ</th>
-                            <th colspan="3">ગોળ</th>
+                            <th colspan="4">શીંગદાણા</th>
+                            <th colspan="4">તલ</th>
+                            <th colspan="4">ગોળ</th>
                         </tr>
                         <tr class="sub-header">
                             <!-- Wheat sub-headers -->
                             <th>સવારની સંખ્યા</th>
                             <th>સવારની વપરાશ</th>
-                            <th>બપોરની સંખ્યા</th>
-                            <th>બપોરની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
+                            <th>બંધ સિલક</th>
                             <!-- Rice sub-headers -->
                             <th>સવારની સંખ્યા</th>
                             <th>સવારની વપરાશ</th>
-                            <th>બપોરની સંખ્યા</th>
-                            <th>બપોરની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
+                            <th>બંધ સિલક</th>
                             <!-- Singdana sub-headers -->
                             <th>સવારની સંખ્યા</th>
                             <th>સવારની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                             <!-- Tal sub-headers -->
                             <th>સવારની સંખ્યા</th>
                             <th>સવારની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                             <!-- Gol sub-headers -->
                             <th>સવારની સંખ્યા</th>
                             <th>સવારની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                         </tr>
                 `;
                 
                 // Calculate consumption for all items
                 const wheatMorningConsumption = calculateMorningConsumption('wheat', dayOfWeek, beneficiaries);
-                const wheatAfternoonConsumption = calculateAfternoonConsumption('wheat', dayOfWeek, beneficiaries);
+                const wheatTotalConsumption = wheatMorningConsumption;
+                
                 const riceMorningConsumption = calculateMorningConsumption('rice', dayOfWeek, beneficiaries);
-                const riceAfternoonConsumption = calculateAfternoonConsumption('rice', dayOfWeek, beneficiaries);
+                const riceTotalConsumption = riceMorningConsumption;
+                
                 const singdanaMorningConsumption = calculateMatruMandalConsumption('singdana', dayOfWeek, beneficiaries);
+                const singdanaTotalConsumption = singdanaMorningConsumption;
+                
                 const talMorningConsumption = calculateMatruMandalConsumption('tal', dayOfWeek, beneficiaries);
+                const talTotalConsumption = talMorningConsumption;
+                
                 const golMorningConsumption = calculateMatruMandalConsumption('gol', dayOfWeek, beneficiaries);
+                const golTotalConsumption = golMorningConsumption;
                 
                 // Calculate closing stock
-                const wheatClosing = calculateClosingStock('wheat', wheatMorningConsumption + wheatAfternoonConsumption);
-                const riceClosing = calculateClosingStock('rice', riceMorningConsumption + riceAfternoonConsumption);
-                const singdanaClosing = calculateMatruMandalClosingStock('singdana', singdanaMorningConsumption);
-                const talClosing = calculateMatruMandalClosingStock('tal', talMorningConsumption);
-                const golClosing = calculateMatruMandalClosingStock('gol', golMorningConsumption);
+                const wheatClosing = calculateClosingStock('wheat', wheatTotalConsumption);
+                const riceClosing = calculateClosingStock('rice', riceTotalConsumption);
+                const singdanaClosing = calculateMatruMandalClosingStock('singdana', singdanaTotalConsumption);
+                const talClosing = calculateMatruMandalClosingStock('tal', talTotalConsumption);
+                const golClosing = calculateMatruMandalClosingStock('gol', golTotalConsumption);
                 
-                // Morning and afternoon beneficiaries count
+                // Morning beneficiaries count
                 const wheatMorningBeneficiaries = isItemServedInMorning('wheat', dayOfWeek) ? beneficiaries : 0;
-                const wheatAfternoonBeneficiaries = isItemServedInAfternoon('wheat', dayOfWeek) ? beneficiaries : 0;
                 const riceMorningBeneficiaries = isItemServedInMorning('rice', dayOfWeek) ? beneficiaries : 0;
-                const riceAfternoonBeneficiaries = isItemServedInAfternoon('rice', dayOfWeek) ? beneficiaries : 0;
                 const singdanaMorningBeneficiaries = isMatruMandalItemServed('singdana', dayOfWeek) ? beneficiaries : 0;
                 const talMorningBeneficiaries = isMatruMandalItemServed('tal', dayOfWeek) ? beneficiaries : 0;
                 const golMorningBeneficiaries = isMatruMandalItemServed('gol', dayOfWeek) ? beneficiaries : 0;
@@ -3140,32 +3255,35 @@
                 html += `<td>${dayName}</td>`;
                 html += `<td>${beneficiaries}</td>`;
                 
-                // Wheat columns
+                // Wheat columns (only morning)
                 html += `
                     <td>${wheatMorningBeneficiaries}</td>
                     <td>${wheatMorningConsumption.toFixed(3)}</td>
-                    <td>${wheatAfternoonBeneficiaries}</td>
-                    <td>${wheatAfternoonConsumption.toFixed(3)}</td>
+                    <td>${wheatTotalConsumption.toFixed(3)}</td>
+                    <td>${wheatClosing.toFixed(3)}</td>
                 `;
                 
-                // Rice columns
+                // Rice columns (only morning)
                 html += `
                     <td>${riceMorningBeneficiaries}</td>
                     <td>${riceMorningConsumption.toFixed(3)}</td>
-                    <td>${riceAfternoonBeneficiaries}</td>
-                    <td>${riceAfternoonConsumption.toFixed(3)}</td>
+                    <td>${riceTotalConsumption.toFixed(3)}</td>
+                    <td>${riceClosing.toFixed(3)}</td>
                 `;
                 
                 // Matru Mandal items columns
                 html += `
                     <td>${singdanaMorningBeneficiaries}</td>
                     <td>${singdanaMorningConsumption.toFixed(3)}</td>
+                    <td>${singdanaTotalConsumption.toFixed(3)}</td>
                     <td>${singdanaClosing.toFixed(3)}</td>
                     <td>${talMorningBeneficiaries}</td>
                     <td>${talMorningConsumption.toFixed(3)}</td>
+                    <td>${talTotalConsumption.toFixed(3)}</td>
                     <td>${talClosing.toFixed(3)}</td>
                     <td>${golMorningBeneficiaries}</td>
                     <td>${golMorningConsumption.toFixed(3)}</td>
+                    <td>${golTotalConsumption.toFixed(3)}</td>
                     <td>${golClosing.toFixed(3)}</td>
                 `;
                 
@@ -3196,7 +3314,7 @@
                     currentStock[item] = opening + income;
                 });
 
-                // Generate monthly Matru Mandal report table
+                // Generate monthly Matru Mandal report table - Only morning data for wheat and rice
                 let html = `
                     <h3>${monthName} ${year} - માતૃમંડળ માસિક રિપોર્ટ</h3>
                     <table class="wide-table">
@@ -3206,42 +3324,45 @@
                             <th rowspan="2">સંખ્યા</th>
                             <th colspan="4">ઘઉં</th>
                             <th colspan="4">ચોખા</th>
-                            <th colspan="3">શીંગદાણા</th>
-                            <th colspan="3">તલ</th>
-                            <th colspan="3">ગોળ</th>
+                            <th colspan="4">શીંગદાણા</th>
+                            <th colspan="4">તલ</th>
+                            <th colspan="4">ગોળ</th>
                         </tr>
                         <tr class="sub-header">
                             <!-- Wheat sub-headers -->
                             <th>સવારની સંખ્યા</th>
                             <th>સવારની વપરાશ</th>
-                            <th>બપોરની સંખ્યા</th>
-                            <th>બપોરની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
+                            <th>બંધ સિલક</th>
                             <!-- Rice sub-headers -->
                             <th>સવારની સંખ્યા</th>
                             <th>સવારની વપરાશ</th>
-                            <th>બપોરની સંખ્યા</th>
-                            <th>બપોરની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
+                            <th>બંધ સિલક</th>
                             <!-- Singdana sub-headers -->
                             <th>સવારની સંખ્યા</th>
                             <th>સવારની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                             <!-- Tal sub-headers -->
                             <th>સવારની સંખ્યા</th>
                             <th>સવારની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                             <!-- Gol sub-headers -->
                             <th>સવારની સંખ્યા</th>
                             <th>સવારની વપરાશ</th>
+                            <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
                         </tr>
                 `;
                 
                 let monthlyTotals = {
-                    wheat: { morningBeneficiaries: 0, morningConsumption: 0, afternoonBeneficiaries: 0, afternoonConsumption: 0 },
-                    rice: { morningBeneficiaries: 0, morningConsumption: 0, afternoonBeneficiaries: 0, afternoonConsumption: 0 },
-                    singdana: { morningBeneficiaries: 0, morningConsumption: 0 },
-                    tal: { morningBeneficiaries: 0, morningConsumption: 0 },
-                    gol: { morningBeneficiaries: 0, morningConsumption: 0 }
+                    wheat: { morningBeneficiaries: 0, morningConsumption: 0, totalConsumption: 0 },
+                    rice: { morningBeneficiaries: 0, morningConsumption: 0, totalConsumption: 0 },
+                    singdana: { morningBeneficiaries: 0, morningConsumption: 0, totalConsumption: 0 },
+                    tal: { morningBeneficiaries: 0, morningConsumption: 0, totalConsumption: 0 },
+                    gol: { morningBeneficiaries: 0, morningConsumption: 0, totalConsumption: 0 }
                 };
                 
                 // Calculate for each day
@@ -3257,7 +3378,7 @@
                                 <td class="date-column">${day}/${appState.currentMonth+1}</td>
                                 <td>${dayName}</td>
                                 <td>રજા</td>
-                                <td colspan="18">-</td>
+                                <td colspan="20">-</td>
                             </tr>
                         `;
                         continue;
@@ -3270,28 +3391,33 @@
                     
                     // Calculate consumption for all items
                     const wheatMorningConsumption = calculateMorningConsumption('wheat', dayOfWeek, beneficiaries);
-                    const wheatAfternoonConsumption = calculateAfternoonConsumption('wheat', dayOfWeek, beneficiaries);
-                    const riceMorningConsumption = calculateMorningConsumption('rice', dayOfWeek, beneficiaries);
-                    const riceAfternoonConsumption = calculateAfternoonConsumption('rice', dayOfWeek, beneficiaries);
-                    const singdanaMorningConsumption = calculateMatruMandalConsumption('singdana', dayOfWeek, beneficiaries);
-                    const talMorningConsumption = calculateMatruMandalConsumption('tal', dayOfWeek, beneficiaries);
-                    const golMorningConsumption = calculateMatruMandalConsumption('gol', dayOfWeek, beneficiaries);
+                    const wheatTotalConsumption = wheatMorningConsumption;
                     
-                    // Morning and afternoon beneficiaries count
+                    const riceMorningConsumption = calculateMorningConsumption('rice', dayOfWeek, beneficiaries);
+                    const riceTotalConsumption = riceMorningConsumption;
+                    
+                    const singdanaMorningConsumption = calculateMatruMandalConsumption('singdana', dayOfWeek, beneficiaries);
+                    const singdanaTotalConsumption = singdanaMorningConsumption;
+                    
+                    const talMorningConsumption = calculateMatruMandalConsumption('tal', dayOfWeek, beneficiaries);
+                    const talTotalConsumption = talMorningConsumption;
+                    
+                    const golMorningConsumption = calculateMatruMandalConsumption('gol', dayOfWeek, beneficiaries);
+                    const golTotalConsumption = golMorningConsumption;
+                    
+                    // Morning beneficiaries count
                     const wheatMorningBeneficiaries = isItemServedInMorning('wheat', dayOfWeek) ? beneficiaries : 0;
-                    const wheatAfternoonBeneficiaries = isItemServedInAfternoon('wheat', dayOfWeek) ? beneficiaries : 0;
                     const riceMorningBeneficiaries = isItemServedInMorning('rice', dayOfWeek) ? beneficiaries : 0;
-                    const riceAfternoonBeneficiaries = isItemServedInAfternoon('rice', dayOfWeek) ? beneficiaries : 0;
                     const singdanaMorningBeneficiaries = isMatruMandalItemServed('singdana', dayOfWeek) ? beneficiaries : 0;
                     const talMorningBeneficiaries = isMatruMandalItemServed('tal', dayOfWeek) ? beneficiaries : 0;
                     const golMorningBeneficiaries = isMatruMandalItemServed('gol', dayOfWeek) ? beneficiaries : 0;
                     
                     // Calculate closing stock
-                    const wheatClosing = currentStock['wheat'] - (wheatMorningConsumption + wheatAfternoonConsumption);
-                    const riceClosing = currentStock['rice'] - (riceMorningConsumption + riceAfternoonConsumption);
-                    const singdanaClosing = currentStock['singdana'] - singdanaMorningConsumption;
-                    const talClosing = currentStock['tal'] - talMorningConsumption;
-                    const golClosing = currentStock['gol'] - golMorningConsumption;
+                    const wheatClosing = currentStock['wheat'] - wheatTotalConsumption;
+                    const riceClosing = currentStock['rice'] - riceTotalConsumption;
+                    const singdanaClosing = currentStock['singdana'] - singdanaTotalConsumption;
+                    const talClosing = currentStock['tal'] - talTotalConsumption;
+                    const golClosing = currentStock['gol'] - golTotalConsumption;
                     
                     // Update current stock for next day
                     currentStock['wheat'] = wheatClosing;
@@ -3303,47 +3429,53 @@
                     // Add to monthly totals
                     monthlyTotals.wheat.morningBeneficiaries += wheatMorningBeneficiaries;
                     monthlyTotals.wheat.morningConsumption += wheatMorningConsumption;
-                    monthlyTotals.wheat.afternoonBeneficiaries += wheatAfternoonBeneficiaries;
-                    monthlyTotals.wheat.afternoonConsumption += wheatAfternoonConsumption;
+                    monthlyTotals.wheat.totalConsumption += wheatTotalConsumption;
                     
                     monthlyTotals.rice.morningBeneficiaries += riceMorningBeneficiaries;
                     monthlyTotals.rice.morningConsumption += riceMorningConsumption;
-                    monthlyTotals.rice.afternoonBeneficiaries += riceAfternoonBeneficiaries;
-                    monthlyTotals.rice.afternoonConsumption += riceAfternoonConsumption;
+                    monthlyTotals.rice.totalConsumption += riceTotalConsumption;
                     
                     monthlyTotals.singdana.morningBeneficiaries += singdanaMorningBeneficiaries;
                     monthlyTotals.singdana.morningConsumption += singdanaMorningConsumption;
+                    monthlyTotals.singdana.totalConsumption += singdanaTotalConsumption;
+                    
                     monthlyTotals.tal.morningBeneficiaries += talMorningBeneficiaries;
                     monthlyTotals.tal.morningConsumption += talMorningConsumption;
+                    monthlyTotals.tal.totalConsumption += talTotalConsumption;
+                    
                     monthlyTotals.gol.morningBeneficiaries += golMorningBeneficiaries;
                     monthlyTotals.gol.morningConsumption += golMorningConsumption;
+                    monthlyTotals.gol.totalConsumption += golTotalConsumption;
                     
-                    // Wheat columns
+                    // Wheat columns (only morning)
                     html += `
                         <td>${wheatMorningBeneficiaries}</td>
                         <td>${wheatMorningConsumption.toFixed(3)}</td>
-                        <td>${wheatAfternoonBeneficiaries}</td>
-                        <td>${wheatAfternoonConsumption.toFixed(3)}</td>
+                        <td>${wheatTotalConsumption.toFixed(3)}</td>
+                        <td>${wheatClosing.toFixed(3)}</td>
                     `;
                     
-                    // Rice columns
+                    // Rice columns (only morning)
                     html += `
                         <td>${riceMorningBeneficiaries}</td>
                         <td>${riceMorningConsumption.toFixed(3)}</td>
-                        <td>${riceAfternoonBeneficiaries}</td>
-                        <td>${riceAfternoonConsumption.toFixed(3)}</td>
+                        <td>${riceTotalConsumption.toFixed(3)}</td>
+                        <td>${riceClosing.toFixed(3)}</td>
                     `;
                     
                     // Matru Mandal items columns
                     html += `
                         <td>${singdanaMorningBeneficiaries}</td>
                         <td>${singdanaMorningConsumption.toFixed(3)}</td>
+                        <td>${singdanaTotalConsumption.toFixed(3)}</td>
                         <td>${singdanaClosing.toFixed(3)}</td>
                         <td>${talMorningBeneficiaries}</td>
                         <td>${talMorningConsumption.toFixed(3)}</td>
+                        <td>${talTotalConsumption.toFixed(3)}</td>
                         <td>${talClosing.toFixed(3)}</td>
                         <td>${golMorningBeneficiaries}</td>
                         <td>${golMorningConsumption.toFixed(3)}</td>
+                        <td>${golTotalConsumption.toFixed(3)}</td>
                         <td>${golClosing.toFixed(3)}</td>
                     `;
                     
@@ -3358,32 +3490,48 @@
                 html += `
                     <td>${monthlyTotals.wheat.morningBeneficiaries}</td>
                     <td>${monthlyTotals.wheat.morningConsumption.toFixed(3)}</td>
-                    <td>${monthlyTotals.wheat.afternoonBeneficiaries}</td>
-                    <td>${monthlyTotals.wheat.afternoonConsumption.toFixed(3)}</td>
+                    <td>${monthlyTotals.wheat.totalConsumption.toFixed(3)}</td>
+                    <td>-</td>
                 `;
                 
                 // Rice totals
                 html += `
                     <td>${monthlyTotals.rice.morningBeneficiaries}</td>
                     <td>${monthlyTotals.rice.morningConsumption.toFixed(3)}</td>
-                    <td>${monthlyTotals.rice.afternoonBeneficiaries}</td>
-                    <td>${monthlyTotals.rice.afternoonConsumption.toFixed(3)}</td>
+                    <td>${monthlyTotals.rice.totalConsumption.toFixed(3)}</td>
+                    <td>-</td>
                 `;
                 
                 // Matru Mandal items totals
                 html += `
                     <td>${monthlyTotals.singdana.morningBeneficiaries}</td>
                     <td>${monthlyTotals.singdana.morningConsumption.toFixed(3)}</td>
+                    <td>${monthlyTotals.singdana.totalConsumption.toFixed(3)}</td>
                     <td>-</td>
                     <td>${monthlyTotals.tal.morningBeneficiaries}</td>
                     <td>${monthlyTotals.tal.morningConsumption.toFixed(3)}</td>
+                    <td>${monthlyTotals.tal.totalConsumption.toFixed(3)}</td>
                     <td>-</td>
                     <td>${monthlyTotals.gol.morningBeneficiaries}</td>
                     <td>${monthlyTotals.gol.morningConsumption.toFixed(3)}</td>
+                    <td>${monthlyTotals.gol.totalConsumption.toFixed(3)}</td>
                     <td>-</td>
                 `;
                 
                 html += `</tr>`;
+                
+                // Add closing stock row
+                html += `
+                    <tr class="total-row">
+                        <td colspan="3">બંધ સિલક</td>
+                        <td colspan="4">${currentStock['wheat'].toFixed(3)} કિલો</td>
+                        <td colspan="4">${currentStock['rice'].toFixed(3)} કિલો</td>
+                        <td colspan="4">${currentStock['singdana'].toFixed(3)} કિલો</td>
+                        <td colspan="4">${currentStock['tal'].toFixed(3)} કિલો</td>
+                        <td colspan="4">${currentStock['gol'].toFixed(3)} કિલો</td>
+                    </tr>
+                `;
+                
                 html += `</table>`;
                 
                 container.innerHTML = html;
@@ -3824,7 +3972,9 @@
                 return;
             }
             
-            // Create a print-friendly version
+           
+                        
+                    // Create a print-friendly version
             const printWindow = window.open('', '_blank');
             const monthName = gujaratiMonths[appState.currentMonth];
             
