@@ -11,54 +11,43 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-        /* Password Protection Styles - Added without modifying original structure */
-        /* Password Protection Responsive Fix */
-/* Password Overlay Fix */
-#passwordOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 99999; /* Very high z-index */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding: 20px;
-    box-sizing: border-box;
-}
+        /* Password Protection Styles */
+        #passwordOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            box-sizing: border-box;
+        }
 
-.password-container {
-    background: white;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-sizing: border-box;
-    position: relative;
-    z-index: 100000; /* Even higher */
-}
+        .password-container {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 100000;
+        }
 
-/* Hide main app content when password is required */
-#passwordOverlay:not([style*="display: none"]) ~ .container {
-    display: none !important;
-}
+        /* Hide main app content when password is required */
+        #passwordOverlay:not([style*="display: none"]) ~ .container {
+            display: none !important;
+        }
 
-@viewport {
-    width: device-width;
-    zoom: 1.0;
-}
-
-@-ms-viewport {
-    width: device-width;
-}
-        
         .password-input {
             width: 100%;
             padding: 15px;
@@ -103,6 +92,16 @@
             margin-top: 10px;
             font-size: 0.9rem;
             display: none;
+        }
+        
+        .contact-info {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #666;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
         }
 
         /* ALL ORIGINAL STYLES REMAIN EXACTLY THE SAME */
@@ -1177,13 +1176,17 @@
     <div id="passwordOverlay">
         <div class="password-container">
             <h2>આંગણવાડી Patrak-4</h2>
-            <p>આ એપ્લિકેશન ઍક્સેસ કરવા માટે પાસવર્ડ દાખલ કરો</p>
+            <p>આ એપ્લિકેશન પાસવર્ડ પ્રોટેક્ટેડ છે</p>
             <input type="password" id="passwordInput" class="password-input" placeholder="પાસવર્ડ દાખલ કરો">
             <button id="passwordSubmit" class="password-btn">
                 <span class="material-icons">lock_open</span> એક્સેસ કરો
             </button>
             <div id="passwordError" class="error-message">
                 ખોટું પાસવર્ડ! કૃપા કરીને ફરી પ્રયાસ કરો.
+            </div>
+            <div class="contact-info">
+                <p><strong>પાસવર્ડ માટે સંપર્ક કરો:</strong></p>
+                <p>📞 mo.9276505035</p>
             </div>
             <div class="credit-note">
                 Developed by Devendra Ramanuj
@@ -1905,7 +1908,7 @@
     <div id="toast" class="toast"></div>
 
     <script>
-        // Password Protection Logic - Added without modifying original functions
+        // Password Protection Logic
         const CORRECT_PASSWORD = "Dev123"; // Default password
         
         document.addEventListener('DOMContentLoaded', function() {
