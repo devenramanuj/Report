@@ -1169,6 +1169,179 @@
                 margin: 20px;
             }
         }
+
+       /* AI Assistant Styles */
+#aiAssistant {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+#aiAssistant:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+#aiAssistant.active {
+    width: 350px;
+    height: 450px;
+    border-radius: 20px;
+    bottom: 25px;
+    left: 25px;
+}
+
+.assistant-icon {
+    font-size: 2rem;
+    color: white;
+}
+
+#aiAssistant.active .assistant-icon {
+    display: none;
+}
+
+.assistant-container {
+    display: none;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+#aiAssistant.active .assistant-container {
+    display: flex;
+}
+
+.assistant-header {
+    background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+    color: white;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.assistant-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.assistant-close {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.assistant-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.message {
+    padding: 10px 15px;
+    border-radius: 18px;
+    max-width: 85%;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.message.user {
+    align-self: flex-end;
+    background: #3498db;
+    color: white;
+    border-bottom-right-radius: 5px;
+}
+
+.message.assistant {
+    align-self: flex-start;
+    background: #f1f1f1;
+    color: #333;
+    border-bottom-left-radius: 5px;
+}
+
+.assistant-input {
+    padding: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 10px;
+}
+
+.assistant-input input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.assistant-input button {
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.assistant-input button:hover {
+    background: #2980b9;
+    transform: scale(1.05);
+}
+
+.quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.quick-action {
+    background: #e3f2fd;
+    border: 1px solid #bbdefb;
+    border-radius: 15px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.quick-action:hover {
+    background: #bbdefb;
+}
+
+@media (max-width: 768px) {
+    #aiAssistant.active {
+        width: 300px;
+        height: 400px;
+    }
+}
     </style>
 </head>
 <body>
@@ -1193,6 +1366,33 @@
             </div>
         </div>
     </div>
+
+    <!-- AI Assistant -->
+<div id="aiAssistant">
+    <div class="assistant-icon">
+        <span class="material-icons">smart_toy</span>
+    </div>
+    <div class="assistant-container">
+        <div class="assistant-header">
+            <span class="material-icons">smart_toy</span>
+            <h3>મને પૂછો</h3>
+            <button class="assistant-close" onclick="closeAssistant()">
+                <span class="material-icons">close</span>
+            </button>
+        </div>
+        <div class="assistant-messages" id="assistantMessages">
+            <div class="message assistant">
+                નમસ્તે! હું તમારો સહાયક છું. તમને આ એપ્લિકેશનનો ઉપયોગ કરવામાં કેવી રીતે મદદ કરી શકું?
+            </div>
+        </div>
+        <div class="assistant-input">
+            <input type="text" id="assistantInput" placeholder="તમારો પ્રશ્ન લખો..." onkeypress="handleAssistantKeypress(event)">
+            <button onclick="sendMessage()">
+                <span class="material-icons">send</span>
+            </button>
+        </div>
+    </div>
+</div>
 
     <!-- ALL ORIGINAL HTML CONTENT REMAINS EXACTLY THE SAME -->
     <div class="container">
@@ -1932,6 +2132,9 @@
                     checkPassword();
                 }
             });
+            
+            // Initialize AI Assistant
+            initializeAssistant();
         });
         
         function checkPassword() {
@@ -1990,6 +2193,258 @@
             }
         `;
         document.head.appendChild(style);
+
+        // AI Assistant Logic - FIXED CLOSE FUNCTIONALITY
+        let assistantActive = false;
+
+        function initializeAssistant() {
+            // Add click event to toggle assistant - FIXED VERSION
+            document.getElementById('aiAssistant').addEventListener('click', function(e) {
+                // If click is on close button, close assistant
+                if (e.target.closest('.assistant-close')) {
+                    closeAssistant();
+                    e.stopPropagation(); // Prevent event from bubbling up
+                    return;
+                }
+                
+                // If assistant is not active, open it
+                if (!assistantActive) {
+                    toggleAssistant();
+                }
+                // If assistant is active and click is on the main icon (not inside content), close it
+                else if (assistantActive && e.target.closest('.assistant-icon')) {
+                    closeAssistant();
+                }
+            });
+            
+            // Add welcome message with quick actions
+            addQuickActions();
+        }
+
+        function toggleAssistant() {
+            const assistant = document.getElementById('aiAssistant');
+            
+            if (!assistantActive) {
+                assistantActive = true;
+                assistant.classList.add('active');
+                // Focus on input when opened
+                setTimeout(() => {
+                    document.getElementById('assistantInput').focus();
+                }, 300);
+            }
+        }
+
+        // NEW FUNCTION: Close assistant properly
+        function closeAssistant() {
+            const assistant = document.getElementById('aiAssistant');
+            assistantActive = false;
+            assistant.classList.remove('active');
+            
+            // Clear input field when closing
+            document.getElementById('assistantInput').value = '';
+        }
+
+        function handleAssistantKeypress(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('assistantInput');
+            const message = input.value.trim();
+            
+            if (message === '') return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            
+            // Clear input
+            input.value = '';
+            
+            // Process and respond
+            processMessage(message);
+        }
+
+        function addMessage(text, sender) {
+            const messagesContainer = document.getElementById('assistantMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.textContent = text;
+            messagesContainer.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function addQuickActions() {
+            const messagesContainer = document.getElementById('assistantMessages');
+            
+            // Check if quick actions already exist
+            if (messagesContainer.querySelector('.quick-actions')) {
+                return;
+            }
+            
+            const quickActionsDiv = document.createElement('div');
+            quickActionsDiv.className = 'quick-actions';
+            
+            const actions = [
+                'લાભાર્થી કેવી રીતે ઉમેરવા?',
+                'સ્ટોક કેવી રીતે મેનેજ કરવો?',
+                'રિપોર્ટ કેવી રીતે બનાવવો?',
+                'બિલ કેવી રીતે જનરેટ કરવું?'
+            ];
+            
+            actions.forEach(action => {
+                const actionBtn = document.createElement('div');
+                actionBtn.className = 'quick-action';
+                actionBtn.textContent = action;
+                actionBtn.onclick = () => {
+                    addMessage(action, 'user');
+                    processMessage(action);
+                };
+                quickActionsDiv.appendChild(actionBtn);
+            });
+            
+            messagesContainer.appendChild(quickActionsDiv);
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function processMessage(message) {
+            let response = '';
+            
+            // Convert message to lowercase for easier matching
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('લાભાર્થી') || lowerMessage.includes('ઉમેરવા') || 
+                lowerMessage.includes('beneficiary') || lowerMessage.includes('add')) {
+                response = `લાભાર્થી ઉમેરવા માટે:
+1. 'લાભાર્થી' ટેબ પર ક્લિક કરો
+2. કેલેન્ડર પર ઇચ્છિત તારીખ પર ક્લિક કરો
+3. લાભાર્થીઓની સંખ્યા દાખલ કરો
+4. સેવ કરવા માટે 'ઓકે' પર ક્લિક કરો
+
+રવિવારે લાભાર્થીઓ ઉમેરી શકાતા નથી.`;
+                
+                // Show the beneficiary page if user wants to add beneficiaries
+                if (lowerMessage.includes('ઉમેરવા') || lowerMessage.includes('add')) {
+                    setTimeout(() => {
+                        if (typeof showPage === 'function') {
+                            showPage('beneficiaryPage');
+                        }
+                    }, 1000);
+                }
+                
+            } else if (lowerMessage.includes('સ્ટોક') || lowerMessage.includes('મેનેજ') || 
+                      lowerMessage.includes('stock') || lowerMessage.includes('manage')) {
+                response = `સ્ટોક મેનેજ કરવા માટે:
+1. 'સ્ટોક' ટેબ પર ક્લિક કરો
+2. ઘઉં, ચોખા, તેલ, ચણા અને દાળનો સ્ટોક દાખલ કરો
+3. શરૂઆતી સ્ટોક અને આવક ભરો
+4. સેવ કરવા માટે 'સ્ટોક સેવ કરો' બટન પર ક્લિક કરો
+
+માતૃમંડળ સ્ટોક માટે 'માતૃમંડળ સ્ટોક' ટેબનો ઉપયોગ કરો.`;
+                
+                // Show the stock page if user wants to manage stock
+                if (lowerMessage.includes('મેનેજ') || lowerMessage.includes('manage')) {
+                    setTimeout(() => {
+                        if (typeof showPage === 'function') {
+                            showPage('stockPage');
+                        }
+                    }, 1000);
+                }
+                
+            } else if (lowerMessage.includes('રિપોર્ટ') || lowerMessage.includes('બનાવવો') || 
+                      lowerMessage.includes('report') || lowerMessage.includes('generate')) {
+                response = `રિપોર્ટ બનાવવા માટે:
+1. 'રિપોર્ટ' ટેબ પર ક્લિક કરો
+2. મહિનો અને વર્ષ પસંદ કરો
+3. દૈનિક અથવા માસિક રિપોર્ટ બનાવવા માટે બટન પર ક્લિક કરો
+4. રિપોર્ટ પ્રિન્ટ, PDF અથવા Excel તરીકે ડાઉનલોડ કરો
+
+માતૃમંડળ રિપોર્ટ માટે 'માતૃમંડળ રિપોર્ટ' ટેબનો ઉપયોગ કરો.`;
+                
+                // Show the report page if user wants to generate report
+                if (lowerMessage.includes('બનાવવો') || lowerMessage.includes('generate')) {
+                    setTimeout(() => {
+                        if (typeof showPage === 'function') {
+                            showPage('reportPage');
+                        }
+                    }, 1000);
+                }
+                
+            } else if (lowerMessage.includes('બિલ') || lowerMessage.includes('જનરેટ') || 
+                      lowerMessage.includes('bill') || lowerMessage.includes('generate')) {
+                response = `બિલ જનરેટ કરવા માટે:
+1. 'બિલ' ટેબ પર ક્લિક કરો
+2. મહિનો અને વર્ષ પસંદ કરો
+3. આંગણવાડીની માહિતી ભરો
+4. ઇચ્છિત પ્રમાણપત્ર બનાવવા માટે બટન પર ક્લિક કરો
+5. પ્રમાણપત્ર પ્રિન્ટ કરો
+
+તમે 1.30, 1.60 અને 1.00 પૈસાના પ્રમાણપત્ર બનાવી શકો છો.`;
+                
+                // Show the bill page if user wants to generate bill
+                if (lowerMessage.includes('જનરેટ') || lowerMessage.includes('generate')) {
+                    setTimeout(() => {
+                        if (typeof showPage === 'function') {
+                            showPage('billPage');
+                        }
+                    }, 1000);
+                }
+                
+            } else if (lowerMessage.includes('હેલ્પ') || lowerMessage.includes('મદદ') || 
+                      lowerMessage.includes('help') || lowerMessage.includes('સહાય')) {
+                response = `હું તમને આ એપ્લિકેશનનો ઉપયોગ કરવામાં મદદ કરી શકું છું:
+
+• લાભાર્થી એન્ટ્રી - દરરોજના લાભાર્થીઓની સંખ્યા નોંધો
+• સ્ટોક મેનેજમેન્ટ - ખોરાકનો સ્ટોક ટ્રેક કરો
+• રિપોર્ટ જનરેશન - દૈનિક અને માસિક રિપોર્ટ બનાવો
+• બિલ જનરેશન - મસાલા બીલ પ્રમાણપત્ર બનાવો
+• ઉપયોગી ટૂલ્સ - કેલ્ક્યુલેટર, ઉંમર અને BMI કેલ્ક્યુલેટર
+
+તમારો પ્રશ્ન પૂછો અથવા ઉપરના વિકલ્પોમાંથી એક પસંદ કરો.`;
+                
+            } else if (lowerMessage.includes('નમસ્તે') || lowerMessage.includes('હેલો') || 
+                      lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+                response = `નમસ્તે! હું તમારો સહાયક છું. તમને આંગણવાડી Patrak-4 એપ્લિકેશનનો ઉપયોગ કરવામાં કેવી રીતે મદદ કરી શકું?`;
+                
+            } else {
+                response = `માફ કરશો, મને તમારો પ્રશ્ન સમજાયો નથી. તમે નીચેના વિષયો પર મદદ માંગી શકો છો:
+• લાભાર્થી એન્ટ્રી
+• સ્ટોક મેનેજમેન્ટ
+• રિપોર્ટ જનરેશન
+• બિલ જનરેશન
+• એપ્લિકેશનનો ઉપયોગ
+
+કૃપા કરીને તમારો પ્રશ્ન ફરીથી પૂછો.`;
+            }
+            
+            // Add a slight delay to simulate thinking
+            setTimeout(() => {
+                addMessage(response, 'assistant');
+                
+                // Add quick actions again if it's a general question
+                if (lowerMessage.includes('નમસ્તે') || lowerMessage.includes('હેલ્પ') || 
+                    lowerMessage.includes('help') || lowerMessage.includes('મદદ')) {
+                    addQuickActions();
+                }
+            }, 1000);
+        }
+        
+        // Allow pressing Enter to send message
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('assistantInput');
+            if (input) {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        sendMessage();
+                    }
+                });
+            }
+        });
 
         // ALL ORIGINAL JAVASCRIPT CODE REMAINS EXACTLY THE SAME
         // Application State
