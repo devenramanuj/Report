@@ -1170,11 +1170,11 @@
             }
         }
 
-       /* AI Assistant Styles */
+      /* AI Assistant Styles */
 #aiAssistant {
     position: fixed;
-    bottom: 25px;
-    left: 25px;
+    top: 140px; /* Header ની નીચે */
+    right: 25px; /* જમણી બાજુએ */
     width: 70px;
     height: 70px;
     background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
@@ -1189,9 +1189,12 @@
     overflow: hidden;
 }
 
-#aiAssistant:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+#aiAssistant.active {
+    width: 350px;
+    height: 450px;
+    border-radius: 20px;
+    top: 140px; /* Header ની નીચે જ રહેશે */
+    right: 25px; /* જમણી બાજુએ જ રહેશે */
 }
 
 #aiAssistant.active {
@@ -1281,67 +1284,129 @@
 }
 
 .assistant-input {
-    padding: 15px;
-    border-top: 1px solid #eee;
-    display: flex;
-    gap: 10px;
-}
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
 
-.assistant-input input {
-    flex: 1;
-    padding: 10px 15px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    outline: none;
-    font-size: 0.9rem;
-}
+        .assistant-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+            font-size: 0.9rem;
+        }
 
-.assistant-input button {
-    background: #3498db;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s;
-}
+        .assistant-input button {
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
 
-.assistant-input button:hover {
-    background: #2980b9;
-    transform: scale(1.05);
-}
+        .assistant-input button:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+        }
 
-.quick-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 10px;
-}
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
 
-.quick-action {
-    background: #e3f2fd;
-    border: 1px solid #bbdefb;
-    border-radius: 15px;
-    padding: 6px 12px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: all 0.2s;
-}
+        .quick-action {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 15px;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
 
-.quick-action:hover {
-    background: #bbdefb;
-}
+        .quick-action:hover {
+            background: #bbdefb;
+        }
 
-@media (max-width: 768px) {
-    #aiAssistant.active {
-        width: 300px;
-        height: 400px;
-    }
-}
+        @media (max-width: 768px) {
+            #aiAssistant {
+                top: 120px; /* Mobile માટે થોડું ઉપર */
+                right: 15px;
+            }
+            
+            #aiAssistant.active {
+                width: 300px;
+                height: 400px;
+                top: 120px;
+                right: 15px;
+            }
+        }
+
+        /* Report Summary Table Styles */
+        .report-summary-table {
+            margin-top: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .report-summary-table h3 {
+            padding: 20px;
+            margin: 0;
+            text-align: center;
+            background: rgba(0,0,0,0.2);
+            font-size: 1.4rem;
+        }
+
+        .summary-table-container {
+            background: white;
+            color: #333;
+        }
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .summary-table th {
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #dee2e6;
+        }
+
+        .summary-table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+            background-color: #f8f9fa;
+        }
+
+        .summary-table .item-header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            font-weight: bold;
+        }
+
+        .summary-table .total-row {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -1754,6 +1819,21 @@
             <div class="card">
                 <div class="table-container" id="reportTableContainer">
                     <p style="text-align: center; color: #888;">કૃપા કરીને રિપોર્ટ બનાવવા માટે ઉપરના બટન પર ક્લિક કરો.</p>
+                </div>
+            </div>
+
+            <!-- NEW: Report Summary Section -->
+            <div class="card" id="reportSummaryContainer" style="display: none;">
+                <h2>માસિક રિપોર્ટ સમરી</h2>
+                <div class="report-summary-table">
+                    <h3>મહિનાના કુલ આંકડા</h3>
+                    <div class="summary-table-container">
+                        <div class="table-container">
+                            <table class="summary-table" id="reportSummaryTable">
+                                <!-- Report summary will be displayed here -->
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -2977,7 +3057,7 @@
                 
                 const beneficiaries = appState.beneficiaries[day] || 0;
                 
-                // Generate daily report table with total consumption and closing stock
+                // Generate daily report table with UPDATED COLUMNS for chana and dal
                 let html = `
                     <h3>${day}/${month+1}/${year} (${dayName}) - દૈનિક રિપોર્ટ</h3>
                     <table class="wide-table">
@@ -2988,8 +3068,8 @@
                             <th colspan="6">ઘઉં</th>
                             <th colspan="6">ચોખા</th>
                             <th colspan="6">તેલ</th>
-                            <th colspan="5">ચણા</th>
-                            <th colspan="5">દાળ</th>
+                            <th colspan="4">ચણા</th>
+                            <th colspan="4">દાળ</th>
                         </tr>
                         <tr class="sub-header">
                             <!-- Wheat sub-headers -->
@@ -3013,15 +3093,13 @@
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
-                            <!-- Chana sub-headers -->
-                            <th>સવારની સંખ્યા</th>
-                            <th>સવારની વપરાશ</th>
+                            <!-- Chana sub-headers - UPDATED -->
+                            <th>બપોરની સંખ્યા</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
-                            <!-- Dal sub-headers -->
-                            <th>સવારની સંખ્યા</th>
-                            <th>સવારની વપરાશ</th>
+                            <!-- Dal sub-headers - UPDATED -->
+                            <th>બપોરની સંખ્યા</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
@@ -3041,13 +3119,11 @@
                 const oilAfternoonConsumption = calculateAfternoonConsumption('oil', dayOfWeek, beneficiaries);
                 const oilTotalConsumption = oilMorningConsumption + oilAfternoonConsumption;
                 
-                const chanaMorningConsumption = calculateMorningConsumption('chana', dayOfWeek, beneficiaries);
                 const chanaAfternoonConsumption = calculateAfternoonConsumption('chana', dayOfWeek, beneficiaries);
-                const chanaTotalConsumption = chanaMorningConsumption + chanaAfternoonConsumption;
+                const chanaTotalConsumption = chanaAfternoonConsumption;
                 
-                const dalMorningConsumption = calculateMorningConsumption('dal', dayOfWeek, beneficiaries);
                 const dalAfternoonConsumption = calculateAfternoonConsumption('dal', dayOfWeek, beneficiaries);
-                const dalTotalConsumption = dalMorningConsumption + dalAfternoonConsumption;
+                const dalTotalConsumption = dalAfternoonConsumption;
                 
                 // Calculate closing stock
                 const wheatClosing = calculateClosingStock('wheat', wheatTotalConsumption);
@@ -3063,6 +3139,8 @@
                 const riceAfternoonBeneficiaries = isItemServedInAfternoon('rice', dayOfWeek) ? beneficiaries : 0;
                 const oilMorningBeneficiaries = isItemServedInMorning('oil', dayOfWeek) ? beneficiaries : 0;
                 const oilAfternoonBeneficiaries = isItemServedInAfternoon('oil', dayOfWeek) ? beneficiaries : 0;
+                const chanaAfternoonBeneficiaries = isItemServedInAfternoon('chana', dayOfWeek) ? beneficiaries : 0;
+                const dalAfternoonBeneficiaries = isItemServedInAfternoon('dal', dayOfWeek) ? beneficiaries : 0;
                 
                 html += `<tr>`;
                 html += `<td class="date-column">${day}/${month+1}</td>`;
@@ -3099,19 +3177,17 @@
                     <td>${oilClosing.toFixed(3)}</td>
                 `;
                 
-                // Chana columns
+                // Chana columns - UPDATED
                 html += `
-                    <td>0</td>
-                    <td>${chanaMorningConsumption.toFixed(3)}</td>
+                    <td>${chanaAfternoonBeneficiaries}</td>
                     <td>${chanaAfternoonConsumption.toFixed(3)}</td>
                     <td>${chanaTotalConsumption.toFixed(3)}</td>
                     <td>${chanaClosing.toFixed(3)}</td>
                 `;
                 
-                // Dal columns
+                // Dal columns - UPDATED
                 html += `
-                    <td>0</td>
-                    <td>${dalMorningConsumption.toFixed(3)}</td>
+                    <td>${dalAfternoonBeneficiaries}</td>
                     <td>${dalAfternoonConsumption.toFixed(3)}</td>
                     <td>${dalTotalConsumption.toFixed(3)}</td>
                     <td>${dalClosing.toFixed(3)}</td>
@@ -3137,7 +3213,7 @@
                     currentStock[item] = opening + income;
                 });
 
-                // Generate monthly report table with total consumption and closing stock
+                // Generate monthly report table with UPDATED COLUMNS for chana and dal
                 let html = `
                     <h3>${monthName} ${year} - માસિક રિપોર્ટ</h3>
                     <table class="wide-table">
@@ -3148,8 +3224,8 @@
                             <th colspan="6">ઘઉં</th>
                             <th colspan="6">ચોખા</th>
                             <th colspan="6">તેલ</th>
-                            <th colspan="5">ચણા</th>
-                            <th colspan="5">દાળ</th>
+                            <th colspan="4">ચણા</th>
+                            <th colspan="4">દાળ</th>
                         </tr>
                         <tr class="sub-header">
                             <!-- Wheat sub-headers -->
@@ -3173,15 +3249,13 @@
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
-                            <!-- Chana sub-headers -->
-                            <th>સવારની સંખ્યા</th>
-                            <th>સવારની વપરાશ</th>
+                            <!-- Chana sub-headers - UPDATED -->
+                            <th>બપોરની સંખ્યા</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
-                            <!-- Dal sub-headers -->
-                            <th>સવારની સંખ્યા</th>
-                            <th>સવારની વપરાશ</th>
+                            <!-- Dal sub-headers - UPDATED -->
+                            <th>બપોરની સંખ્યા</th>
                             <th>બપોરની વપરાશ</th>
                             <th>કુલ વપરાશ</th>
                             <th>બંધ સિલક</th>
@@ -3192,8 +3266,8 @@
                     wheat: { morningBeneficiaries: 0, morningConsumption: 0, afternoonBeneficiaries: 0, afternoonConsumption: 0, totalConsumption: 0 },
                     rice: { morningBeneficiaries: 0, morningConsumption: 0, afternoonBeneficiaries: 0, afternoonConsumption: 0, totalConsumption: 0 },
                     oil: { morningBeneficiaries: 0, morningConsumption: 0, afternoonBeneficiaries: 0, afternoonConsumption: 0, totalConsumption: 0 },
-                    chana: { morningBeneficiaries: 0, morningConsumption: 0, afternoonConsumption: 0, totalConsumption: 0 },
-                    dal: { morningBeneficiaries: 0, morningConsumption: 0, afternoonConsumption: 0, totalConsumption: 0 }
+                    chana: { afternoonBeneficiaries: 0, afternoonConsumption: 0, totalConsumption: 0 },
+                    dal: { afternoonBeneficiaries: 0, afternoonConsumption: 0, totalConsumption: 0 }
                 };
                 
                 // Calculate for each day
@@ -3209,7 +3283,7 @@
                                 <td class="date-column">${day}/${appState.currentMonth+1}</td>
                                 <td>${dayName}</td>
                                 <td>રજા</td>
-                                <td colspan="28">-</td>
+                                <td colspan="26">-</td>
                             </tr>
                         `;
                         continue;
@@ -3233,13 +3307,11 @@
                     const oilAfternoonConsumption = calculateAfternoonConsumption('oil', dayOfWeek, beneficiaries);
                     const oilTotalConsumption = oilMorningConsumption + oilAfternoonConsumption;
                     
-                    const chanaMorningConsumption = calculateMorningConsumption('chana', dayOfWeek, beneficiaries);
                     const chanaAfternoonConsumption = calculateAfternoonConsumption('chana', dayOfWeek, beneficiaries);
-                    const chanaTotalConsumption = chanaMorningConsumption + chanaAfternoonConsumption;
+                    const chanaTotalConsumption = chanaAfternoonConsumption;
                     
-                    const dalMorningConsumption = calculateMorningConsumption('dal', dayOfWeek, beneficiaries);
                     const dalAfternoonConsumption = calculateAfternoonConsumption('dal', dayOfWeek, beneficiaries);
-                    const dalTotalConsumption = dalMorningConsumption + dalAfternoonConsumption;
+                    const dalTotalConsumption = dalAfternoonConsumption;
                     
                     // Morning and afternoon beneficiaries count
                     const wheatMorningBeneficiaries = isItemServedInMorning('wheat', dayOfWeek) ? beneficiaries : 0;
@@ -3248,6 +3320,8 @@
                     const riceAfternoonBeneficiaries = isItemServedInAfternoon('rice', dayOfWeek) ? beneficiaries : 0;
                     const oilMorningBeneficiaries = isItemServedInMorning('oil', dayOfWeek) ? beneficiaries : 0;
                     const oilAfternoonBeneficiaries = isItemServedInAfternoon('oil', dayOfWeek) ? beneficiaries : 0;
+                    const chanaAfternoonBeneficiaries = isItemServedInAfternoon('chana', dayOfWeek) ? beneficiaries : 0;
+                    const dalAfternoonBeneficiaries = isItemServedInAfternoon('dal', dayOfWeek) ? beneficiaries : 0;
                     
                     // Calculate closing stock
                     const wheatClosing = currentStock['wheat'] - wheatTotalConsumption;
@@ -3282,13 +3356,11 @@
                     monthlyTotals.oil.afternoonConsumption += oilAfternoonConsumption;
                     monthlyTotals.oil.totalConsumption += oilTotalConsumption;
                     
-                    monthlyTotals.chana.morningBeneficiaries += 0; // No morning beneficiaries for chana
-                    monthlyTotals.chana.morningConsumption += chanaMorningConsumption;
+                    monthlyTotals.chana.afternoonBeneficiaries += chanaAfternoonBeneficiaries;
                     monthlyTotals.chana.afternoonConsumption += chanaAfternoonConsumption;
                     monthlyTotals.chana.totalConsumption += chanaTotalConsumption;
                     
-                    monthlyTotals.dal.morningBeneficiaries += 0; // No morning beneficiaries for dal
-                    monthlyTotals.dal.morningConsumption += dalMorningConsumption;
+                    monthlyTotals.dal.afternoonBeneficiaries += dalAfternoonBeneficiaries;
                     monthlyTotals.dal.afternoonConsumption += dalAfternoonConsumption;
                     monthlyTotals.dal.totalConsumption += dalTotalConsumption;
                     
@@ -3322,19 +3394,17 @@
                         <td>${oilClosing.toFixed(3)}</td>
                     `;
                     
-                    // Chana columns
+                    // Chana columns - UPDATED
                     html += `
-                        <td>0</td>
-                        <td>${chanaMorningConsumption.toFixed(3)}</td>
+                        <td>${chanaAfternoonBeneficiaries}</td>
                         <td>${chanaAfternoonConsumption.toFixed(3)}</td>
                         <td>${chanaTotalConsumption.toFixed(3)}</td>
                         <td>${chanaClosing.toFixed(3)}</td>
                     `;
                     
-                    // Dal columns
+                    // Dal columns - UPDATED
                     html += `
-                        <td>0</td>
-                        <td>${dalMorningConsumption.toFixed(3)}</td>
+                        <td>${dalAfternoonBeneficiaries}</td>
                         <td>${dalAfternoonConsumption.toFixed(3)}</td>
                         <td>${dalTotalConsumption.toFixed(3)}</td>
                         <td>${dalClosing.toFixed(3)}</td>
@@ -3377,19 +3447,17 @@
                     <td>-</td>
                 `;
                 
-                // Chana totals
+                // Chana totals - UPDATED
                 html += `
-                    <td>0</td>
-                    <td>${monthlyTotals.chana.morningConsumption.toFixed(3)}</td>
+                    <td>${monthlyTotals.chana.afternoonBeneficiaries}</td>
                     <td>${monthlyTotals.chana.afternoonConsumption.toFixed(3)}</td>
                     <td>${monthlyTotals.chana.totalConsumption.toFixed(3)}</td>
                     <td>-</td>
                 `;
                 
-                // Dal totals
+                // Dal totals - UPDATED
                 html += `
-                    <td>0</td>
-                    <td>${monthlyTotals.dal.morningConsumption.toFixed(3)}</td>
+                    <td>${monthlyTotals.dal.afternoonBeneficiaries}</td>
                     <td>${monthlyTotals.dal.afternoonConsumption.toFixed(3)}</td>
                     <td>${monthlyTotals.dal.totalConsumption.toFixed(3)}</td>
                     <td>-</td>
@@ -3404,8 +3472,8 @@
                         <td colspan="6">${currentStock['wheat'].toFixed(3)} કિલો</td>
                         <td colspan="6">${currentStock['rice'].toFixed(3)} કિલો</td>
                         <td colspan="6">${currentStock['oil'].toFixed(3)} લિટર</td>
-                        <td colspan="5">${currentStock['chana'].toFixed(3)} કિલો</td>
-                        <td colspan="5">${currentStock['dal'].toFixed(3)} કિલો</td>
+                        <td colspan="4">${currentStock['chana'].toFixed(3)} કિલો</td>
+                        <td colspan="4">${currentStock['dal'].toFixed(3)} કિલો</td>
                     </tr>
                 `;
                 
@@ -3413,11 +3481,107 @@
                 
                 container.innerHTML = html;
                 
+                // Show report summary
+                showReportSummary(monthlyTotals, currentStock);
                 // Show beneficiary summary
                 showBeneficiarySummary();
             }
             
             showToast('રિપોર્ટ બનાવાયો', 'success');
+        }
+
+        // NEW FUNCTION: Show Report Summary
+        function showReportSummary(monthlyTotals, currentStock) {
+            const container = document.getElementById('reportSummaryContainer');
+            const table = document.getElementById('reportSummaryTable');
+            
+            if (!container || !table) return;
+            
+            let html = `
+                <tr>
+                    <th rowspan="2">આઇટમ</th>
+                    <th colspan="2">સવાર</th>
+                    <th colspan="2">બપોર</th>
+                    <th rowspan="2">કુલ વપરાશ</th>
+                    <th rowspan="2">બંધ સિલક</th>
+                </tr>
+                <tr>
+                    <th>લાભાર્થી</th>
+                    <th>વપરાશ</th>
+                    <th>લાભાર્થી</th>
+                    <th>વપરાશ</th>
+                </tr>
+            `;
+            
+            // Add data for each item
+            const items = [
+                { 
+                    name: 'ઘઉં', 
+                    data: monthlyTotals.wheat,
+                    closing: currentStock['wheat'],
+                    unit: 'કિલો'
+                },
+                { 
+                    name: 'ચોખા', 
+                    data: monthlyTotals.rice,
+                    closing: currentStock['rice'],
+                    unit: 'કિલો'
+                },
+                { 
+                    name: 'તેલ', 
+                    data: monthlyTotals.oil,
+                    closing: currentStock['oil'],
+                    unit: 'લિટર'
+                },
+                { 
+                    name: 'ચણા', 
+                    data: monthlyTotals.chana,
+                    closing: currentStock['chana'],
+                    unit: 'કિલો'
+                },
+                { 
+                    name: 'દાળ', 
+                    data: monthlyTotals.dal,
+                    closing: currentStock['dal'],
+                    unit: 'કિલો'
+                }
+            ];
+            
+            items.forEach(item => {
+                html += `
+                    <tr>
+                        <td class="item-header">${item.name}</td>
+                        <td>${item.data.morningBeneficiaries || 0}</td>
+                        <td>${(item.data.morningConsumption || 0).toFixed(3)}</td>
+                        <td>${item.data.afternoonBeneficiaries || 0}</td>
+                        <td>${(item.data.afternoonConsumption || 0).toFixed(3)}</td>
+                        <td>${(item.data.totalConsumption || 0).toFixed(3)}</td>
+                        <td>${item.closing.toFixed(3)} ${item.unit}</td>
+                    </tr>
+                `;
+            });
+            
+            // Add total row
+            const totalMorningBeneficiaries = items.reduce((sum, item) => sum + (item.data.morningBeneficiaries || 0), 0);
+            const totalAfternoonBeneficiaries = items.reduce((sum, item) => sum + (item.data.afternoonBeneficiaries || 0), 0);
+            const totalMorningConsumption = items.reduce((sum, item) => sum + (item.data.morningConsumption || 0), 0);
+            const totalAfternoonConsumption = items.reduce((sum, item) => sum + (item.data.afternoonConsumption || 0), 0);
+            const totalConsumption = items.reduce((sum, item) => sum + (item.data.totalConsumption || 0), 0);
+            
+            html += `
+                <tr class="total-row">
+                    <td>કુલ</td>
+                    <td>${totalMorningBeneficiaries}</td>
+                    <td>${totalMorningConsumption.toFixed(3)}</td>
+                    <td>${totalAfternoonBeneficiaries}</td>
+                    <td>${totalAfternoonConsumption.toFixed(3)}</td>
+                    <td>${totalConsumption.toFixed(3)}</td>
+                    <td>-</td>
+                </tr>
+            `;
+            
+            table.innerHTML = html;
+            container.style.display = 'block';
         }
 
         // Show beneficiary summary
