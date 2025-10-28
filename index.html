@@ -5193,5 +5193,23 @@ function calculateChanaDalBeneficiaries() {
         }
     </script>
 </body>
+</html>            document.getElementById('certificateDate100').textContent = certificateDate;
+            document.getElementById('beneficiaries100').textContent = totalBeneficiaries;
+            document.getElementById('submittedAmount100').textContent = amount.toFixed(2);
+            document.getElementById('payableAmount100').textContent = amount.toFixed(2);
+            
+            // Show certificate
+            document.getElementById('certificateModal100').style.display = 'block';
+        }
+
+        function printAllCertificates() {
+            showToast('બધા પ્રમાણપત્ર પ્રિન્ટ કરવાનું શરૂ કર્યું', 'success');
+        }
+
+        function closeCertificate(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+    </script>
+</body>
 </html>    
 
